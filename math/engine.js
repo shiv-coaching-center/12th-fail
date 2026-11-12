@@ -117,3 +117,4 @@ function solve(input,reasons){
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
 if(typeof module!=='undefined'&&module.exports)module.exports={solve,UNSUPPORTED_MESSAGE};
+if(typeof window!=='undefined')window.TwelfthFailMath={solve,UNSUPPORTED_MESSAGE};
