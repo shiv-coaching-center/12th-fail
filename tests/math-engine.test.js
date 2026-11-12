@@ -15,7 +15,7 @@ test('BODMAS independent test bank: 40 hand-verified cases',async(t)=>{
  });
 });
 test('unsupported tokens never produce an answer',()=>{
- for(const input of ['2^3','3x+2','abc','','1..2','.5+1','5/']){const r=solve(input,reasons);assert.equal(r.ok,false,input);assert.equal(r.message,UNSUPPORTED_MESSAGE,input);}
+ for(const input of ['3x+2','abc','','1..2','.5+1','5/','√(2)']){const r=solve(input,reasons);assert.equal(r.ok,false,input);assert.equal(r.message,UNSUPPORTED_MESSAGE,input);}
 });
 test('every supported rule has a fixed Hindi reason',()=>{
  for(const key of ['addition','subtraction','multiplication','division','brackets','unary']){assert.equal(typeof reasons[key],'string');assert.ok(reasons[key].trim().length>0);}
