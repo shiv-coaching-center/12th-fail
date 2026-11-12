@@ -64,7 +64,7 @@ test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.4/);
  assert.match(app,/sw\.js\?v=14/);
- assert.match(sw,/12th-fail-shell-v21/);
+ assert.match(sw,/12th-fail-shell-v22/);
  assert.match(sw,/app\.js\?v=0\.4\.4/);
 });
 
@@ -82,7 +82,7 @@ test('standalone LCM/HCF page is linked without replacing the original calculato
  assert.match(html,/href="\.\/lcm-hcf\.html"/);
  assert.match(page,/LCM \(ल\.स\.\)/);assert.match(page,/HCF \(म\.स\.\)/);
  assert.match(page,/id="lcm-keypad"/);assert.match(page,/id="lcm-solution"/);
- assert.match(js,/verifyH=values\.reduce/);assert.match(js,/verifyL%BigInt\(v\)/);assert.match(js,/primeFactors/);
+ assert.match(js,/verifyH=values\.reduce/);assert.match(js,/l%BigInt\(v\)/);assert.match(js,/primeFactors/);
  assert.match(css,/--green-dark:#075B35/);
 });
 
