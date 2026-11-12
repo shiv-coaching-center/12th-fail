@@ -1,14 +1,14 @@
 (()=>{"use strict";
 const $=s=>document.querySelector(s),values=[12,18,24],active={value:0},state={mode:"lcm",answer:null,steps:[]};
 const tabs=[...document.querySelectorAll(".lcm-tab")],slots=$("#lcm-values"),result=$("#lcm-result"),label=$("#lcm-result-label"),number=$("#lcm-result-number"),steps=$("#lcm-steps"),note=$("#lcm-note");
-function gcd(a,b){while(b){[a,b]=[b,a%b]}return a}
+function gcd(a,b){while(b!==0n){const r=a%b;a=b;b=r}return a}
 function primeFactors(n){const f=[];let d=2,x=n;while(d*d<=x){let c=0;while(x%d===0){x/=d;c++}if(c)f.push([d,c]);d=d===1?2:d===2?3:d+2}if(x>1)f.push([x,1]);return f}
 function powerText(f){return f.length?f.map(([p,e])=>e===1?String(p):p+"<sup>"+e+"</sup>").join(" × "):"1"}
 function compute(){note.textContent="";if(values.some(v=>!Number.isSafeInteger(v)||v<1)){note.textContent="कृपया 1 या उससे बड़ी पूर्ण संख्या डालें";return}
- let h=BigInt(values[0]),l=h;for(const v of values.slice(1)){const b=BigInt(v),g=BigInt(gcd(Number(h),Number(b)));h=g;l=(l/g)*b}
+ let h=BigInt(values[0]),l=h;for(const v of values.slice(1)){const b=BigInt(v),g=gcd(h,b);h=g;l=(l/g)*b}
  // Use the existing Level 3.2 solver for an independent exact check on each pair.
  const engine=window.TwelfthFailMath;if(!engine||typeof engine.solveLcmHcf!=="function"){note.textContent="गणित इंजन उपलब्ध नहीं है";return}
- let checkH=String(values[0]),checkL=String(values[0]);for(const v of values.slice(1)){const a=engine.solveLcmHcf(checkH,String(v),{}),b=engine.solveLcmHcf(checkL,String(v),{});if(!a.ok||!b.ok){note.textContent="इस सवाल का हल उपलब्ध नहीं";return}checkH=a.hcf;checkL=b.lcm}
+ let checkH=String(values[0]),checkL=String(values[0]);for(const v of values.slice(1)){const why={hcf_euclidean:"HCF की जाँच",lcm_product:"LCM की जाँच"};const a=engine.solveLcmHcf(checkH,String(v),why),b=engine.solveLcmHcf(checkL,String(v),why);if(!a.ok||!b.ok){note.textContent="इस सवाल का हल उपलब्ध नहीं";return}checkH=a.hcf;checkL=b.lcm}
  if(checkH!==String(h)||checkL!==String(l)){note.textContent="उत्तर की जाँच पूरी नहीं हुई";return}
  state.answer=state.mode==="lcm"?l.toString():h.toString();state.steps=[];
  const facts=values.map(v=>primeFactors(v));
