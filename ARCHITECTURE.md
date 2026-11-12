@@ -55,3 +55,12 @@ Phase 0 और Phase 1 में कोई solving engine नहीं होग
 - Last 20 questions stored only in localStorage on the device.
 - `#preview-solution` UI route with verified-answer visual treatment, numbered step cards, a step-detail bottom sheet, and optional device-local speech only when a local voice exists. All preview content is explicitly marked as placeholder, not a real solution.
 - Responsive layout target: 320–430px mobile widths; system fonts; no external assets or runtime network dependencies.
+
+
+## Phase 2.1 — Mathematics arithmetic engine
+
+- Strict, dependency-free parser for numeric arithmetic: addition, subtraction, multiplication, division, parentheses, powers, percentages, constants π/e, and sqrt, sin, cos, tan, log, ln, abs.
+- No eval(), Function(), network calls, or external libraries.
+- Algebraic variables and equations are explicitly rejected until a later algebra-solving phase.
+- Parser guards input length, token count, nesting, division by zero, and non-finite results.
+- Local Node test suite runs before every Pages deployment.
