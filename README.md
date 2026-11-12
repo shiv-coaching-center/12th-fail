@@ -5,8 +5,8 @@
 ## वर्तमान चरण
 
 - Phase 0.1: Repository documentation और project structure
-- Phase 0.2: GitHub Pages + PWA foundation
-- Phase 0.3: Offline verification
+- Phase 0.2: PWA manifest, versioned offline cache और safe update flow
+- Phase 0.3: वास्तविक GitHub Pages deployment और offline proof
 - Phase 1: UI only
 - Phase 2: Solving engine (अभी scope में नहीं)
 
@@ -15,13 +15,13 @@
 - Plain HTML, CSS और JavaScript
 - कोई AI/LLM, analytics, ads या remote API नहीं
 - कोई external font, CDN या remote image नहीं
-- उत्तर केवल भविष्य में स्वतंत्र रूप से verify होने पर दिखाया जाएगा
-- History और usage counts केवल इसी device पर रहेंगे
-- Service Worker cache versioned होगा और update flow पुरानी cache को सुरक्षित तरीके से हटाएगा
+- Phase 0 और Phase 1 में कोई solve/result engine नहीं
+- History और usage counts भविष्य में केवल इसी device पर रहेंगे
+- Service Worker केवल `twelfth-fail-` prefix वाले caches manage करेगा
 
 ## Development
 
-यह repository GitHub Pages पर static site के रूप में deploy होगी। स्थानीय परीक्षण के लिए किसी static HTTP server का उपयोग करें। `file://` से खोलने पर Service Worker उपलब्ध नहीं होता।
+यह repository GitHub Pages पर static site के रूप में deploy होती है। स्थानीय परीक्षण के लिए किसी static HTTP server का उपयोग करें। `file://` से खोलने पर Service Worker उपलब्ध नहीं होता।
 
 ## Project structure
 
@@ -35,8 +35,7 @@
 ├── icons/
 │   └── icon.svg
 ├── tests/
-│   ├── README.md
-│   └── input.test.js
+│   └── README.md
 ├── .github/
 │   └── workflows/
 │       └── pages.yml
@@ -45,6 +44,13 @@
 └── README.md
 ```
 
+## Offline check
+
+1. GitHub Pages URL को online खोलें और Service Worker install होने दें।
+2. एक बार reload करें।
+3. Airplane mode चालू करके app को दोबारा खोलें।
+4. App shell और local assets दिखने चाहिए।
+
 ## Scope boundary
 
-Phase 0 और Phase 1 में कोई गणितीय, भौतिक या रासायनिक उत्तर calculate नहीं होगा। Equals key केवल निर्धारित cannot-solve state दिखाएगी।
+Phase 0 और Phase 1 में कोई गणितीय, भौतिक या रासायनिक उत्तर calculate नहीं होगा। Solve action केवल निर्धारित cannot-solve state दिखाएगा।
