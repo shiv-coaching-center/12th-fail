@@ -44,3 +44,14 @@ Repository structure, GitHub Pages workflow, web app manifest, versioned Service
 ## Trust boundary
 
 Phase 0 और Phase 1 में कोई solving engine नहीं होगा। Solve action verified result का दिखावा नहीं करेगा। कोई sample answer सामान्य route पर नहीं दिखेगा। Solution preview केवल hidden preview route पर होगा और स्पष्ट रूप से test-only रहेगा।
+
+
+## Phase 1 UI surface
+
+- Single-page workspace with Maths, Physics, and Chemistry subject tabs.
+- Expression input and explicit cannot-solve state. The UI never invents an answer.
+- Fixed-in-flow, sticky thumb-reach keypad; keyboard mode hides the app keypad and focuses the native keyboard.
+- Subject-specific symbol strip, symbol/formula/chemistry element sheets, and sample templates.
+- Last 20 questions stored only in localStorage on the device.
+- Hidden `#preview-solution` UI route with verified-answer visual treatment, numbered step cards, a step-detail bottom sheet, and optional device-local speech only when a local voice exists. All preview content is explicitly marked as placeholder, not a real solution.
+- Responsive layout target: 320–430px mobile widths; system fonts; no external assets or runtime network dependencies.
