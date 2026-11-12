@@ -28,7 +28,7 @@ test('step explanations come from the fixed reasons file',()=>{
  assert.match(app,/selectedStep\.reason/);
 });
 test('offline shell pre-caches engine and fixed reasons',()=>{
- assert.match(sw,/\.\/math\/engine\.js\?v=0\.2\.0/);
+ assert.match(sw,/\.\/math\/engine\.js\?v=0\.2\.1/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.2\.0/);
  assert.match(sw,/12th-fail-shell-v10/);
 });
