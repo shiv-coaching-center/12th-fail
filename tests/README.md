@@ -53,3 +53,13 @@ The service worker may delete only caches whose names start with `twelfth-fail-`
 - [ ] Chemistry shows Symbols, Formulas and Elements actions; each opens only on demand and selected items insert into the reaction input.
 - [ ] Switching subjects updates the visible actions without leaving stale controls from the previous subject.
 - [ ] Keypad, History, clear and keyboard controls remain usable.
+
+
+## Phase 2.1 Maths arithmetic checks
+
+- [ ] 2+3*4 gives 14; (2+3)*4 gives 20.
+- [ ] 2^3^2 gives 512; -2^2 gives -4; 50% gives 0.5.
+- [ ] sqrt(81) gives 9; sin(30) gives 0.5 degrees; 2π and 2(3+4) work.
+- [ ] Division by zero, invalid syntax, too-long input and unsupported variables show clear messages.
+- [ ] x² + 5x + 6 = 0 is explicitly reported as algebra not yet supported.
+- [ ] Works offline after math-engine.js is cached.
