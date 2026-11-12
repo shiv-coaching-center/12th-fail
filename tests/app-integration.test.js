@@ -67,3 +67,9 @@ test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(sw,/12th-fail-shell-v17/);
  assert.match(sw,/app\.js\?v=0\.4\.4/);
 });
+
+
+test('number-theory engine exports a verified LCM/HCF solver',()=>{
+ const engine=require('../math/engine.js');
+ assert.equal(typeof engine.solveLcmHcf,'function');
+});
