@@ -16,23 +16,16 @@
     <header class="topbar">
       <div class="brand">
         <span class="brand-mark" aria-hidden="true">ƒ</span>
-        <div><h1>12th Fail</h1><p>सीखो समझकर · Learn by understanding</p></div>
+        
       </div>
-      <span class="status-pill" id="connection-status" role="status">जाँच हो रही है…</span>
     </header>
 
     <section id="home-screen" class="screen" aria-labelledby="home-title">
-      <div class="screen-heading">
-        <div><p class="eyebrow">गणित · MATHEMATICS</p><h2 id="home-title">कैलकुलेटर</h2></div>
-        <span class="class-tag">कक्षा 1–12 · Class 1–12</span>
-      </div>
 
       <section class="display-card" aria-label="Calculator display">
-        <p class="display-label">सवाल · QUESTION</p>
         <div id="expression" class="expression" aria-live="polite">0</div>
         <div class="answer-row">
-          <span id="answer-preview" class="answer-preview">अपना सवाल लिखें · Enter a question</span>
-          <button id="show-solution" class="small-primary" type="button">हल देखें <span lang="en">View steps</span></button>
+          <button id="show-solution" class="small-primary" type="button">हल</button>
         </div>
       </section>
 
@@ -67,40 +60,34 @@
         <button class="key" data-action="backspace" type="button" aria-label="मिटाएँ Delete">⌫</button>
         <button class="key equals" data-action="equals" type="button">=</button>
       </div>
-      <p id="calculator-message" class="inline-message" role="status">अभी कैलकुलेटर का डिज़ाइन तैयार है। हल करने की सुविधा अगले चरण में आएगी।</p>
+      <p id="calculator-message" class="sr-only" role="status"></p>
     </section>
 
     <section id="solution-screen" class="screen hidden" aria-labelledby="solution-title">
-      <button id="back-home" class="back-button" type="button">← वापस · Back</button>
-      <h2 id="solution-title" class="page-title">हल देखें · Solution</h2>
+      <button id="back-home" class="back-button" type="button" aria-label="वापस">←</button>
       <section class="question-card">
-        <p class="card-label">सवाल · QUESTION</p>
         <p id="solution-question" class="question-value">—</p>
       </section>
       <section class="answer-card">
-        <p class="card-label">उत्तर · ANSWER</p>
         <p class="answer-value">अभी उपलब्ध नहीं · Not available yet</p>
-        <p class="answer-note">सत्यापित गणना Phase 2 में जोड़ी जाएगी।</p>
       </section>
-      <div class="steps-heading"><h3>हल के चरण · Solution steps</h3><span>UI नमूना · UI preview</span></div>
+      <div class="steps-heading"><h3>हल के चरण</h3></div>
       <div class="step-list">
-        <button class="step-button" type="button" data-step="1"><span class="step-number">1</span><span class="step-copy"><strong>पहला चरण · Step one</strong><small>यहाँ पहली गणितीय प्रक्रिया दिखाई जाएगी।</small></span><span class="step-arrow">›</span></button>
-        <button class="step-button" type="button" data-step="2"><span class="step-number">2</span><span class="step-copy"><strong>दूसरा चरण · Step two</strong><small>यहाँ अगला चरण और उसका परिणाम होगा।</small></span><span class="step-arrow">›</span></button>
+        <button class="step-button" type="button" data-step="1"><span class="step-number">1</span><span class="step-copy"><strong>पहला चरण</strong></span><span class="step-arrow">›</span></button>
+        <button class="step-button" type="button" data-step="2"><span class="step-number">2</span><span class="step-copy"><strong>दूसरा चरण</strong></span><span class="step-arrow">›</span></button>
       </div>
-      <p class="preview-note">ये केवल डिज़ाइन के नमूने हैं, तुम्हारे सवाल का हल नहीं।</p>
     </section>
 
-    <footer class="footer"><small>12th Fail · Version 0.2.0 · Offline Mathematics</small></footer>
   </main>
 
   <div id="explanation-sheet" class="sheet-backdrop hidden" role="presentation">
     <section class="bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
       <div class="sheet-handle"></div>
-      <div class="sheet-top"><p class="card-label">चरण की जानकारी · STEP DETAILS</p><button id="close-sheet" class="close-button" type="button" aria-label="बंद करें Close">×</button></div>
+      <div class="sheet-top"><button id="close-sheet" class="close-button" type="button" aria-label="बंद करें Close">×</button></div>
       <h2 id="sheet-title">चरण</h2>
       <p id="sheet-reason" class="sheet-reason">यहाँ इस चरण का आसान हिंदी में कारण बताया जाएगा।</p>
       <p id="sheet-easier" class="sheet-easier hidden">और आसान: गणित का हर कदम धीरे-धीरे समझेंगे।</p>
-      <button id="easier-button" class="secondary-button" type="button">और आसान · Make it simpler</button>
+      <button id="easier-button" class="secondary-button" type="button">और आसान</button>
     </section>
   </div>
 
