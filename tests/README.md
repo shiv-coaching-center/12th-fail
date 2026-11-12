@@ -75,3 +75,13 @@ The service worker may delete only caches whose names start with `twelfth-fail-`
 - [ ] x² + 1 = 0 is classified as complex roots.
 - [ ] 0 = 0 and 2 = 3 are handled correctly.
 - [ ] Cubic and mixed x/y equations are rejected clearly.
+
+
+## Phase 2.3 LCM/HCF checks
+
+- [ ] LCM(12, 18) gives 36 and prime factorisation steps.
+- [ ] HCF(24, 36) gives 12 and Euclidean steps.
+- [ ] Supports 3 or more inputs.
+- [ ] Handles zero and one correctly; HCF(0, 0) is rejected.
+- [ ] Rejects decimals, malformed input, more than 20 values and values above 1,000,000,000.
+- [ ] Large exact integer result is not rounded.
