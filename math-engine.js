@@ -38,4 +38,28 @@ const factor=roots.length===2&&roots.every(v=>Math.abs(v-Math.round(v))<1e-9)?"F
 const finalSteps=first.concat(["D "+(D===0?"= 0 है, इसलिए दोनों roots समान हैं।":"≥ 0 है, इसलिए वास्तविक roots मिलेंगे।"),"पहला मूल = "+fmt(roots[0])]);if(roots.length===2)finalSteps.push("दूसरा मूल = "+fmt(roots[1]));if(factor)finalSteps.push(factor);
 return {kind:"quadratic",variable:x,roots,answer:roots.length===1?x+" = "+fmt(roots[0]):x+"₁ = "+fmt(roots[0])+" , "+x+"₂ = "+fmt(roots[1]),steps:finalSteps}
 }
-return {evaluate,solveEquation}});
+
+function solveLcmHcf(source){
+if(typeof source!=="string"||source.length>200)throw Error("LCM/HCF का सवाल 200 अक्षरों से छोटा रखें।");
+const match=source.trim().match(/^(LCM|HCF)\s*\(([^()]*)\)$/i);
+if(!match)throw Error("ऐसे लिखें: LCM(12, 18) या HCF(12, 18)।");
+const mode=match[1].toUpperCase(),parts=match[2].split(",").map(v=>v.trim());
+if(parts.length<2||parts.length>20||parts.some(v=>!/^\d+$/.test(v)))throw Error("दो से बीस तक पूर्णांक संख्याएँ comma से अलग करके लिखें।");
+const nums=parts.map(BigInt);
+if(nums.some(n=>n>1000000000n))throw Error("अभी हर संख्या 1,000,000,000 या उससे छोटी होनी चाहिए।");
+const fmt=n=>n.toString(),gcd=(a,b)=>{while(b!==0n){const t=a%b;a=b;b=t}return a};
+const steps=[mode+" निकालना: "+nums.map(fmt).join(", ")];let answer;
+if(mode==="HCF"){
+if(nums.every(n=>n===0n))throw Error("HCF(0, 0) परिभाषित नहीं है।");
+let current=nums[0];for(let i=1;i<nums.length;i++){let a=current,b=nums[i];steps.push("Euclidean Method: HCF("+fmt(a)+", "+fmt(b)+")");while(b!==0n){const q=a/b,r=a%b;steps.push(fmt(a)+" = "+fmt(b)+" × "+fmt(q)+" + "+fmt(r));a=b;b=r}current=a;steps.push("इस जोड़ी का HCF = "+fmt(current))}answer=current;
+}else if(nums.some(n=>n===0n)){answer=0n;steps.push("कम-से-कम एक संख्या 0 है, इसलिए LCM = 0।")}
+else{
+const factors=n=>{let x=n,p=2n,out={};while(p*p<=x){let count=0;while(x%p===0n){x/=p;count++}if(count)out[fmt(p)]=count;p=p===2n?3n:p+2n}if(x>1n)out[fmt(x)]=(out[fmt(x)]||0)+1;return out};
+const maps=nums.map(factors),max={};maps.forEach(m=>Object.entries(m).forEach(([p,e])=>max[p]=Math.max(max[p]||0,e)));
+nums.forEach((n,i)=>steps.push("Prime Factorisation "+fmt(n)+" = "+Object.entries(maps[i]).map(([p,e])=>p+(e>1?"^"+e:"")).join(" × ")));
+steps.push("हर prime factor की सबसे बड़ी घात लें: "+Object.entries(max).map(([p,e])=>p+(e>1?"^"+e:"")).join(" × "));
+answer=Object.entries(max).reduce((v,[p,e])=>v*(BigInt(p)**BigInt(e)),1n);
+}
+steps.push("अंतिम उत्तर: "+mode+" = "+fmt(answer));return {kind:mode.toLowerCase(),answer:fmt(answer),steps};
+}
+return {evaluate,solveEquation,solveLcmHcf}});
