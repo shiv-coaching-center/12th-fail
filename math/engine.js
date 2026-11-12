@@ -403,7 +403,7 @@ function solveProportion(first,second,third,reasons){
 
 
 function parseFractionInput(value){
-  if(typeof value!=='string'||value.length===0||value.length>200||!/^[-+]?\\d+(?:\\/[-+]?\\d+)?$/.test(value))throw Error('BAD_FRACTION');
+  if(typeof value!=='string'||value.length===0||value.length>200||!/^[-+]?\d+(?:\/[-+]?\d+)?$/.test(value))throw Error('BAD_FRACTION');
   const parts=value.split('/');
   const n=BigInt(parts[0]),d=parts.length===2?BigInt(parts[1]):1n;
   if(d===0n)throw Error('DIV_ZERO');
