@@ -1,12 +1,12 @@
 /* 12th Fail service worker — verified BODMAS engine v6. */
 "use strict";
-const CACHE_NAME = "12th-fail-shell-v30";
+const CACHE_NAME = "12th-fail-shell-v31";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./style.css?v=0.4.1",
   "./app.js?v=0.4.4",
-  "./math/engine.js?v=0.4.0",
+  "./math/engine.js?v=0.4.1",
   "./reasons_hi.json?v=0.4.0",
   "./manifest.json",
   "./icons/icon.svg",
@@ -17,7 +17,10 @@ const APP_SHELL = [
   "./lcm-hcf.js?v=1.0.3",
   "./ratio-proportion.html",
   "./ratio-proportion.css?v=1.0.0",
-  "./ratio-proportion.js?v=1.0.3"
+  "./ratio-proportion.js?v=1.0.3",
+  "./fractions.html",
+  "./fractions.css?v=1.0.0",
+  "./fractions.js?v=1.0.0"
 ];
 
 self.addEventListener("install", (event) => {
