@@ -3,27 +3,14 @@
 
   const $ = (selector) => document.querySelector(selector);
   const expression = $("#expression");
-  const answerPreview = $("#answer-preview");
   const message = $("#calculator-message");
   const homeScreen = $("#home-screen");
   const solutionScreen = $("#solution-screen");
   const sheet = $("#explanation-sheet");
   let currentExpression = "";
 
-  const connectionStatus = $("#connection-status");
-  function updateConnectionStatus() {
-    const online = navigator.onLine;
-    connectionStatus.textContent = online ? "ऑनलाइन · Online" : "ऑफलाइन · Offline";
-    connectionStatus.classList.toggle("online", online);
-    connectionStatus.classList.toggle("offline", !online);
-  }
-  window.addEventListener("online", updateConnectionStatus);
-  window.addEventListener("offline", updateConnectionStatus);
-  updateConnectionStatus();
-
   function renderExpression() {
     expression.textContent = currentExpression || "0";
-    answerPreview.textContent = currentExpression ? "हल Phase 2 में आएगा · Solving in Phase 2" : "अपना सवाल लिखें · Enter a question";
   }
   function insert(value) {
     if (currentExpression.length >= 48) {
