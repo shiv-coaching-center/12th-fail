@@ -135,8 +135,8 @@ test('F logo opens a shared menu listing all available math tools on every page'
  const css=fs.readFileSync(path.join(__dirname,'..','app-menu.css'),'utf8');
  for(const page of pages){
   assert.match(page,/data-app-menu-trigger/);
-  assert.match(page,/app-menu\\.js\\?v=1\\.0\\.2/);
-  assert.match(page,/app-menu\\.css\\?v=1\\.0\\.1/);
+  assert.ok(page.includes("app-menu.js?v=1.0.2"));
+  assert.ok(page.includes("app-menu.css?v=1.0.1"));
  }
  for(const feature of ['मुख्य कैलकुलेटर','प्रतिशत (Percentage)','समीकरण (Equation)','घात / वर्गमूल (Power)','lcm-hcf.html','ratio-proportion.html'])assert.ok(menu.includes(feature));
  assert.ok(menu.includes('aria-modal="true"'));
