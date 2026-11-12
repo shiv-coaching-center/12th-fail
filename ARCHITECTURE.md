@@ -49,3 +49,9 @@ The first successful online visit installs the service worker and caches the app
 - HCF uses the Euclidean algorithm; LCM uses `abs(a) / HCF * abs(b)` to reduce intermediate growth.
 - Results are verified independently by divisibility and the product/HCF identity. Decimal, malformed, or oversized inputs are rejected.
 - Fixed Hindi explanations are stored in `reasons_hi.json`; 40 independent hand-verified cases are in `tests/lcm-hcf-cases.json`.
+
+## Phase 3.3 Ratio and Proportion
+- `solveRatio(first, second, reasons)` reduces a non-negative integer ratio with a positive second term using BigInt GCD and verifies the reduced terms are coprime.
+- `solveProportion(first, second, third, reasons)` solves `first:second = third:x` exactly as a rational value and verifies by cross multiplication.
+- Both APIs reject malformed, decimal, negative, zero-denominator, and oversized inputs; all displayed explanations use fixed entries in `reasons_hi.json`.
+- Independent hand-verified cases are maintained in `tests/ratio-proportion-cases.json`.
