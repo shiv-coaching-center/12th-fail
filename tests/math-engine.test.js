@@ -1,0 +1,4 @@
+"use strict";
+const assert=require("node:assert/strict");const {evaluate}=require("../math-engine.js");const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-10,String(a)+" != "+String(b));
+near(evaluate("2+3*4"),14);near(evaluate("(2+3)*4"),20);near(evaluate("2^3^2"),512);near(evaluate("-2^2"),-4);near(evaluate("50%"),.5);near(evaluate("sqrt(81)"),9);near(evaluate("sin(30)"),.5);near(evaluate("cos(60)"),.5);near(evaluate("2π"),2*Math.PI);near(evaluate("2(3+4)"),14);near(evaluate("3×4÷2"),6);near(evaluate("log(100)"),2);near(evaluate("ln(e)"),1);
+assert.throws(()=>evaluate("1/0"),/शून्य से भाग/);assert.throws(()=>evaluate("x^2+2x+1"),/बीजगणितीय/);assert.throws(()=>evaluate("x^2=4"),/समीकरण हल/);assert.throws(()=>evaluate("(2+3"),/बंद ब्रैकेट/);assert.throws(()=>evaluate("2+@"),/चिन्ह/);assert.throws(()=>evaluate("1".repeat(201)),/200 अक्षरों/);assert.throws(()=>evaluate("sqrt(-1)"),/वर्गमूल/);console.log("Math engine tests passed.");
