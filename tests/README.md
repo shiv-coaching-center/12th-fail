@@ -41,3 +41,5 @@ The service worker may delete only caches whose names start with `twelfth-fail-`
 - [ ] Open `#preview-solution`; verify the placeholder disclaimer, numbered step cards, step detail sheet, and local-voice-only TTS behavior.
 - [ ] Confirm the supplied original app icon appears in the header and is referenced by the PWA manifest.
 - [ ] Confirm the app remains usable offline after a successful online load.
+
+- [ ] Confirm the app prompts before activating a waiting Service Worker update.
