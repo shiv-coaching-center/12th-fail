@@ -29,3 +29,7 @@
 - Added hidden solution-preview route with explicit placeholder messaging; no solver or fabricated answers.
 - Added responsive mobile styling, accessibility labels, and a thumb-reach sticky keypad.
 - Bumped the app-shell cache version to v1.0.0.
+
+- Embedded the original supplied app artwork as the PWA/browser icon and workspace brand mark.
+- Restored Service Worker registration and the user-approved update banner in the new UI shell.
+- Added pre-deploy checks for JavaScript syntax, manifest JSON, and SVG icon XML.
