@@ -59,3 +59,10 @@ The first successful online visit installs the service worker and caches the app
 - `ratio-proportion.html`, `ratio-proportion.css`, and `ratio-proportion.js` provide the standalone mobile-first Ratio/Proportion page. Ratio accepts 2–6 terms through `solveRatioMany`; Proportion solves `a:b = c:x` with exact rational arithmetic. The page is linked from the main calculator and LCM/HCF page and is pre-cached for offline use.
 
 - A shared F-logo feature menu (`app-menu.js` / `app-menu.css`) is available on the main calculator, LCM/HCF page, and Ratio/Proportion page. It lists all built-in calculator functions and links to standalone number-theory tools; menu assets are pre-cached for offline access.
+
+
+## Phase 4 Fractions
+- `solveFraction(first, second, operation, reasons)` performs exact addition, subtraction, multiplication, and division on signed integer or fraction inputs using the shared BigInt rational arithmetic.
+- `simplifyFraction(value, reasons)` reduces a fraction to lowest terms. Zero denominators, malformed input, unsupported operations, and division by zero are rejected.
+- Each result is normalized and independently checked; fixed Hindi explanations live in `reasons_hi.json`.
+- `fractions.html`, `fractions.css`, and `fractions.js` provide a mobile-first keypad UI. `tests/fractions.test.js` covers 40 arithmetic cases, simplification, and invalid inputs.
