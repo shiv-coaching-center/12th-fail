@@ -1,94 +1,45 @@
 <!doctype html>
-<html lang="hi">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f5f5fb">
-<meta name="description" content="12th Fail · Learn, practice and improve offline">
-<meta name="application-name" content="12th Fail">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./icons/brand-icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="./icons/brand-icon.svg">
-<link rel="stylesheet" href="./style.css?v=1.0.8">
-<title>12th Fail · Scientific Study Calculator</title>
-</head>
-<body>
-<div class="app-frame" id="app-frame">
-<header class="topbar">
-<button class="icon-button menu-button" id="more-open" type="button" aria-label="Menu">☰</button>
-<a class="brand" href="./" aria-label="12th Fail home"><span class="brand-copy"><strong>12th <b>Fail</b></strong></span></a>
-<div class="top-actions">
-<span class="offline-indicator" id="connection-status"><i id="connection-dot"></i><span>ऑफलाइन तैयार</span></span>
-<button class="icon-button" id="history-open" type="button" aria-label="History"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8.3M3 4v4.3h4.3M12 7v5l3.5 2"/></svg></button>
-</div>
-</header>
-<section class="update-card" id="update-card" hidden aria-live="polite"><p>12th Fail का नया अपडेट उपलब्ध है।</p><button id="update-button" type="button">अपडेट करें</button></section>
-<section class="update-banner" id="update-banner" hidden aria-live="polite"><span>12th Fail का नया अपडेट उपलब्ध है।</span><button id="apply-update" type="button">अपडेट करें</button></section>
+<html lang="hi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f4fb"><meta name="description" content="12th Fail offline study calculator">
+<meta name="application-name" content="12th Fail"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/brand-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./icons/brand-icon.svg">
+<link rel="stylesheet" href="./style.css?v=1.0.9"><title>12th Fail · Learn & Practice</title></head>
+<body><div class="app-frame">
+<header class="topbar"><button class="icon-button" id="more-open" aria-label="Menu">☰</button><a class="brand" href="./"><strong>12th <b>Fail</b></strong></a><div class="top-actions"><button class="icon-button" id="history-open" aria-label="History"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8.3M3 4v4.3h4.3M12 7v5l3.5 2"/></svg></button></div></header>
+<section class="update-banner" id="update-banner" hidden><span>नया अपडेट उपलब्ध है।</span><button id="apply-update">अपडेट करें</button></section>
 <main id="main-screen">
-<nav class="subject-switch" aria-label="Subjects" role="tablist">
-<button class="subject-tab active" data-subject="math" role="tab" aria-selected="true">गणित</button>
-<button class="subject-tab" data-subject="physics" role="tab" aria-selected="false">भौतिक</button>
-<button class="subject-tab" data-subject="chemistry" role="tab" aria-selected="false">रसायन</button>
-</nav>
-<section class="work-card" aria-label="Calculator workspace">
-<div class="expression-area">
-<div class="expression-placeholder" id="expression-placeholder">x² + 5x + 6 = 0</div>
-<textarea id="expression-input" rows="2" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Expression" placeholder="अपना सवाल यहाँ लिखें"></textarea>
-<div class="physics-fields" id="physics-fields" hidden>
-<label>u = <input id="physics-u" inputmode="decimal" value="10"></label>
-<label>a = <input id="physics-a" inputmode="decimal" value="2"></label>
-<label>t = <input id="physics-t" inputmode="decimal" value="5"></label>
-<div class="physics-result">v = <strong id="physics-v">—</strong></div>
+<nav class="subject-switch" role="tablist" aria-label="विषय"><button class="subject-tab active" data-subject="math" role="tab" aria-selected="true">गणित</button><button class="subject-tab" data-subject="physics" role="tab" aria-selected="false">भौतिक</button><button class="subject-tab" data-subject="chemistry" role="tab" aria-selected="false">रसायन</button></nav>
+<section class="work-card">
+<div class="workspace-head"><span id="workspace-label">गणित · सवाल हल करें</span><span class="local-label">● डिवाइस पर सुरक्षित</span></div>
+<div class="expression-card"><div class="example-line" id="example-line">x² + 5x + 6 = 0</div><textarea id="expression-input" rows="2" placeholder="अपना सवाल यहाँ लिखें" aria-label="अपना सवाल यहाँ लिखें" spellcheck="false"></textarea></div>
+<div class="physics-work" id="physics-work" hidden>
+<div class="formula-heading"><b>भौतिकी सूत्र</b><button class="small-link" id="physics-formulas-open">सभी सूत्र देखें</button></div>
+<div class="formula-chips" id="physics-formula-chips"><button class="formula-chip active" data-formula="motion">v = u + at</button><button class="formula-chip" data-formula="force">F = ma</button><button class="formula-chip" data-formula="ohm">V = IR</button><button class="formula-chip" data-formula="work">W = Fs</button></div>
+<div class="value-fields" id="value-fields"></div><div class="physics-output"><span id="physics-output-label">अंतिम वेग (v)</span><strong id="physics-output-value">—</strong></div>
 </div>
-<div class="cannot-solve" id="cannot-solve"><span class="info-icon">i</span><span data-i18n="notReady">यह सवाल अभी हल नहीं कर सकता</span></div>
-<div class="display-footer"><span id="expression-hint">आपका सवाल इस डिवाइस पर सुरक्षित है</span><button class="keyboard-toggle" id="keyboard-toggle" type="button"><span>⌨</span></button></div>
+<div class="chemistry-work" id="chemistry-work" hidden>
+<div class="formula-heading"><b>रासायनिक समीकरण</b><button class="small-link" id="elements-open">तत्व (Elements)</button></div>
+<div class="reaction-input"><textarea id="reaction-input" rows="2" placeholder="उदा. H₂ + O₂ → H₂O" aria-label="रासायनिक समीकरण"></textarea></div>
+<div class="reaction-tools"><button class="reaction-chip" data-reaction="→">→ अभिक्रिया</button><button class="reaction-chip" data-reaction="⇌">⇌ साम्य</button><button class="reaction-chip" data-reaction="Δ">Δ ऊष्मा</button><button class="reaction-chip" data-reaction="↑">↑ गैस</button><button class="reaction-chip" data-reaction="↓">↓ अवक्षेप</button></div>
+<div class="element-preview" id="element-preview"><span>तत्व चुनें:</span><button data-element="H">H</button><button data-element="O">O</button><button data-element="Na">Na</button><button data-element="Cl">Cl</button><button data-element="C">C</button><button data-element="Fe">Fe</button></div>
+<p class="chemistry-note">तत्व या प्रतीक चुनने पर वे समीकरण में जुड़ेंगे।</p>
 </div>
-<div class="quick-strip-section">
-<div class="quick-strip" id="quick-strip" aria-label="Subject symbols"></div>
-<button class="round-more" id="symbols-open" type="button" aria-label="More symbols">•••</button>
-</div>
-<div class="keypad-section" id="keypad-section">
-<div class="keypad" id="keypad">
-<button class="key key-clear" data-action="clear" type="button">C</button><button class="key" data-key="(" type="button">(</button><button class="key" data-key=")" type="button">)</button><button class="key key-operator" data-key="%" type="button">%</button><button class="key key-operator" data-key="÷" type="button">÷</button>
-<button class="key" data-key="7" type="button">7</button><button class="key" data-key="8" type="button">8</button><button class="key" data-key="9" type="button">9</button><button class="key key-operator" data-key="×" type="button">×</button>
-<button class="key" data-key="4" type="button">4</button><button class="key" data-key="5" type="button">5</button><button class="key" data-key="6" type="button">6</button><button class="key key-operator" data-key="−" type="button">−</button>
-<button class="key" data-key="1" type="button">1</button><button class="key" data-key="2" type="button">2</button><button class="key" data-key="3" type="button">3</button><button class="key key-operator" data-key="+" type="button">+</button>
-<button class="key" data-key="0" type="button">0</button><button class="key" data-key="." type="button">.</button><button class="key key-function" data-action="backspace" aria-label="Backspace" type="button">⌫</button><button class="key key-equals" data-action="submit" type="button">=</button>
-</div>
-<div class="keypad-bottom">
-<button class="utility-button" id="templates-open" type="button"><span>▤</span><span data-i18n="templates">साँचे (Templates)</span></button>
-<button class="utility-button" id="more-tools-open" type="button"><span>＋</span><span data-i18n="moreSymbols">और Symbols</span></button>
-<button class="utility-button" id="history-open-bottom" type="button"><span>◷</span><span data-i18n="history">History</span></button>
-</div>
-</div>
+<div class="cannot-solve" id="cannot-solve"><span class="info-icon">i</span><strong>यह सवाल अभी हल नहीं कर सकता</strong></div>
+<div class="work-footer"><span id="saved-hint">आपका सवाल इस डिवाइस पर सुरक्षित है</span><button class="keyboard-toggle" id="keyboard-toggle" aria-label="फोन कीबोर्ड">⌨</button><button class="clear-button" id="clear-input">साफ़ करें</button></div>
 </section>
-<footer class="app-footer"><span>12th FAIL</span><span data-i18n="footer">100% Offline · आपका डेटा आपके डिवाइस पर</span></footer>
+<section class="quick-tools"><div class="section-heading"><div><h2 id="quick-title">गणित के चिह्न</h2><p id="quick-subtitle">उपयोगी Symbols</p></div><button class="round-more" id="symbols-open" aria-label="अधिक चिह्न">•••</button></div><div class="quick-strip" id="quick-strip"></div></section>
+<section class="keypad-section" id="keypad-section"><div class="keypad" id="keypad">
+<button class="key key-clear" data-action="clear">C</button><button class="key" data-key="("> ( </button><button class="key" data-key=")"> ) </button><button class="key key-operator" data-key="%">%</button>
+<button class="key key-operator" data-key="÷">÷</button><button class="key" data-key="7">7</button><button class="key" data-key="8">8</button><button class="key" data-key="9">9</button>
+<button class="key key-operator" data-key="×">×</button><button class="key" data-key="4">4</button><button class="key" data-key="5">5</button><button class="key" data-key="6">6</button>
+<button class="key key-operator" data-key="−">−</button><button class="key" data-key="1">1</button><button class="key" data-key="2">2</button><button class="key" data-key="3">3</button>
+<button class="key key-operator" data-key="+">+</button><button class="key" data-key="0">0</button><button class="key" data-key=".">.</button><button class="key key-function" data-action="backspace">⌫</button>
+<button class="key key-equals" data-action="submit">=</button>
+</div><div class="keypad-bottom"><button class="utility-button" id="templates-open">▤ <span>साँचे (Templates)</span></button><button class="utility-button" id="more-tools-open">＋ <span>और Symbols</span></button><button class="utility-button" id="history-open-bottom">◷ <span>History</span></button></div></section>
+<footer class="app-footer"><b>12th FAIL</b><span>100% Offline · आपका डेटा आपके डिवाइस पर</span></footer>
 </main>
-<main id="solution-screen" hidden>
-<button class="back-button" id="solution-back" type="button">← वापस</button>
-<section class="solution-header"><span class="verified-pill">✓ VERIFIED SOLUTION</span><h1>हल का पूर्वावलोकन</h1><p>यह केवल UI preview है। वास्तविक उत्तर अभी उपलब्ध नहीं हैं।</p></section>
-<section class="verified-answer-card"><span>सत्यापित उत्तर</span><strong>—</strong><small>उत्तर इंजन जुड़ने पर यहाँ दिखेगा</small></section>
-<div class="steps-heading"><h2>हल के चरण</h2><span>समझने के लिए चरण चुनें</span></div>
-<div class="step-list" id="step-list">
-<button class="step-card" data-step="0"><span class="step-number">01</span><span><strong>प्रश्न को समझें</strong><small>यहाँ सत्यापित चरण का विवरण आएगा।</small></span><b>›</b></button>
-<button class="step-card" data-step="1"><span class="step-number">02</span><span><strong>सही नियम चुनें</strong><small>यहाँ नियम और उसका उपयोग दिखेगा।</small></span><b>›</b></button>
-<button class="step-card" data-step="2"><span class="step-number">03</span><span><strong>अंतिम जाँच</strong><small>उत्तर की जाँच यहाँ दिखाई जाएगी।</small></span><b>›</b></button>
+<main id="solution-screen" hidden><button class="back-button" id="solution-back">← वापस</button><h2>हल का पूर्वावलोकन</h2><div class="cannot-solve">ⓘ वास्तविक Solver अभी शामिल नहीं है।</div><p>Solver जुड़ने पर सत्यापित चरण यहाँ दिखेंगे।</p></main>
 </div>
-<div class="solution-controls"><button id="speak-solution" type="button">🔊 सुनें</button><button id="simple-solution" type="button">Aa सरल टेक्स्ट</button></div>
-<p class="preview-disclaimer">यह स्क्रीन केवल डिज़ाइन जाँच के लिए है।</p>
-</main>
-</div>
-<div class="sheet-backdrop" id="sheet-backdrop" hidden>
-<section class="bottom-sheet" id="bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-<div class="sheet-handle"></div>
-<div class="sheet-header"><h2 id="sheet-title">चिह्न और प्रतीक</h2><button class="icon-button close-sheet" id="sheet-close" type="button" aria-label="Close">×</button></div>
-<div class="sheet-search"><span>⌕</span><input id="sheet-search" type="search" placeholder="खोजें..." autocomplete="off"></div>
-<div class="sheet-tabs" id="sheet-tabs"></div>
-<div class="sheet-content" id="sheet-content"></div>
-</section>
-</div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="./app.js?v=1.0.8" defer></script>
-</body></html>
+<div class="sheet-backdrop" id="sheet-backdrop" hidden><section class="bottom-sheet" role="dialog" aria-modal="true"><div class="sheet-handle"></div><header class="sheet-header"><h2 id="sheet-title">चिह्न और प्रतीक</h2><button id="sheet-close" class="icon-button" aria-label="बंद करें">×</button></header><input id="sheet-search" class="sheet-search" type="search" placeholder="खोजें..."><div class="sheet-tabs" id="sheet-tabs"></div><div class="sheet-content" id="sheet-content"></div></section></div>
+<div class="toast" id="toast" role="status"></div><script src="./app.js?v=1.0.9" defer></script></body></html>
