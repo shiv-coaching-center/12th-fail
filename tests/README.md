@@ -41,10 +41,21 @@
 - [x] Engine is integrated with the calculator UI and offline app shell.
 
 ## Phase 2.2 Percentages
-- [ ] 30 hand-verified percentage cases with source labels.
-- [ ] Standalone, negative, decimal, grouped, and mixed percentage calculations.
-- [ ] Exact BigInt arithmetic and independent verification.
-- [ ] Fixed Hindi reason for every percentage step.
-- [ ] Phone testing of percentage keypad.
+- [x] 30 hand-verified percentage cases with source labels.
+- [x] Standalone, negative, decimal, grouped, and mixed percentage calculations.
+- [x] Exact BigInt arithmetic and independent verification.
+- [x] Fixed Hindi reason for every percentage step.
+- [x] Phone testing of percentage keypad (user-confirmed).
 
 Run locally with `npm test` (Node.js 20+; no external packages).
+
+
+## Phase 2.3 Linear equations
+- [x] 37 hand-verified cases with source labels.
+- [x] Equations in the form ax + b = c and variables on both sides.
+- [x] Parentheses, implicit multiplication, exact fractions, decimals, and negative values.
+- [x] No-solution and infinite-solution cases.
+- [x] Nonlinear terms, variable divisors, malformed input, and division by zero rejected.
+- [x] Exact substitution and reduced-equation verification.
+- [x] Fixed Hindi reason for every displayed equation step.
+- [ ] Phone testing of linear equations.
