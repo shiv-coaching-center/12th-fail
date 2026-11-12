@@ -367,6 +367,23 @@ function solveRatio(first,second,reasons){
     return {ok:true,ratio:left.toString()+':'+right.toString(),first:left.toString(),second:right.toString(),verified:true,steps:[{expression:first+':'+second,result:left.toString()+':'+right.toString(),display:first+':'+second+'  →  '+left+':'+right,rule:'ratio_reduce',reason}]};
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
+
+function solveRatioMany(values,reasons){
+  try{
+    if(!Array.isArray(values)||values.length<2||values.length>6||!reasons||typeof reasons!=='object')throw Error('INPUT');
+    const nums=values.map((v,i)=>parsePositiveInteger(v,i===0));
+    let g=nums[0];for(const n of nums.slice(1))g=gcd(g,n);
+    const reduced=nums.map(n=>n/g);
+    if(reduced.reduce((acc,n)=>gcd(acc,n),reduced[0])!==1n)throw Error('VERIFY');
+    if(typeof reasons.ratio_reduce!=='string'||!reasons.ratio_reduce.trim())throw Error('REASON');
+    const steps=[{expression:values.join(', '),result:'HCF = '+g,display:values.join(', ')+' का म.स. (HCF) = '+g,rule:'ratio_reduce',reason:reasons.ratio_reduce}];
+    reduced.forEach((n,i)=>steps.push({expression:values[i]+' ÷ '+g,result:n.toString(),display:values[i]+' ÷ '+g+' = '+n,rule:'ratio_reduce',reason:reasons.ratio_reduce}));
+    const ratio=reduced.map(String).join(' : ');
+    steps.push({expression:values.join(' : '),result:ratio,display:'इसलिए अनुपात = '+ratio,rule:'ratio_reduce',reason:reasons.ratio_reduce});
+    return {ok:true,ratio,commonDivisor:g.toString(),parts:reduced.map(String),verified:true,steps};
+  }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
+}
+
 function solveProportion(first,second,third,reasons){
   try{
     if(!reasons||typeof reasons!=='object')throw Error('REASONS');
@@ -384,5 +401,5 @@ function solveProportion(first,second,third,reasons){
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
 
-if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,solveLcmHcf,solveRatio,solveProportion,UNSUPPORTED_MESSAGE};
-if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,solveLcmHcf,solveRatio,solveProportion,UNSUPPORTED_MESSAGE};
+if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,UNSUPPORTED_MESSAGE};
+if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,UNSUPPORTED_MESSAGE};
