@@ -9,4 +9,33 @@ function unary(){if(take("+"))return unary();if(take("-"))return -unary();return
 function term(){let v=unary();while(peek()&&(peek().type==="*"||peek().type==="/")){const op=a[i++].type,r=unary();if(op==="/"&&r===0)throw Error("शून्य से भाग नहीं कर सकते।");v=op==="*"?v*r:v/r}return v}
 function expr(){let v=term();while(peek()&&(peek().type==="+"||peek().type==="-")){const op=a[i++].type,r=term();v=op==="+"?v+r:v-r}return v}
 const result=expr();if(i!==a.length)throw Error("सवाल का कुछ हिस्सा समझ नहीं आया।");if(!Number.isFinite(result))throw Error("इस गणना का परिणाम मान्य संख्या नहीं है।");return Number(result.toPrecision(12))}
-return {evaluate}});
+
+function solveEquation(source){
+if(typeof source!=="string"||source.length>200)throw Error("समीकरण 200 अक्षरों से छोटा रखें।");
+const parts=source.split("=");if(parts.length!==2||!parts[0].trim()||!parts[1].trim())throw Error("एक ही बराबर (=) का चिन्ह लगाकर समीकरण लिखें।");
+function parsePoly(text){
+const a=tokenize(text);let i=0,variable="";
+const zero=()=>[0,0,0],constant=n=>[n,0,0],add=(p,q)=>p.map((v,k)=>v+q[k]),sub=(p,q)=>p.map((v,k)=>v-q[k]);
+function mul(p,q){const r=zero();for(let j=0;j<3;j++)for(let k=0;k<3;k++){if(Math.abs(p[j])<1e-14||Math.abs(q[k])<1e-14)continue;if(j+k>2)throw Error("अभी केवल Linear और Quadratic समीकरण हल हो सकते हैं।");r[j+k]+=p[j]*q[k]}return r}
+const peek=()=>a[i],take=t=>{if(peek()&&peek().type===t){i++;return true}return false};
+function primary(){const t=peek();if(!t)throw Error("समीकरण अधूरा है।");if(t.type==="number"){i++;return constant(t.value)}if(take("(")){const v=expr();if(!take(")"))throw Error("एक बंद ब्रैकेट ) छूटा हुआ है।");return v}if(t.type==="id"){i++;if(t.value!=="x"&&t.value!=="y")throw Error("अभी केवल x या y वाला समीकरण हल कर सकते हैं।");if(variable&&variable!==t.value)throw Error("एक समीकरण में अभी x और y दोनों साथ इस्तेमाल नहीं कर सकते।");variable=t.value;return [0,1,0]}throw Error("समीकरण का यह हिस्सा समझ नहीं आया।")}
+function power(){let v=primary();if(take("^")){const n=unary();if(!Number.isInteger(n)||n<0||n>2)throw Error("चर की घात अभी 0, 1 या 2 ही हो सकती है।");v=n===0?constant(1):n===1?v:mul(v,v)}return v}
+function unary(){if(take("+"))return unary();if(take("-"))return unary().map(v=>-v);return power()}
+function term(){let v=unary();while(peek()&&(peek().type==="*"||peek().type==="/")){const op=a[i++].type,r=unary();if(op==="/"){if(Math.abs(r[1])+Math.abs(r[2])>1e-12)throw Error("अभी किसी variable से भाग देने वाले समीकरण हल नहीं होते।");if(Math.abs(r[0])<1e-14)throw Error("शून्य से भाग नहीं कर सकते।");v=v.map(n=>n/r[0])}else v=mul(v,r)}return v}
+function expr(){let v=term();while(peek()&&(peek().type==="+"||peek().type==="-")){const op=a[i++].type,r=term();v=op==="+"?add(v,r):sub(v,r)}return v}
+const p=expr();if(i!==a.length)throw Error("समीकरण का कुछ हिस्सा समझ नहीं आया।");return {p,variable:variable||"x"}}
+const left=parsePoly(parts[0]),right=parsePoly(parts[1]);if(left.variable!==right.variable)throw Error("दोनों तरफ एक ही variable इस्तेमाल करें।");
+const c=left.p.map((v,i)=>v-right.p[i]);const [C,B,A]=c.map(v=>Math.abs(v)<1e-12?0:v),x=left.variable;
+const fmt=n=>String(Number(n.toPrecision(8)));
+const polyText=()=>{const terms=[];[[A,2],[B,1],[C,0]].forEach(([v,p])=>{if(!v)return;const abs=Math.abs(v),part=(p===0?fmt(abs):(abs===1?"":fmt(abs))+(p===2?x+"²":x));terms.push({sign:v<0?-1:1,text:part})});if(!terms.length)return "0";return terms.map((t,i)=>(i===0?(t.sign<0?"−":""):(t.sign<0?" − ":" + "))+t.text).join("")};
+const steps=["समीकरण: "+source,"सभी पद एक तरफ लाकर दूसरी तरफ 0 रखें: "+polyText()+" = 0"];
+if(A===0&&B===0){if(C===0)return {kind:"identity",answer:"अनंत हल",steps:steps.concat(["दोनों तरफ समान हैं। इस समीकरण के अनंत हल हैं।"])};return {kind:"none",answer:"कोई हल नहीं",steps:steps.concat(["यह कथन असत्य है, इसलिए इसका कोई हल नहीं है।"])}}
+if(A===0){const root=-C/B;return {kind:"linear",variable:x,roots:[root],answer:x+" = "+fmt(root),steps:steps.concat(["रेखीय समीकरण: "+fmt(B)+x+" + ("+fmt(C)+") = 0","स्थिर पद दूसरी तरफ ले जाएँ: "+fmt(B)+x+" = "+fmt(-C),"दोनों तरफ "+fmt(B)+" से भाग दें।",x+" = "+fmt(root)])}}
+const D=B*B-4*A*C,first=steps.concat(["Quadratic Formula: "+x+" = (−b ± √(b² − 4ac)) / 2a","यहाँ a = "+fmt(A)+", b = "+fmt(B)+", c = "+fmt(C),"Discriminant (D) = "+fmt(B)+"² − 4 × "+fmt(A)+" × "+fmt(C)+" = "+fmt(D)]);
+if(D< -1e-12){const real=-B/(2*A),imag=Math.sqrt(-D)/(2*Math.abs(A));return {kind:"complex",answer:x+" = "+fmt(real)+" ± "+fmt(imag)+"i",steps:first.concat(["D < 0 है, इसलिए वास्तविक roots नहीं हैं।","Complex roots: "+x+" = "+fmt(real)+" ± "+fmt(imag)+"i"])}}
+const sqrtD=Math.sqrt(Math.max(0,D)),r1=(-B+sqrtD)/(2*A),r2=(-B-sqrtD)/(2*A),roots=D<1e-12?[r1]:[r1,r2].sort((m,n)=>m-n);
+const factor=roots.length===2&&roots.every(v=>Math.abs(v-Math.round(v))<1e-9)?"Factorisation: ("+x+(roots[0]<0?" + "+fmt(-roots[0]):" − "+fmt(roots[0]))+")("+x+(roots[1]<0?" + "+fmt(-roots[1]):" − "+fmt(roots[1]))+") = 0":null;
+const finalSteps=first.concat(["D "+(D===0?"= 0 है, इसलिए दोनों roots समान हैं।":"≥ 0 है, इसलिए वास्तविक roots मिलेंगे।"),x+"₁ = (−b + √D) / 2a = "+fmt(r1)]);if(roots.length===2)finalSteps.push(x+"₂ = (−b − √D) / 2a = "+fmt(r2));if(factor)finalSteps.push(factor);
+return {kind:"quadratic",variable:x,roots,answer:roots.length===1?x+" = "+fmt(roots[0]):x+"₁ = "+fmt(roots[0])+" , "+x+"₂ = "+fmt(roots[1]),steps:finalSteps}
+}
+return {evaluate,solveEquation}});
