@@ -122,5 +122,151 @@ function solve(input,reasons){
     return {ok:true,answer,exact:{numerator:primary.n.toString(),denominator:primary.d.toString()},verified:true,steps:safe};
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
-if(typeof module!=='undefined'&&module.exports)module.exports={solve,UNSUPPORTED_MESSAGE};
-if(typeof window!=='undefined')window.TwelfthFailMath={solve,UNSUPPORTED_MESSAGE};
+
+
+// Exact one-variable linear-equation solver. It shares rational primitives,
+// but parses equations separately so unsupported algebra never falls through.
+function tokenizeLinear(source){
+  if(typeof source!=='string'||!source.length||source.length>MAX_INPUT_LENGTH)throw Error('BAD_EQUATION');
+  const s=source.replace(/[×✕]/g,'*').replace(/÷/g,'/').replace(/[−–]/g,'-').toLowerCase();
+  const out=[];let i=0;
+  while(i<s.length){
+    const c=s[i];
+    if(/[ \t\r\n]/.test(c)){i++;continue;}
+    if(/[0-9]/.test(c)){
+      const start=i;while(/[0-9]/.test(s[i]||''))i++;
+      if(s[i]==='.'){i++;const ds=i;while(/[0-9]/.test(s[i]||''))i++;if(i===ds)throw Error('BAD_NUMBER');}
+      out.push({type:'num',value:decimal(s.slice(start,i))});
+    }else if(c==='x'){out.push({type:'x'});i++;}
+    else if('+-*/()'.includes(c)){out.push({type:c==='('? 'open':c===')'?'close':'op',value:c});i++;}
+    else throw Error('UNSUPPORTED');
+    if(out.length>MAX_TOKENS)throw Error('TOO_MANY');
+  }
+  if(!out.length)throw Error('EMPTY');return out;
+}
+const linearZero=()=>rat(0n);
+const linearConst=(v)=>({a:linearZero(),b:v});
+const linearVariable=()=>({a:rat(1n),b:linearZero()});
+const isZero=(v)=>v.n===0n;
+const sameRat=(a,b)=>a.n===b.n&&a.d===b.d;
+function linearAdd(x,y){return {a:add(x.a,y.a),b:add(x.b,y.b)};}
+function linearSub(x,y){return {a:sub(x.a,y.a),b:sub(x.b,y.b)};}
+function linearScale(x,k){return {a:mul(x.a,k),b:mul(x.b,k)};}
+function linearMultiply(x,y){
+  if(!isZero(x.a)&&!isZero(y.a))throw Error('NON_LINEAR');
+  if(isZero(x.a))return linearScale(y,x.b);
+  return linearScale(x,y.b);
+}
+function linearDivide(x,y){
+  if(!isZero(y.a))throw Error('VARIABLE_DIVISOR');
+  if(isZero(y.b))throw Error('DIV_ZERO');
+  return linearScale(x,div(rat(1n),y.b));
+}
+function parseLinear(tokens){
+  let i=0;
+  function primary(){
+    const t=tokens[i++];if(!t)throw Error('END');
+    if(t.type==='num')return linearConst(t.value);
+    if(t.type==='x')return linearVariable();
+    if(t.type==='open'){
+      const value=expr();
+      if(!tokens[i]||tokens[i].type!=='close')throw Error('PAREN');
+      i++;return value;
+    }
+    throw Error('VALUE');
+  }
+  function unary(){
+    if(tokens[i]&&tokens[i].type==='op'&&(tokens[i].value==='+'||tokens[i].value==='-')){
+      const op=tokens[i++].value,value=unary();return op==='-'?linearScale(value,rat(-1n)):value;
+    }
+    return primary();
+  }
+  function term(){
+    let left=unary();
+    while(i<tokens.length){
+      let op=null;
+      if(tokens[i].type==='op'&&(tokens[i].value==='*'||tokens[i].value==='/'))op=tokens[i++].value;
+      else if(tokens[i].type==='num'||tokens[i].type==='x'||tokens[i].type==='open')op='*';
+      else break;
+      const right=unary();
+      left=op==='*'?linearMultiply(left,right):linearDivide(left,right);
+    }
+    return left;
+  }
+  function expr(){
+    let left=term();
+    while(tokens[i]&&tokens[i].type==='op'&&(tokens[i].value==='+'||tokens[i].value==='-')){
+      const op=tokens[i++].value,right=term();
+      left=op==='+'?linearAdd(left,right):linearSub(left,right);
+    }
+    return left;
+  }
+  const result=expr();if(i!==tokens.length)throw Error('EXTRA');return result;
+}
+function formatLinearTerm(coefficient){
+  if(isZero(coefficient))return '';
+  if(sameRat(coefficient,rat(1n)))return 'x';
+  if(sameRat(coefficient,rat(-1n)))return '-x';
+  return format(coefficient)+'x';
+}
+function formatSigned(items,variable){
+  let out='';
+  for(const value of items){
+    if(isZero(value))continue;
+    const negative=value.n<0n,absolute=negative?neg(value):value;
+    let term=variable?formatLinearTerm(absolute):format(absolute);
+    if(!term)continue;
+    if(!out)out=(negative?'-':'')+term;
+    else out+=(negative?' − ':' + ')+term;
+  }
+  return out||'0';
+}
+function solveEquation(input,reasons){
+  try{
+    if(!reasons||typeof reasons!=='object')throw Error('REASONS');
+    if(typeof input!=='string'||input.length>MAX_INPUT_LENGTH)throw Error('BAD_EQUATION');
+    const parts=input.split('=');
+    if(parts.length!==2||!parts[0].trim()||!parts[1].trim())throw Error('BAD_EQUATION');
+    const left=parseLinear(tokenizeLinear(parts[0]));
+    const right=parseLinear(tokenizeLinear(parts[1]));
+    const coefficient=sub(left.a,right.a);
+    const constant=sub(right.b,left.b);
+    const steps=[];
+    const addStep=(expression,result,rule)=>{
+      if(typeof reasons[rule]!=='string'||!reasons[rule].trim())throw Error('REASON');
+      steps.push({expression,result,display:expression+'  →  '+result,rule,reason:reasons[rule]});
+    };
+    if(isZero(coefficient)){
+      if(isZero(constant)){
+        addStep(input.trim(),'अनंत हल','infinite_solutions');
+        return {ok:true,answer:'अनंत हल',exact:null,verified:true,steps};
+      }
+      addStep(input.trim(),'कोई हल नहीं','no_solution');
+      return {ok:true,answer:'कोई हल नहीं',exact:null,verified:true,steps};
+    }
+    const movedLeft=formatSigned([left.a,neg(right.a)],true);
+    const movedRight=formatSigned([right.b,neg(left.b)],false);
+    const moved=movedLeft+' = '+movedRight;
+    if(moved!==input.trim())addStep(input.trim(),moved,'move_terms');
+    const combined=formatLinearTerm(coefficient)+' = '+format(constant);
+    if(combined!==moved)addStep(moved,combined,'combine_like_terms');
+    const answerValue=div(constant,coefficient);
+    const answer='x = '+format(answerValue);
+    if(!sameRat(coefficient,rat(1n))){
+      const divided='x = '+format(constant)+' ÷ '+format(coefficient);
+      if(divided!==combined)addStep(combined,divided,'divide_coefficient');
+    }
+    const finalBefore=steps.length?steps[steps.length-1].result:input.trim();
+    if(finalBefore!==answer)addStep(finalBefore,answer,'combine_like_terms');
+    // Independent substitution check: evaluate both original sides at x.
+    const substitutedLeft=add(mul(left.a,answerValue),left.b);
+    const substitutedRight=add(mul(right.a,answerValue),right.b);
+    if(!sameRat(substitutedLeft,substitutedRight))throw Error('VERIFY');
+    // Also verify the reduced equation by exact cross-multiplication.
+    if(!sameRat(mul(coefficient,answerValue),constant))throw Error('VERIFY');
+    return {ok:true,answer,exact:{numerator:answerValue.n.toString(),denominator:answerValue.d.toString()},verified:true,steps};
+  }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
+}
+
+if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,UNSUPPORTED_MESSAGE};
+if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,UNSUPPORTED_MESSAGE};
