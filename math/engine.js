@@ -372,7 +372,7 @@ function solveProportion(first,second,third,reasons){
     if(!reasons||typeof reasons!=='object')throw Error('REASONS');
     const a=parsePositiveInteger(first),b=parsePositiveInteger(second),c=parsePositiveInteger(third);
     const x=rat(b*c,a),answer=format(x);
-    if(!sameRat(mul(rat(a),x),rat(b*c)))throw Error('VERIFY');
+    if(a*x.n!==b*c*x.d)throw Error('VERIFY');
     const rules=['proportion_cross_multiply','proportion_divide'];
     const steps=rules.map((rule,i)=>{
       const reason=reasons[rule];if(typeof reason!=='string'||!reason.trim())throw Error('REASON');
