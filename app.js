@@ -159,7 +159,10 @@
     if (button.dataset.action === "clear") clearExpression();
     else if (button.dataset.action === "backspace") backspace();
     else if (button.dataset.action === "parentheses") insertParentheses();
-    else if (button.dataset.action === "equals") {\n      if (/[xX]/.test(currentExpression) && !currentExpression.includes("=")) insert("=");\n      else calculate();\n    }
+    else if (button.dataset.action === "equals") {
+      if (/[xX]/.test(currentExpression) && !currentExpression.includes("=")) insert("=");
+      else calculate();
+    }
     else if (button.dataset.key) insert(button.dataset.key);
   });
 
