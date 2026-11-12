@@ -2,13 +2,13 @@
 
 ## Product
 
-12th Fail एक single-page, mobile-first PWA है जिसमें गणित, भौतिक विज्ञान और रसायन विज्ञान के input modes होंगे। UI Hindi और English दोनों भाषाओं का समर्थन करेगा।
+12th Fail एक mobile-first, bilingual (Hindi + English) learning PWA है। विषय: Mathematics, Physics और Chemistry.
 
 ## Runtime
 
 - Static HTML, CSS और JavaScript; कोई framework या build dependency आवश्यक नहीं।
-- GitHub Pages hosting और relative asset paths ताकि repository Pages URL पर भी ऐप चले।
-- System fonts only; सभी icons inline SVG या text symbols होंगे।
+- GitHub Pages hosting और relative asset paths ताकि repository subpath पर भी ऐप चले।
+- System fonts only; local SVG icons.
 - कोई AI/LLM, analytics, ads, remote API, CDN या external font नहीं।
 
 ## Phase boundaries
@@ -27,17 +27,20 @@ Repository structure, GitHub Pages workflow, web app manifest, versioned Service
 
 ## Offline and update policy
 
-- Cache name में explicit app version होगा।
-- Install के दौरान आवश्यक same-origin app-shell assets cache होंगे।
-- Activate के दौरान केवल इसी app के पुराने versioned caches हटेंगे; origin के दूसरे caches नहीं।
-- नया worker उपलब्ध होने पर UI update सूचना देगा।
-- उपयोगकर्ता के update स्वीकार करने पर नया worker activate होगा और page reload होगा।
-- Cache या network failure को verified answer नहीं माना जाएगा।
+- Cache name में explicit app version होगा: `twelfth-fail-v0.2.0`.
+- Install के दौरान जरूरी same-origin app-shell assets cache होंगे।
+- Activate के दौरान केवल `twelfth-fail-` prefix वाले पुराने caches हटेंगे।
+- किसी दूसरे app या origin के caches delete नहीं होंगे।
+- नया worker उपलब्ध होने पर UI update prompt दिखाएगा।
+- नया worker तभी activate होगा जब उपयोगकर्ता Update चुनेगा।
+- Navigation network-first है और offline में cached app shell fallback होगा।
+- Local static assets cache-first हैं।
+- Service Worker खुद को unregister नहीं करेगा।
 
 ## Local data
 
-History के अधिकतम 20 प्रश्न और quick-strip usage counts device-local storage में रहेंगे। कोई personal input server पर नहीं भेजा जाएगा।
+भविष्य की History और quick-strip usage counts device-local storage में रहेंगे। कोई personal input server पर नहीं भेजा जाएगा।
 
 ## Trust boundary
 
-Phase 0 और Phase 1 में सभी solve actions cannot-solve state दिखाएँगे। कोई sample answer सामान्य route पर नहीं दिखेगा। Solution preview केवल hidden preview route पर होगा और स्पष्ट रूप से test-only रहेगा।
+Phase 0 और Phase 1 में कोई solving engine नहीं होगा। Solve action verified result का दिखावा नहीं करेगा। कोई sample answer सामान्य route पर नहीं दिखेगा। Solution preview केवल hidden preview route पर होगा और स्पष्ट रूप से test-only रहेगा।
