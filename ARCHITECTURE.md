@@ -11,6 +11,13 @@
 - `sw.js`: caches the static app shell and serves cached same-origin assets.
 - `icons/icon.svg`: scalable local app icon.
 
+## Phase 3.1 exponents and square roots
+- `math/engine.js` supports exact integer powers (including zero and negative integer exponents) and exact square roots when both rational numerator and denominator are perfect squares.
+- Powers use bounded exponentiation by squaring over BigInt rational values. Roots use integer square-root checks; irrational, negative, or unsupported roots are rejected.
+- The AST evaluator and independent shunting-yard/postfix evaluator must agree exactly before a result is returned.
+- `reasons_hi.json` supplies fixed Hindi reasons for `power` and `square_root`.
+- `tests/exponents-roots-cases.json` contains 40 hand-verified cases, including unsupported and edge cases.
+
 ## Trust and privacy boundaries
 - No AI/LLM, online API, analytics, advertisements, login, or remote fonts.
 - No application data is sent to a server.
