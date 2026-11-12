@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0] - 2026-11-12
+
+### Added
+- Exact BigInt ratio simplification and missing-term proportion solver.
+- Cross-multiplication verification and fixed Hindi explanations.
+- 80 hand-verified ratio and proportion test cases.
+
 ## [0.7.0] - 2026-11-12
 
 ### Added
