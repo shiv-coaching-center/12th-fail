@@ -24,7 +24,7 @@ test('equals and view steps both call verified engine',()=>{
  assert.match(app,/result\.verified !== true/);
 });
 test('step explanations come from the fixed reasons file',()=>{
- assert.match(app,/fetch\("\.\/reasons_hi\.json"/);
+ assert.match(app,/fetch\("\.\/reasons_hi\.json\?v=0\.2\.0"/);
  assert.match(app,/selectedStep\.reason/);
 });
 test('offline shell pre-caches engine and fixed reasons',()=>{
