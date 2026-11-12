@@ -182,7 +182,7 @@
   });
 
   if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-    navigator.serviceWorker.register("./sw.js?v=9", { scope: "./" }).catch(() => {
+    navigator.serviceWorker.register("./sw.js?v=10", { scope: "./" }).catch(() => {
       message.textContent = "ऑफलाइन अपडेट के लिए पेज दोबारा खोलें";
     });
   }
