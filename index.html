@@ -2,103 +2,19 @@
 <html lang="hi">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#FBF8F2">
-  <meta name="description" content="12th Fail — offline Mathematics learning app.">
-  <title>12th Fail</title>
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=0.4.1">
-  <link rel="stylesheet" href="./app-menu.css?v=1.0.1">
-  <style>.hidden{display:none!important}.tool-page-link{display:flex;justify-content:center;align-items:center;gap:10px;margin:22px 0 8px;padding:15px;border:1px solid #E7DECF;border-radius:18px;color:#075B35;background:linear-gradient(145deg,#FFFDF8,#F2EBDD);box-shadow:0 4px 0 #E7DECF;text-decoration:none;font-weight:750}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f3">
+  <title>नई शुरुआत</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#f8f7f3;color:#242424;font-family:system-ui,sans-serif}
+    main{max-width:520px;text-align:center;padding:32px;border:1px solid #e8e5dd;border-radius:22px;background:#fff}
+    h1{margin:0 0 12px;font-size:28px}p{margin:0;color:#666;line-height:1.7}
+  </style>
 </head>
 <body>
-  <main class="app-shell">
-    <header class="topbar">
-      <div class="brand">
-        <button class="brand-mark app-menu-trigger" data-app-menu-trigger type="button" aria-label="सभी फीचर खोलें" aria-expanded="false">ƒ</button>
-      </div>
-    </header>
-
-    <section id="home-screen" class="screen" aria-label="कैलकुलेटर">
-      <section class="display-card" aria-label="सवाल और उत्तर">
-        <div id="expression" class="expression" aria-live="polite">0</div>
-        <div class="answer-row">
-          <div class="answer-result" aria-label="उत्तर"><span id="answer-preview" class="answer-preview">—</span></div>
-          <button id="show-solution" class="small-primary" type="button">हल देखें</button>
-        </div>
-      </section>
-
-      <div class="keypad" id="keypad" aria-label="कैलकुलेटर कीपैड">
-        <button class="key extra" data-key="x" type="button">x</button>
-        <button class="key extra" data-key="^2" type="button">x²</button>
-        <button class="key extra" data-key="√(" type="button">√</button>
-        <button class="key extra" data-key="=" type="button" aria-label="समीकरण में बराबर का चिह्न डालें">x =</button>
-
-        <button class="key clear" data-action="clear" type="button">C</button>
-        <button class="key operator" data-action="parentheses" type="button">( )</button>
-        <button class="key operator" data-key="%" type="button">%</button>
-        <button class="key operator" data-key="÷" type="button">÷</button>
-
-        <button class="key" data-key="7" type="button">7</button>
-        <button class="key" data-key="8" type="button">8</button>
-        <button class="key" data-key="9" type="button">9</button>
-        <button class="key operator" data-key="×" type="button">×</button>
-
-        <button class="key" data-key="4" type="button">4</button>
-        <button class="key" data-key="5" type="button">5</button>
-        <button class="key" data-key="6" type="button">6</button>
-        <button class="key operator" data-key="−" type="button">−</button>
-
-        <button class="key" data-key="1" type="button">1</button>
-        <button class="key" data-key="2" type="button">2</button>
-        <button class="key" data-key="3" type="button">3</button>
-        <button class="key operator" data-key="+" type="button">+</button>
-
-        <button class="key" data-key="0" type="button">0</button>
-        <button class="key" data-key="." type="button">.</button>
-        <button class="key" data-action="backspace" type="button" aria-label="मिटाएँ">⌫</button>
-        <button class="key equals" data-action="equals" type="button">=</button>
-      </div>
-      <p id="calculator-message" class="sr-only" role="status"></p>
-      <a class="tool-page-link" href="./lcm-hcf.html">LCM / HCF कैलकुलेटर खोलें <span aria-hidden="true">›</span></a>
-      <a class="tool-page-link" href="./ratio-proportion.html">Ratio / Proportion कैलकुलेटर खोलें <span aria-hidden="true">›</span></a>
-      <a class="tool-page-link" href="./fractions.html">Fractions / भिन्न कैलकुलेटर खोलें <span aria-hidden="true">›</span></a>
-    </section>
-
-    <section id="solution-screen" class="screen hidden" aria-labelledby="solution-title">
-      <header class="solution-header">
-        <button id="back-home" class="back-button" type="button" aria-label="वापस">←</button>
-        <h2 id="solution-title">हल</h2>
-        <span class="header-balance" aria-hidden="true"></span>
-      </header>
-
-      <section class="question-card" aria-label="सवाल">
-        <p id="solution-question" class="question-value">—</p>
-        <p id="solution-answer" class="answer-value">—</p>
-      </section>
-
-      <div class="steps-heading hidden" id="steps-heading"><h3>हल के चरण</h3></div>
-      <div class="step-list" id="step-list" aria-label="हल के चरण"></div>
-    </section>
+  <main>
+    <h1>नई शुरुआत जल्द होगी</h1>
+    <p>यह वेबसाइट फिलहाल रीबिल्ड की जा रही है। कृपया बाद में दोबारा देखें।</p>
   </main>
-
-  <div id="explanation-sheet" class="sheet-backdrop hidden" role="presentation">
-    <section class="bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-      <div class="sheet-handle"></div>
-      <div class="sheet-top">
-        <span class="sheet-spacer" aria-hidden="true"></span>
-        <button id="close-sheet" class="close-button" type="button" aria-label="बंद करें">×</button>
-      </div>
-      <h2 id="sheet-title">चरण</h2>
-      <p id="sheet-reason" class="sheet-reason">यहाँ इस चरण का आसान हिंदी में कारण बताया जाएगा।</p>
-      <p id="sheet-easier" class="sheet-easier hidden">और आसान: गणित का हर कदम धीरे-धीरे समझेंगे।</p>
-      <button id="easier-button" class="secondary-button" type="button" aria-label="और आसान">✧</button>
-    </section>
-  </div>
-
-  <script src="./app-menu.js?v=1.0.2" defer></script>
-  <script src="./math/engine.js?v=0.4.1" defer></script>
-  <script src="./app.js?v=0.4.4" defer></script>
 </body>
 </html>
