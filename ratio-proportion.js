@@ -8,11 +8,11 @@ function render(){
  values.forEach((v,i)=>{
   const slot=document.createElement("div");slot.className="rp-slot";
   const b=document.createElement("button");b.type="button";b.className="rp-value"+(state.active===i?" selected":"");b.textContent=v||"—";b.setAttribute("aria-label","संख्या "+(i+1)+" "+v);b.addEventListener("click",()=>{state.active=i;render()});slot.append(b);
-  if(i<values.length-1){const sep=document.createElement("span");sep.className="rp-separator";sep.textContent=" : ";slot.append(sep)}
+  if(i<values.length-1){const sep=document.createElement("span");sep.className="rp-separator";sep.textContent=state.mode==="proportion"&&i===1?" = ":" : ";slot.append(sep)}
   slots.append(slot);
  });
  if(state.mode==="proportion"){
-  slots.insertAdjacentHTML("beforeend",'<span class="rp-separator"> = </span><span class="rp-separator">x</span>');
+  slots.insertAdjacentHTML("beforeend",'<span class="rp-separator"> : </span><span class="rp-separator">x</span>');
  }
  add.classList.toggle("rp-hidden",state.mode!=="ratio");
 }
