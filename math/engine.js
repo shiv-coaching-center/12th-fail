@@ -257,7 +257,7 @@ function solveEquation(input,reasons){
       if(divided!==combined)addStep(combined,divided,'divide_coefficient');
     }
     const finalBefore=steps.length?steps[steps.length-1].result:input.trim();
-    if(finalBefore!==answer)addStep(finalBefore,answer,'combine_like_terms');
+    if(finalBefore!==answer)addStep(finalBefore,answer,'simplify_division');
     // Independent substitution check: evaluate both original sides at x.
     const substitutedLeft=add(mul(left.a,answerValue),left.b);
     const substitutedRight=add(mul(right.a,answerValue),right.b);
