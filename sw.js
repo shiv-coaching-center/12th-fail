@@ -1,7 +1,7 @@
 "use strict";
 
 const CACHE_PREFIX = "twelfth-fail-";
-const CACHE_VERSION = "v1.2.2";
+const CACHE_VERSION = "v1.2.3";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 const APP_SHELL = [
   "./",
