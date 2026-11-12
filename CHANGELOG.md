@@ -38,3 +38,13 @@
 - Updated app-shell cache version to v1.0.4.
 
 - Finalized the first-update compatibility bridge for users still running the Phase 0 cached shell; cache version is now v1.0.5.
+
+
+## 2026-11-12 — UI bug-fix pass
+
+- Fixed native-keyboard mode so it hides the app keypad and quick-symbol strip, focuses the active subject input, and can be toggled back.
+- Standardized local history retention to the latest 20 entries.
+- Corrected Physics formula-sheet selection for supported interactive formulas.
+- Added a working, clearly labelled placeholder solution-preview route with no fabricated result.
+- Added bottom-sheet backdrop dismissal and Escape-key dismissal.
+- Updated responsive interaction and preview styles; no solving engine added.
