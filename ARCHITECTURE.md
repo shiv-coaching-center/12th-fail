@@ -64,3 +64,11 @@ Phase 0 और Phase 1 में कोई solving engine नहीं होग
 - Algebraic variables and equations are explicitly rejected until a later algebra-solving phase.
 - Parser guards input length, token count, nesting, division by zero, and non-finite results.
 - Local Node test suite runs before every Pages deployment.
+
+
+## Phase 2.2 — Linear and Quadratic Algebra
+
+- Supports one-variable linear and quadratic equations in x or y, including parentheses, implicit multiplication, and constants on either side of a single equality.
+- Uses a polynomial parser with degree capped at two; no eval() or external dependencies.
+- Returns linear roots, quadratic roots via the quadratic formula, discriminant classification, and readable Hindi solution steps.
+- Explicitly rejects higher-degree, mixed-variable, and unsupported equation forms.
