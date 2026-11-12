@@ -20,7 +20,8 @@ test('solution screen has dynamic answer and step containers',()=>{
 });
 test('calculator routes equations to the verified equation solver',()=>{
  assert.ok(app.includes('const isEquation = currentExpression.includes("=");'));
- assert.ok(app.includes('const solver = isEquation ? math?.solveEquation : math?.solve;'));\n assert.ok(app.includes('if (/[xX]/.test(currentExpression) && !currentExpression.includes("=")) insert("=");'));
+ assert.ok(app.includes('const solver = isEquation ? math?.solveEquation : math?.solve;'));
+ assert.ok(app.includes('if (/[xX]/.test(currentExpression) && !currentExpression.includes("=")) insert("=");'));
  assert.match(app,/result\.verified !== true/);
 });
 test('equation steps display transformation arrows and fixed Hindi reasons',()=>{
