@@ -43,3 +43,9 @@ The first successful online visit installs the service worker and caches the app
 - Unique solutions are verified by substituting the exact value into both original sides and by checking the reduced equation exactly. No-solution and infinite-solution cases are distinguished.
 - Every displayed equation step maps to a fixed teacher-reviewable Hindi reason in `reasons_hi.json`.
 - `tests/linear-equations-cases.json` contains 37 hand-verified cases, including edge cases and unsupported inputs.
+
+## Phase 3.2 LCM and HCF
+- `solveLcmHcf(first, second, reasons)` accepts signed integer strings and returns exact BigInt HCF/LCM results.
+- HCF uses the Euclidean algorithm; LCM uses `abs(a) / HCF * abs(b)` to reduce intermediate growth.
+- Results are verified independently by divisibility and the product/HCF identity. Decimal, malformed, or oversized inputs are rejected.
+- Fixed Hindi explanations are stored in `reasons_hi.json`; 40 independent hand-verified cases are in `tests/lcm-hcf-cases.json`.
