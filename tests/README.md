@@ -31,5 +31,9 @@
 - [ ] Equals does not display a fabricated answer; it clearly says solving comes in Phase 2.
 - [ ] Updated app shell loads after service-worker cache version changes.
 
+- [ ] Minimal home screen shows only the app mark, expression, solve action, and keypad.
+- [ ] No online/offline badge, repeated calculator title, class tag, helper paragraph, or footer is visible.
+- [ ] Solution screen uses concise labels and retains back navigation and step details.
+
 ## Math engine
 No math correctness tests exist yet because the deterministic math engine is intentionally out of scope until Phase 2.
