@@ -9,7 +9,7 @@ const sw=fs.readFileSync(path.join(__dirname,'..','sw.js'),'utf8');
 
 test('browser loads local math engine before app controller',()=>{
  const engineAt=html.indexOf('./math/engine.js?v=0.1.0');
- const appAt=html.indexOf('./app.js?v=0.3.0');
+ const appAt=html.indexOf('./app.js?v=0.3.1');
  assert.ok(engineAt>=0 && appAt>engineAt);
 });
 test('solution screen has dynamic answer and step containers',()=>{
@@ -30,7 +30,7 @@ test('step explanations come from the fixed reasons file',()=>{
 test('offline shell pre-caches engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.1\.0/);
  assert.match(sw,/\.\/reasons_hi\.json/);
- assert.match(sw,/12th-fail-shell-v7/);
+ assert.match(sw,/12th-fail-shell-v8/);
 });
 
 test('unsupported input uses a compact message and compact visual state',()=>{
