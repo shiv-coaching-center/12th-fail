@@ -8,7 +8,7 @@ r=solveEquation("3(x - 2) = 9");assert.equal(r.kind,"linear");assert.equal(r.roo
 r=solveEquation("x^2 + 1 = 0");assert.equal(r.kind,"complex");
 r=solveEquation("0 = 0");assert.equal(r.kind,"identity");
 r=solveEquation("2 = 3");assert.equal(r.kind,"none");
-assert.throws(()=>solveEquation("x^3 + 1 = 0"),/केवल Linear और Quadratic/);
+assert.throws(()=>solveEquation("x^3 + 1 = 0"),/घात अभी 0, 1 या 2/);
 assert.throws(()=>solveEquation("x + y = 3"),/एक समीकरण में अभी x और y/);
 assert.throws(()=>solveEquation("x = 2x + 1"),/एक ही बराबर/);
 console.log("Algebra solver tests passed.");
