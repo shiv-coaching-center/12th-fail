@@ -10,7 +10,10 @@
 
   function renderConnection() {
     const online = navigator.onLine;
-    status.textContent = online ? "ऑनलाइन · ऑफलाइन उपयोग के लिए तैयार" : "ऑफलाइन · ऐप उपलब्ध है";
+    const controlled = Boolean(navigator.serviceWorker && navigator.serviceWorker.controller);
+    status.textContent = online
+      ? (controlled ? "ऑनलाइन · ऑफलाइन उपयोग के लिए तैयार" : "ऑनलाइन · ऑफलाइन सेटअप हो रहा है")
+      : (controlled ? "ऑफलाइन · ऐप उपलब्ध है" : "ऑफलाइन · पहली बार ऑनलाइन खोलें");
     dot.classList.toggle("is-online", online);
     dot.classList.toggle("is-offline", !online);
   }
