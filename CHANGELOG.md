@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.0] - 2026-11-12
+
+### Added
+- Exact one-variable linear equation solving, including variables on both sides.
+- Parentheses, decimals, fractions, negative coefficients, and implicit multiplication such as `2x`.
+- Exact substitution verification and special handling for no-solution and infinite-solution equations.
+- Fixed Hindi explanations and 37 hand-verified equation tests.
+- Calculator UI routes equations to the equation solver while preserving arithmetic and percentage behavior.
+
+### Safety
+- Nonlinear expressions, variable divisors, malformed equations, and division by zero are rejected without guessing.
+- No network API, external dependency, or UI redesign was introduced.
+
 ## [0.4.0] - 2026-11-12
 
 ### Added
