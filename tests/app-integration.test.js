@@ -9,7 +9,7 @@ const sw=fs.readFileSync(path.join(__dirname,'..','sw.js'),'utf8');
 
 test('browser loads local equation-enabled math engine before app controller',()=>{
  const engineAt=html.indexOf('./math/engine.js?v=0.3.0');
- const appAt=html.indexOf('./app.js?v=0.4.1');
+ const appAt=html.indexOf('./app.js?v=0.4.2');
  assert.ok(engineAt>=0 && appAt>engineAt);
 });
 test('solution screen has dynamic answer and step containers',()=>{
