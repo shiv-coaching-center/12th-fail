@@ -1,0 +1,16 @@
+"use strict";
+const assert=require("node:assert/strict");const {solveLcmHcf}=require("../math-engine.js");
+let r=solveLcmHcf("LCM(12, 18)");assert.equal(r.answer,"36");assert.ok(r.steps.some(s=>s.includes("Prime Factorisation")));
+r=solveLcmHcf("HCF(24, 36)");assert.equal(r.answer,"12");assert.ok(r.steps.some(s=>s.includes("Euclidean Method")));
+assert.equal(solveLcmHcf("LCM(5, 10, 20)").answer,"20");
+assert.equal(solveLcmHcf("HCF(18, 27, 45)").answer,"9");
+assert.equal(solveLcmHcf("HCF(0, 18)").answer,"18");
+assert.equal(solveLcmHcf("LCM(0, 18)").answer,"0");
+assert.equal(solveLcmHcf("LCM(1, 1)").answer,"1");
+assert.equal(solveLcmHcf("LCM(999999937, 999999929)").answer,"999999866000004473");
+assert.throws(()=>solveLcmHcf("HCF(0, 0)"),/परिभाषित नहीं/);
+assert.throws(()=>solveLcmHcf("LCM(12)"),/दो से बीस/);
+assert.throws(()=>solveLcmHcf("LCM(12, 2.5)"),/पूर्णांक/);
+assert.throws(()=>solveLcmHcf("LCM(1000000001, 2)"),/1,000,000,000/);
+assert.throws(()=>solveLcmHcf("LCM(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21)"),/दो से बीस/);
+console.log("LCM/HCF tests passed.");
