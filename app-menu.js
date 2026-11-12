@@ -5,7 +5,7 @@ document.documentElement.dataset.featureMenuReady="true";
 const backdrop=document.createElement("div");
 backdrop.className="app-menu-backdrop";
 backdrop.hidden=true;
-backdrop.innerHTML='<nav class="app-menu-panel" role="dialog" aria-modal="true" aria-label="फीचर सूची"><div class="app-menu-head"><strong>फीचर</strong><button class="app-menu-close" type="button" aria-label="बंद करें">×</button></div><div class="app-menu-list"><a class="app-menu-link" href="./index.html">मुख्य कैलकुलेटर</a><a class="app-menu-link" href="./index.html">प्रतिशत (Percentage)</a><a class="app-menu-link" href="./index.html">समीकरण (Equation)</a><a class="app-menu-link" href="./index.html">घात / वर्गमूल (Power)</a><a class="app-menu-link" href="./lcm-hcf.html">LCM / HCF</a><a class="app-menu-link" href="./ratio-proportion.html">अनुपात / समानुपात</a></div></nav>';
+backdrop.innerHTML='<nav class="app-menu-panel" role="dialog" aria-modal="true" aria-label="फीचर सूची"><div class="app-menu-head"><strong>फीचर</strong><button class="app-menu-close" type="button" aria-label="बंद करें">×</button></div><div class="app-menu-list"><a class="app-menu-link" href="./index.html">मुख्य कैलकुलेटर</a><a class="app-menu-link" href="./index.html">प्रतिशत (Percentage)</a><a class="app-menu-link" href="./index.html">समीकरण (Equation)</a><a class="app-menu-link" href="./index.html">घात / वर्गमूल (Power)</a><a class="app-menu-link" href="./lcm-hcf.html">LCM / HCF</a><a class="app-menu-link" href="./ratio-proportion.html">अनुपात / समानुपात</a><a class="app-menu-link" href="./fractions.html">भिन्न (Fractions)</a><a class="app-menu-link" href="./fractions.html">भिन्न (Fractions)</a></div></nav>';
 document.body.append(backdrop);
 let lastTrigger=null;
 function setOpen(open){
