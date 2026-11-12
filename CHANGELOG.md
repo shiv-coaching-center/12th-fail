@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5.1] - 2026-11-12
+
+### Fixed
+- HTML page navigation now checks the network first and updates its cached copy; offline navigation falls back to the last cached page.
+- Versioned app assets remain cache-first so the PWA continues to work offline.
+
 ## [0.5.0] - 2026-11-12
 
 ### Input
