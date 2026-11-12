@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f8f7f3">
-  <meta name="description" content="12th Fail - Offline-first learning app">
+  <meta name="theme-color" content="#f3f4f7">
+  <meta name="description" content="12th Fail - Offline-first Maths, Physics and Chemistry workspace">
   <meta name="application-name" content="12th Fail">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -12,25 +12,87 @@
   <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./icons/icon.svg">
   <link rel="stylesheet" href="./style.css">
-  <title>12th Fail</title>
+  <title>12th Fail · Learn & Practice</title>
 </head>
 <body>
-  <main class="shell">
-    <div class="brand-mark" aria-hidden="true">F</div>
-    <p class="eyebrow">LEARN • PRACTICE • IMPROVE</p>
-    <h1>12th Fail</h1>
-    <p class="subtitle">आपकी पढ़ाई, अब ऑफलाइन भी।</p>
-    <div class="status-card" role="status" aria-live="polite">
-      <span class="status-dot" id="connection-dot"></span>
-      <span id="connection-status">ऐप तैयार हो रहा है…</span>
-    </div>
-    <p class="phase-note">नई शुरुआत। ऐप का अगला हिस्सा तैयार किया जा रहा है।</p>
-    <section class="update-card" id="update-card" hidden aria-live="polite">
-      <p>12th Fail का नया अपडेट उपलब्ध है।</p>
-      <button id="update-button" type="button">अपडेट करें</button>
+  <div class="app-frame" id="app-frame">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="12th Fail home">
+        <span class="brand-icon">12</span>
+        <span class="brand-copy"><strong>12th Fail</strong><small>LEARN · PRACTICE · IMPROVE</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="offline-indicator" id="connection-status"><i></i><span>ऑफलाइन तैयार</span></span>
+        <button class="icon-button language-button" id="language-toggle" type="button" aria-label="Switch language">EN</button>
+        <button class="icon-button" id="history-open" type="button" aria-label="History"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8.3M3 4v4.3h4.3M12 7v5l3.5 2"/></svg></button>
+      </div>
+    </header>
+
+    <main id="main-screen">
+      <section class="welcome-row">
+        <div><p class="overline" data-i18n="workspace">YOUR STUDY WORKSPACE</p><h1 data-i18n="headline">आज क्या सीखेंगे?</h1><p class="subheading" data-i18n="subhead">लिखो, समझो और अभ्यास करो।</p></div>
+        <button class="avatar-button" id="more-open" type="button" aria-label="More options">⋯</button>
+      </section>
+
+      <nav class="subject-switch" aria-label="Subjects" role="tablist">
+        <button class="subject-tab active" data-subject="math" role="tab" aria-selected="true"><span class="subject-icon math-icon">∑</span><span data-i18n="math">गणित</span></button>
+        <button class="subject-tab" data-subject="physics" role="tab" aria-selected="false"><span class="subject-icon physics-icon">⚛</span><span data-i18n="physics">भौतिक</span></button>
+        <button class="subject-tab" data-subject="chemistry" role="tab" aria-selected="false"><span class="subject-icon chemistry-icon">⚗</span><span data-i18n="chemistry">रसायन</span></button>
+      </nav>
+
+      <section class="work-card" aria-label="Calculator workspace">
+        <div class="card-heading"><div><span class="section-kicker" data-i18n="inputLabel">YOUR EXPRESSION</span><span class="tiny-status"><i></i><span data-i18n="localOnly">डिवाइस पर ही सुरक्षित</span></span></div><button class="text-button" id="clear-input" type="button" data-i18n="clear">साफ़ करें</button></div>
+        <label class="sr-only" for="expression-input">Expression</label>
+        <textarea id="expression-input" rows="2" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="उदाहरण: 2x + 5 = 15"></textarea>
+        <div class="display-footer"><span id="expression-hint" data-i18n="hint">यहाँ अपना सवाल लिखें</span><button class="keyboard-toggle" id="keyboard-toggle" type="button"><span>⌨</span><span data-i18n="keyboard">कीबोर्ड</span></button></div>
+        <div class="answer-area" id="answer-area" hidden>
+          <div class="answer-line"><span data-i18n="answer">उत्तर</span><strong id="answer-value">—</strong></div>
+          <p class="cannot-solve" id="cannot-solve"><span>ⓘ</span><span data-i18n="notReady">इस संस्करण में हल निकालने की सुविधा अभी शामिल नहीं है। आपका सवाल सुरक्षित रखा गया है।</span></p>
+          <button class="solution-link" id="solution-preview-link" type="button" hidden data-i18n="seeSteps">हल के चरण देखें</button>
+        </div>
+      </section>
+
+      <section class="quick-strip-section">
+        <div class="section-title-row"><div><h2 data-i18n="quickTools">Quick tools</h2><p data-i18n="subjectTools">विषय के उपयोगी symbols</p></div><button class="round-more" id="symbols-open" type="button" aria-label="More symbols">⋯</button></div>
+        <div class="quick-strip" id="quick-strip" aria-label="Subject symbols"></div>
+      </section>
+
+      <section class="keypad-section" id="keypad-section">
+        <div class="keypad-topline"><span data-i18n="keypad">कैलकुलेटर कीपैड</span><span data-i18n="tapToInsert">टैप करके जोड़ें</span></div>
+        <div class="keypad" id="keypad">
+          <button class="key key-function" data-key="(">(</button><button class="key key-function" data-key=")">)</button><button class="key key-function" data-key="%">%</button><button class="key key-operator" data-key="÷">÷</button>
+          <button class="key" data-key="7">7</button><button class="key" data-key="8">8</button><button class="key" data-key="9">9</button><button class="key key-operator" data-key="×">×</button>
+          <button class="key" data-key="4">4</button><button class="key" data-key="5">5</button><button class="key" data-key="6">6</button><button class="key key-operator" data-key="−">−</button>
+          <button class="key" data-key="1">1</button><button class="key" data-key="2">2</button><button class="key" data-key="3">3</button><button class="key key-operator" data-key="+">+</button>
+          <button class="key key-function" data-action="backspace" aria-label="Backspace">⌫</button><button class="key" data-key="0">0</button><button class="key" data-key=".">.</button><button class="key key-equals" data-action="submit">=</button>
+        </div>
+        <div class="keypad-bottom"><button class="utility-button" id="templates-open" type="button"><span>▤</span><span data-i18n="templates">Templates</span></button><button class="utility-button" id="more-tools-open" type="button"><span>＋</span><span data-i18n="moreSymbols">और Symbols</span></button><button class="utility-button" id="history-open-bottom" type="button"><span>◷</span><span data-i18n="history">History</span></button></div>
+      </section>
+      <footer class="app-footer"><span>12th FAIL</span><span data-i18n="footer">100% Offline · आपका डेटा आपके डिवाइस पर</span></footer>
+    </main>
+
+    <main id="solution-screen" hidden>
+      <button class="back-button" id="solution-back" type="button">← <span data-i18n="back">वापस</span></button>
+      <section class="solution-header"><span class="verified-pill">✓ <span data-i18n="verified">VERIFIED SOLUTION</span></span><h1 data-i18n="solutionPreview">हल का पूर्वावलोकन</h1><p data-i18n="previewOnly">यह केवल UI preview है। वास्तविक उत्तर अभी उपलब्ध नहीं हैं।</p></section>
+      <section class="verified-answer-card"><span data-i18n="verifiedAnswer">सत्यापित उत्तर</span><strong>—</strong><small data-i18n="verifiedPlaceholder">उत्तर इंजन जुड़ने पर यहाँ दिखेगा</small></section>
+      <div class="steps-heading"><h2 data-i18n="steps">हल के चरण</h2><span data-i18n="tapStep">समझने के लिए चरण चुनें</span></div>
+      <div class="step-list" id="step-list">
+        <button class="step-card" data-step="0"><span class="step-number">01</span><span><strong data-i18n="stepOne">प्रश्न को समझें</strong><small data-i18n="stepOneText">यहाँ सत्यापित चरण का विवरण आएगा।</small></span><b>›</b></button>
+        <button class="step-card" data-step="1"><span class="step-number">02</span><span><strong data-i18n="stepTwo">सही नियम चुनें</strong><small data-i18n="stepTwoText">यहाँ नियम और उसका उपयोग दिखेगा।</small></span><b>›</b></button>
+        <button class="step-card" data-step="2"><span class="step-number">03</span><span><strong data-i18n="stepThree">अंतिम जाँच</strong><small data-i18n="stepThreeText">उत्तर की जाँच यहाँ दिखाई जाएगी।</small></span><b>›</b></button>
+      </div>
+      <div class="solution-controls"><button id="speak-solution" type="button">🔊 <span data-i18n="listen">सुनें</span></button><button id="simple-solution" type="button">Aa <span data-i18n="simpleText">सरल टेक्स्ट</span></button></div>
+      <p class="preview-disclaimer" data-i18n="noFake">यह स्क्रीन केवल डिज़ाइन जाँच के लिए है, इसे वास्तविक हल न समझें।</p>
+    </main>
+  </div>
+
+  <div class="sheet-backdrop" id="sheet-backdrop" hidden>
+    <section class="bottom-sheet" id="bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="sheet-handle"></div><div class="sheet-header"><div><p class="section-kicker">12TH FAIL</p><h2 id="sheet-title">More tools</h2></div><button class="icon-button close-sheet" id="sheet-close" type="button" aria-label="Close">×</button></div>
+      <div class="sheet-tabs" id="sheet-tabs"></div><div class="sheet-content" id="sheet-content"></div>
     </section>
-    <p class="version">PWA FOUNDATION · v0.2.1</p>
-  </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./app.js" defer></script>
 </body>
 </html>
