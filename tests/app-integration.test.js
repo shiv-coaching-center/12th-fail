@@ -51,7 +51,7 @@ test('HTML navigation is network-first with an offline cache fallback',()=>{
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.4\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.4\.0/);
- assert.match(sw,/12th-fail-shell-v25/);
+ assert.match(sw,/12th-fail-shell-v26/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
