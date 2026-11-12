@@ -2,19 +2,34 @@
 <html lang="hi">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f8f7f3">
-  <title>नई शुरुआत</title>
-  <style>
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#f8f7f3;color:#242424;font-family:system-ui,sans-serif}
-    main{max-width:520px;text-align:center;padding:32px;border:1px solid #e8e5dd;border-radius:22px;background:#fff}
-    h1{margin:0 0 12px;font-size:28px}p{margin:0;color:#666;line-height:1.7}
-  </style>
+  <meta name="description" content="12th Fail - Offline-first learning app">
+  <meta name="application-name" content="12th Fail">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <title>12th Fail</title>
 </head>
 <body>
-  <main>
-    <h1>नई शुरुआत जल्द होगी</h1>
-    <p>यह वेबसाइट फिलहाल रीबिल्ड की जा रही है। कृपया बाद में दोबारा देखें।</p>
+  <main class="shell">
+    <div class="brand-mark" aria-hidden="true">F</div>
+    <p class="eyebrow">LEARN • PRACTICE • IMPROVE</p>
+    <h1>12th Fail</h1>
+    <p class="subtitle">आपकी पढ़ाई, अब ऑफलाइन भी।</p>
+    <div class="status-card" role="status" aria-live="polite">
+      <span class="status-dot" id="connection-dot"></span>
+      <span id="connection-status">ऐप तैयार हो रहा है…</span>
+    </div>
+    <p class="phase-note">नई शुरुआत। ऐप का अगला हिस्सा तैयार किया जा रहा है।</p>
+    <section class="update-card" id="update-card" hidden aria-live="polite">
+      <p>12th Fail का नया अपडेट उपलब्ध है।</p>
+      <button id="update-button" type="button">अपडेट करें</button>
+    </section>
+    <p class="version">PWA FOUNDATION · v0.2.0</p>
   </main>
+  <script src="./app.js" defer></script>
 </body>
 </html>
