@@ -54,3 +54,10 @@
 ## Scope boundary
 
 Phase 0 और Phase 1 में कोई गणितीय, भौतिक या रासायनिक उत्तर calculate नहीं होगा। Solve action केवल निर्धारित cannot-solve state दिखाएगा।
+
+
+## Phase 1 UI
+
+The current UI is a bilingual, offline-first study workspace for Maths, Physics, and Chemistry. It includes subject switching, expression input, a thumb-friendly keypad, subject symbol strips, symbol/formula/element sheets, ready-made templates, and a local-only history capped at 20 items. Keyboard mode hides the app keypad and focuses the native device keyboard. A hidden `#preview-solution` route demonstrates the solution layout without claiming to calculate answers.
+
+**Important:** Phase 1 is UI-only. No calculation engine, AI, network API, or remote dependency is included.
