@@ -4,3 +4,5 @@
 @media(min-width:600px){.app-frame{padding:0 28px 34px}.topbar{height:82px}.welcome-row{padding-top:30px}.key{height:60px}.work-card{padding:22px}.keypad-section{padding:20px}}
 @media(max-width:360px){.app-frame{padding-right:12px;padding-left:12px}.top-actions{gap:4px}.offline-indicator{font-size:9px}.welcome-row h1{font-size:23px}.subject-tab{gap:5px;font-size:11px}.work-card{padding:15px}.keypad-section{padding:12px}.keypad{gap:7px}.key{height:49px;border-radius:12px}.utility-button{font-size:9px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.update-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 12px;padding:10px 12px;border:1px solid #d9d6ff;border-radius:13px;background:#f3f2ff;color:#4e45ba;font-size:11px;font-weight:650}.update-banner button{flex:0 0 auto;min-height:34px;padding:0 12px;border:0;border-radius:9px;background:var(--indigo);color:#fff;font-size:10px;font-weight:800}
