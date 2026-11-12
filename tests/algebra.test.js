@@ -11,4 +11,5 @@ r=solveEquation("2 = 3");assert.equal(r.kind,"none");
 assert.throws(()=>solveEquation("x^3 + 1 = 0"),/घात अभी 0, 1 या 2/);
 assert.throws(()=>solveEquation("x + y = 3"),/दोनों तरफ एक ही variable/);
 r=solveEquation("x = 2x + 1");assert.equal(r.kind,"linear");assert.equal(r.roots[0],-1);
+r=solveEquation("2y = 6");assert.equal(r.variable,"y");assert.equal(r.roots[0],3);
 console.log("Algebra solver tests passed.");
