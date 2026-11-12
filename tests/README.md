@@ -33,11 +33,18 @@
 - [x] 40 hand-verified arithmetic cases with source labels.
 - [x] Addition, subtraction, multiplication, division, and operator precedence.
 - [x] Parentheses and nested parentheses.
-- [x] Zero, negative values, unary signs, decimals, and large integers.
+- [x] Zero, negative values, unary signs, decimals, fractions, and large integers.
 - [x] Division-by-zero and malformed/unsupported input rejection.
-- [x] Exact decimal output (for example, `0.1 + 0.2 = 0.3`).
+- [x] Exact decimal output and reduced rational fractions.
 - [x] Independent result check using a second evaluation algorithm.
 - [x] Every solution step maps to a fixed Hindi reason in `reasons_hi.json`.
-- [ ] UI integration and phone testing (next phase).
+- [x] Engine is integrated with the calculator UI and offline app shell.
+
+## Phase 2.2 Percentages
+- [ ] 30 hand-verified percentage cases with source labels.
+- [ ] Standalone, negative, decimal, grouped, and mixed percentage calculations.
+- [ ] Exact BigInt arithmetic and independent verification.
+- [ ] Fixed Hindi reason for every percentage step.
+- [ ] Phone testing of percentage keypad.
 
 Run locally with `npm test` (Node.js 20+; no external packages).
