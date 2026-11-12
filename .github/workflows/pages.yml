@@ -31,7 +31,9 @@ jobs:
 
       - name: Validate JavaScript, manifest and icon
         run: |
+          node --check math-engine.js
           node --check app.js
+          node tests/math-engine.test.js
           python -m json.tool manifest.json > /dev/null
           python -c "import xml.etree.ElementTree as ET; ET.parse('icons/brand-icon.svg')"
 
