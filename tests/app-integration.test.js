@@ -51,7 +51,7 @@ test('HTML navigation is network-first with an offline cache fallback',()=>{
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.4\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.4\.0/);
- assert.match(sw,/12th-fail-shell-v26/);
+ assert.match(sw,/12th-fail-shell-v27/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
@@ -64,7 +64,7 @@ test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.4/);
  assert.match(app,/sw\.js\?v=14/);
- assert.match(sw,/12th-fail-shell-v26/);
+ assert.match(sw,/12th-fail-shell-v27/);
  assert.match(sw,/app\.js\?v=0\.4\.4/);
 });
 
@@ -117,13 +117,13 @@ test('Ratio Proportion page is linked from calculator and LCM/HCF page',()=>{
  assert.match(html,/href="\.\/ratio-proportion\.html"/);
  assert.match(lcm,/href="\.\/ratio-proportion\.html"/);
  assert.match(page,/अनुपात \(Ratio\)/);assert.match(page,/समानुपात \(Proportion\)/);
- assert.match(page,/id="rp-keypad"/);assert.match(js,/solveRatioMany/);assert.match(js,/solveProportion/);
+ assert.match(page,/id="rp-keypad"/);assert.match(js,/solveRatioMany/); assert.match(js,/values\.map\(v=>v\.trim\(\)\)\.filter\(v=>v\.length>0\)/);assert.match(js,/solveProportion/);
  assert.match(js,/i===1\?" = ":" : "/);
  assert.match(css,/--dark:#075B35/);
 });
 test('Ratio Proportion page assets are included in offline shell cache',()=>{
- assert.match(sw,/12th-fail-shell-v26/);
+ assert.match(sw,/12th-fail-shell-v27/);
  assert.match(sw,/\.\/ratio-proportion\.html/);
  assert.match(sw,/\.\/ratio-proportion\.css\?v=1\.0\.0/);
- assert.match(sw,/\.\/ratio-proportion\.js\?v=1\.0\.2/);
+ assert.match(sw,/\.\/ratio-proportion\.js\?v=1\.0\.3/);
 });
