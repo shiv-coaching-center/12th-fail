@@ -18,3 +18,23 @@ body{overflow-y:auto}
 .keypad-section{margin-bottom:0}
 .keypad-bottom{padding-bottom:2px}
 @media(max-width:380px){.value-fields{gap:5px}.value-field{font-size:9px}.value-field input{height:40px}.physics-work,.chemistry-work{padding:9px}.physics-output{min-height:48px}.reaction-tools{flex-wrap:wrap}.reaction-chip{font-size:10px}}
+
+/* Final interaction and preview states */
+body.native-keyboard .keypad-section{display:none!important}
+body.native-keyboard .quick-tools{display:none}
+body.native-keyboard .work-card{margin-top:8px}
+body.native-keyboard .expression-card{min-height:150px}
+#solution-screen{padding:18px 2px 30px}
+.solution-preview .back-button{height:40px;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--purple);font-weight:800}
+.solution-preview header{padding:22px 4px 14px}
+.solution-preview h1{margin:4px 0 8px;font-size:25px}
+.solution-preview header p:not(.preview-kicker){color:var(--muted);font-size:13px;line-height:1.6}
+.preview-kicker{margin:0;color:var(--purple);font-size:10px;font-weight:900;letter-spacing:1px}
+.preview-question{display:grid;gap:8px;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.preview-question span{font-size:11px;color:var(--muted)}
+.preview-question strong{font-size:19px}
+.preview-steps{margin-top:20px}
+.preview-steps h2{font-size:17px}
+.preview-steps article{margin:9px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.preview-steps article b{color:var(--purple);font-size:13px}
+.preview-steps article p{margin:6px 0 0;color:#666a7d;font-size:12px;line-height:1.55}
