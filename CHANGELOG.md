@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0] - 2026-11-12
+
+### Added
+- Exact BigInt LCM/HCF engine using the Euclidean algorithm and product/HCF identity.
+- Zero and negative integer handling, with independent verification.
+- Fixed Hindi reasons and 40 hand-verified tests.
+
 ## [0.6.0] - 2026-11-12
 
 ### Added
