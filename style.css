@@ -38,3 +38,12 @@ body.native-keyboard .expression-card{min-height:150px}
 .preview-steps article{margin:9px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
 .preview-steps article b{color:var(--purple);font-size:13px}
 .preview-steps article p{margin:6px 0 0;color:#666a7d;font-size:12px;line-height:1.55}
+
+/* Remove duplicate controls and keep subject actions compact */
+.formula-heading{font-size:12px}
+.subject-tools{min-height:36px}
+.subject-tools [hidden]{display:none!important}
+#physics-formulas-open,.chemistry-actions{display:none!important}
+.workspace-head{font-size:12px}
+#cannot-solve{justify-content:flex-start;padding-left:14px}
+#cannot-solve strong{font-weight:650}
