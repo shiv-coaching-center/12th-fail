@@ -1,6 +1,6 @@
 /* 12th Fail service worker — verified BODMAS engine v6. */
 "use strict";
-const CACHE_NAME = "12th-fail-shell-v17";
+const CACHE_NAME = "12th-fail-shell-v18";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -9,7 +9,10 @@ const APP_SHELL = [
   "./math/engine.js?v=0.4.0",
   "./reasons_hi.json?v=0.4.0",
   "./manifest.json",
-  "./icons/icon.svg"
+  "./icons/icon.svg",
+  "./lcm-hcf.html",
+  "./lcm-hcf.css?v=1.0.0",
+  "./lcm-hcf.js?v=1.0.0"
 ];
 
 self.addEventListener("install", (event) => {
