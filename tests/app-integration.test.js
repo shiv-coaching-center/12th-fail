@@ -64,7 +64,7 @@ test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.4/);
  assert.match(app,/sw\.js\?v=14/);
- assert.match(sw,/12th-fail-shell-v25/);
+ assert.match(sw,/12th-fail-shell-v26/);
  assert.match(sw,/app\.js\?v=0\.4\.4/);
 });
 
@@ -122,8 +122,8 @@ test('Ratio Proportion page is linked from calculator and LCM/HCF page',()=>{
  assert.match(css,/--dark:#075B35/);
 });
 test('Ratio Proportion page assets are included in offline shell cache',()=>{
- assert.match(sw,/12th-fail-shell-v25/);
+ assert.match(sw,/12th-fail-shell-v26/);
  assert.match(sw,/\.\/ratio-proportion\.html/);
  assert.match(sw,/\.\/ratio-proportion\.css\?v=1\.0\.0/);
- assert.match(sw,/\.\/ratio-proportion\.js\?v=1\.0\.1/);
+ assert.match(sw,/\.\/ratio-proportion\.js\?v=1\.0\.2/);
 });
