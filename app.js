@@ -16,7 +16,7 @@
   let selectedStep = null;
 
   const math = window.TwelfthFailMath;
-  const reasonsReady = fetch("./reasons_hi.json?v=0.3.0", { cache: "no-store" })
+  const reasonsReady = fetch("./reasons_hi.json?v=0.4.0", { cache: "no-store" })
     .then((response) => {
       if (!response.ok) throw new Error("REASONS_UNAVAILABLE");
       return response.json();
@@ -179,7 +179,7 @@
   });
 
   if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-    navigator.serviceWorker.register("./sw.js?v=13", { scope: "./" }).catch(() => {
+    navigator.serviceWorker.register("./sw.js?v=14", { scope: "./" }).catch(() => {
       message.textContent = "ऑफलाइन अपडेट के लिए पेज दोबारा खोलें";
     });
   }
