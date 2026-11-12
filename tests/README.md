@@ -29,6 +29,13 @@
 - [x] Bottom sheet can be dismissed.
 - [x] Equals does not display a fabricated answer.
 
+## Phase 3.1 Exponents and square roots
+- [ ] 40 hand-verified cases with source labels.
+- [ ] Integer positive, zero and negative powers; exact rational and decimal powers.
+- [ ] Perfect square roots of integers, decimals and fractions.
+- [ ] Irrational roots, negative roots, non-integer exponents and unsafe exponent sizes rejected.
+- [ ] Independent AST and postfix verification; fixed Hindi reasons.
+
 ## Phase 2.1 BODMAS
 - [x] 40 hand-verified arithmetic cases with source labels.
 - [x] Addition, subtraction, multiplication, division, and operator precedence.
