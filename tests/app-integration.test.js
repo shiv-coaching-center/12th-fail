@@ -51,7 +51,7 @@ test('HTML navigation is network-first with an offline cache fallback',()=>{
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.4\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.4\.0/);
- assert.match(sw,/12th-fail-shell-v22/);
+ assert.match(sw,/12th-fail-shell-v23/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
@@ -64,7 +64,7 @@ test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.4/);
  assert.match(app,/sw\.js\?v=14/);
- assert.match(sw,/12th-fail-shell-v22/);
+ assert.match(sw,/12th-fail-shell-v23/);
  assert.match(sw,/app\.js\?v=0\.4\.4/);
 });
 
@@ -99,4 +99,11 @@ test('LCM/HCF keypad uses a compact key height while preserving its button style
 test('multi-number LCM accumulates using gcd of the running LCM and next value',()=>{
  const js=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.js'),'utf8');
  assert.match(js,/verifyL=\(verifyL\/gcd\(verifyL,b\)\)\*b/);
+});
+
+
+test('LCM/HCF verifies that every input is divisible by the calculated HCF',()=>{
+ const js=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.js'),'utf8');
+ assert.match(js,/BigInt\(v\)%h!==0n/);
+ assert.match(js,/l%BigInt\(v\)!==0n/);
 });
