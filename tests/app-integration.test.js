@@ -32,3 +32,12 @@ test('offline shell pre-caches engine and fixed reasons',()=>{
  assert.match(sw,/\.\/reasons_hi\.json/);
  assert.match(sw,/12th-fail-shell-v6/);
 });
+
+test('unsupported input uses a compact message and compact visual state',()=>{
+ assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
+ assert.match(app,/answerPreview\.classList\.add\("is-message"\)/);
+ assert.match(app,/answer-result"\)\?\.classList\.add\("has-message"\)/);
+ const css=fs.readFileSync(path.join(__dirname,'..','style.css'),'utf8');
+ assert.match(css,/\.answer-preview\.is-message\s*\{[^}]*font-size:\s*clamp\(18px, 5vw, 23px\)/s);
+ assert.match(css,/\.answer-result\.has-message/);
+});
