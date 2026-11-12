@@ -63,3 +63,6 @@ The current UI is a bilingual, offline-first study workspace for Maths, Physics,
 **Important:** Phase 1 is UI-only. No calculation engine, AI, network API, or remote dependency is included.
 
 The original supplied 12th Fail artwork is embedded as the PWA icon and shown in the workspace header.
+
+
+UI v1.3.0 uses a minimal subject-first layout. Symbols, formula references, templates and element references stay hidden until the matching tool button is tapped.
