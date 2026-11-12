@@ -83,3 +83,11 @@
 - Added quadratic formula, discriminant classification, real/complex roots, and integer factorisation hints.
 - Added readable Hindi solution steps in the result panel.
 - Added automated algebra tests and pre-deploy validation.
+
+
+## 2026-11-12 — Phase 2.3: LCM and HCF
+
+- Added LCM and HCF solving for multiple non-negative integer inputs.
+- Added prime factorisation and Euclidean-method working steps in Hindi.
+- Used BigInt to preserve exact large integer results.
+- Added input validation and automated LCM/HCF tests to the deployment workflow.
