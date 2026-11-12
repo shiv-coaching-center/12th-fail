@@ -40,5 +40,5 @@ $("#rp-keypad").addEventListener("click",e=>{const b=e.target.closest("button[da
 $("#rp-equals").addEventListener("click",compute);
 $("#rp-show").addEventListener("click",()=>{if(state.answer===null){compute().then(()=>{if(state.answer!==null)solution.classList.remove("rp-hidden")});return}solution.classList.toggle("rp-hidden")});
 render();
-if("serviceWorker"in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js?v=17",{scope:"./"}).catch(()=>{});
+if("serviceWorker"in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js?v=18",{scope:"./"}).catch(()=>{});
 })();
