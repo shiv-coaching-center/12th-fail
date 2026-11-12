@@ -1,8 +1,8 @@
 (()=>{"use strict";
 const $=s=>document.querySelector(s),tabs=[...document.querySelectorAll(".rp-tab")],values=["12","18","24"],state={mode:"ratio",active:0,answer:null,steps:[]};
 const slots=$("#rp-values"),result=$("#rp-result"),label=$("#rp-result-label"),number=$("#rp-result-number"),solution=$("#rp-solution"),steps=$("#rp-steps"),note=$("#rp-note"),add=$("#rp-add");
-let reasons=null;
-fetch("./reasons_hi.json?v=0.4.0",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(r=>{reasons=r}).catch(()=>{note.textContent="हल अभी उपलब्ध नहीं है"});
+let reasons=null,reasonError=false;
+const reasonsReady=fetch("./reasons_hi.json?v=0.4.0").then(r=>{if(!r.ok)throw Error("REASONS_HTTP");return r.json()}).then(r=>{reasons=r;return r}).catch(()=>{reasonError=true;return null});
 function render(){
  slots.replaceChildren();
  values.forEach((v,i)=>{
@@ -17,15 +17,19 @@ function render(){
  add.classList.toggle("rp-hidden",state.mode!=="ratio");
 }
 function clearResult(){state.answer=null;state.steps=[];result.classList.add("rp-hidden");solution.classList.add("rp-hidden");number.textContent="—";note.textContent=""}
-function compute(){
- if(!reasons){note.textContent="हल अभी उपलब्ध नहीं है";return}
- let r;
- if(state.mode==="ratio")r=window.TwelfthFailMath.solveRatioMany(values,reasons);
- else r=window.TwelfthFailMath.solveProportion(values[0],values[1],values[2],reasons);
- if(!r||!r.ok||r.verified!==true){note.textContent="कृपया सही पूर्ण संख्याएँ भरें";return}
- state.answer=state.mode==="ratio"?r.ratio:r.answer;state.steps=r.steps;
- label.textContent=state.mode==="ratio"?"सरलतम अनुपात =":"x का मान =";
- number.textContent=state.answer;result.classList.remove("rp-hidden");note.textContent="उत्तर सत्यापित है";renderSteps();
+async function compute(){
+ try{
+  if(!reasons)await reasonsReady;
+  if(!reasons){note.textContent=reasonError?"गणना की फाइल लोड नहीं हुई। पेज Refresh करें।":"कृपया थोड़ी देर बाद = दबाएँ";return}
+  const math=window.TwelfthFailMath;
+  if(!math){note.textContent="Calculator लोड नहीं हुआ। पेज Refresh करें।";return}
+  if(state.mode==="proportion"&&values.length!==3){note.textContent="समानुपात के लिए तीन संख्याएँ चाहिए";return}
+  const r=state.mode==="ratio"?math.solveRatioMany(values,reasons):math.solveProportion(values[0],values[1],values[2],reasons);
+  if(!r||!r.ok||r.verified!==true){note.textContent="कृपया सही पूर्ण संख्याएँ भरें";return}
+  state.answer=state.mode==="ratio"?r.ratio:r.answer;state.steps=r.steps;
+  label.textContent=state.mode==="ratio"?"सरलतम अनुपात =":"x का मान =";
+  number.textContent=state.answer;result.classList.remove("rp-hidden");note.textContent="उत्तर सत्यापित है";renderSteps();
+ }catch(error){note.textContent="गणना में समस्या आई। पेज Refresh करके फिर कोशिश करें।";console.error(error)}
 }
 function renderSteps(){
  steps.replaceChildren();state.steps.forEach((s,i)=>{const row=document.createElement("div");row.className="rp-step";const n=document.createElement("span");n.className="rp-step-num";n.textContent=String(i+1);const t=document.createElement("span");t.textContent=s.display||s.result;row.append(n,t);steps.append(row)});
@@ -34,7 +38,7 @@ tabs.forEach(t=>t.addEventListener("click",()=>{state.mode=t.dataset.mode;tabs.f
 add.addEventListener("click",()=>{if(values.length>=6){note.textContent="अधिकतम 6 संख्याएँ जोड़ सकते हैं";return}values.push("");state.active=values.length-1;clearResult();render();note.textContent="नई संख्या भरें"});
 $("#rp-keypad").addEventListener("click",e=>{const b=e.target.closest("button[data-key]");if(!b)return;let v=values[state.active]||"";if(b.dataset.key==="clear")v="";else if(b.dataset.key==="back")v=v.slice(0,-1);else if(b.dataset.key==="dot")return;else if(v.length<12)v+=b.dataset.key;values[state.active]=v;clearResult();render()});
 $("#rp-equals").addEventListener("click",compute);
-$("#rp-show").addEventListener("click",()=>{if(state.answer===null)compute();if(state.answer!==null)solution.classList.toggle("rp-hidden")});
+$("#rp-show").addEventListener("click",()=>{if(state.answer===null){compute().then(()=>{if(state.answer!==null)solution.classList.remove("rp-hidden")});return}solution.classList.toggle("rp-hidden")});
 render();
 if("serviceWorker"in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js?v=17",{scope:"./"}).catch(()=>{});
 })();
