@@ -94,3 +94,9 @@ test('LCM/HCF keypad uses a compact key height while preserving its button style
  assert.match(css,/\.lcm-key\.equals\{[^}]*min-height:54px/);
  assert.match(page,/lcm-hcf\.css\?v=1\.0\.1/);
 });
+
+
+test('multi-number LCM accumulates using gcd of the running LCM and next value',()=>{
+ const js=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.js'),'utf8');
+ assert.match(js,/gL=gcd\(l,b\);h=g;l=\(l\/gL\)\*b/);
+});
