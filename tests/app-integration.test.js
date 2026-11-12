@@ -49,7 +49,7 @@ test('HTML navigation is network-first with an offline cache fallback',()=>{
  assert.match(sw,/caches\.match\("\.\/index\.html"\)/);
 });
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
- assert.match(sw,/\.\/math\/engine\.js\?v=0\.4\.0/);
+ assert.match(sw,/\.\/math\/engine\.js\?v=0\.4\.1/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.4\.0/);
  assert.match(sw,/12th-fail-shell-v31/);
 });
