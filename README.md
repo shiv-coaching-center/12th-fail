@@ -8,7 +8,7 @@
 - Phase 0.2: PWA manifest, versioned offline cache और safe update flow
 - Phase 0.3: वास्तविक GitHub Pages deployment और offline proof
 - Phase 1: UI only
-- Phase 2: Solving engine (अभी scope में नहीं)
+- Phase 2.1: Maths numeric arithmetic engine (पहला छोटा चरण)
 
 ## तकनीकी नियम
 
@@ -66,3 +66,8 @@ The original supplied 12th Fail artwork is embedded as the PWA icon and shown in
 
 
 UI v1.3.0 uses a minimal subject-first layout. Symbols, formula references, templates and element references stay hidden until the matching tool button is tapped.
+
+
+## Phase 2.1 — गणित की पहली सुविधा
+
+गणित में सामान्य संख्यात्मक गणनाएँ ऑफलाइन हल होती हैं: जोड़, घटाव, गुणा, भाग, ब्रैकेट, घात, प्रतिशत, π, e और sqrt/sin/cos/tan/log/ln/abs। x/y वाले बीजगणितीय समीकरण और Chemistry balancing अभी शामिल नहीं हैं।
