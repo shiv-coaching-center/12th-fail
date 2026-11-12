@@ -73,3 +73,15 @@ test('number-theory engine exports a verified LCM/HCF solver',()=>{
  const engine=require('../math/engine.js');
  assert.equal(typeof engine.solveLcmHcf,'function');
 });
+
+
+test('standalone LCM/HCF page is linked without replacing the original calculator',()=>{
+ const page=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.html'),'utf8');
+ const css=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.css'),'utf8');
+ const js=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.js'),'utf8');
+ assert.match(html,/href="\.\/lcm-hcf\.html"/);
+ assert.match(page,/LCM \(ल\.स\.\)/);assert.match(page,/HCF \(म\.स\.\)/);
+ assert.match(page,/id="lcm-keypad"/);assert.match(page,/id="lcm-solution"/);
+ assert.match(js,/solveLcmHcf/);assert.match(js,/primeFactors/);
+ assert.match(css,/--green-dark:#075B35/);
+});
