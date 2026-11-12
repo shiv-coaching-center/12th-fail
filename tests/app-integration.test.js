@@ -51,7 +51,7 @@ test('HTML navigation is network-first with an offline cache fallback',()=>{
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.4\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.4\.0/);
- assert.match(sw,/12th-fail-shell-v21/);
+ assert.match(sw,/12th-fail-shell-v22/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
@@ -82,7 +82,7 @@ test('standalone LCM/HCF page is linked without replacing the original calculato
  assert.match(html,/href="\.\/lcm-hcf\.html"/);
  assert.match(page,/LCM \(ल\.स\.\)/);assert.match(page,/HCF \(म\.स\.\)/);
  assert.match(page,/id="lcm-keypad"/);assert.match(page,/id="lcm-solution"/);
- assert.match(js,/solveLcmHcf/);assert.match(js,/primeFactors/);
+ assert.match(js,/verifyH=values\.reduce/);assert.match(js,/verifyL%BigInt\(v\)/);assert.match(js,/primeFactors/);
  assert.match(css,/--green-dark:#075B35/);
 });
 
@@ -98,5 +98,5 @@ test('LCM/HCF keypad uses a compact key height while preserving its button style
 
 test('multi-number LCM accumulates using gcd of the running LCM and next value',()=>{
  const js=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.js'),'utf8');
- assert.match(js,/gL=gcd\(l,b\);h=g;l=\(l\/gL\)\*b/);
+ assert.match(js,/verifyL=\(verifyL\/gcd\(verifyL,b\)\)\*b/);
 });
