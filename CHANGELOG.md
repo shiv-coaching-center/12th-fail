@@ -36,3 +36,5 @@
 
 - Added a one-release compatibility bridge so the previous cached PWA shell can approve the first UI update safely.
 - Updated app-shell cache version to v1.0.4.
+
+- Finalized the first-update compatibility bridge for users still running the Phase 0 cached shell; cache version is now v1.0.5.
