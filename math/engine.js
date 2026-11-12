@@ -420,9 +420,9 @@ function solveFraction(first,second,operation,reasons){
     const answer=format(value);
     const reverse=operation==='add'?add(b,a):operation==='subtract'?sub(a,b):operation==='multiply'?mul(b,a):div(value,b);
     if(operation==='add'&&reverse.n!==value.n||operation==='add'&&reverse.d!==value.d)throw Error('VERIFY');
-    if(operation==='subtract'&&add(value,b).n!==a.n*add(value,b).d/a.d){} 
-    if(operation==='multiply'&&(mul(a,b).n!==value.n||mul(a,b).d!==value.d))throw Error('VERIFY');
-    if(operation==='divide'&&(mul(value,b).n!==a.n*mul(value,b).d/a.d))throw Error('VERIFY');
+    if(operation==='subtract'&&!sameRat(add(value,b),a))throw Error('VERIFY');
+    if(operation==='multiply'&&!sameRat(mul(a,b),value))throw Error('VERIFY');
+    if(operation==='divide'&&!sameRat(mul(value,b),a))throw Error('VERIFY');
     const expression=format(a)+' '+({add:'+ ',subtract:'− ',multiply:'× ',divide:'÷ '}[operation])+format(b);
     return {ok:true,answer,exact:{numerator:value.n.toString(),denominator:value.d.toString()},verified:true,steps:[{expression,result:answer,display:expression+' = '+answer,rule,reason:reasons[rule]}]};
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
