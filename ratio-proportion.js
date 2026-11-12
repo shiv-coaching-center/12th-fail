@@ -24,7 +24,9 @@ async function compute(){
   const math=window.TwelfthFailMath;
   if(!math){note.textContent="Calculator लोड नहीं हुआ। पेज Refresh करें।";return}
   if(state.mode==="proportion"&&values.length!==3){note.textContent="समानुपात के लिए तीन संख्याएँ चाहिए";return}
-  const r=state.mode==="ratio"?math.solveRatioMany(values,reasons):math.solveProportion(values[0],values[1],values[2],reasons);
+  const enteredValues=values.map(v=>v.trim()).filter(v=>v.length>0);
+  if(state.mode==="ratio"&&enteredValues.length<2){note.textContent="अनुपात के लिए कम-से-कम 2 संख्याएँ भरें";return}
+  const r=state.mode==="ratio"?math.solveRatioMany(enteredValues,reasons):math.solveProportion(values[0],values[1],values[2],reasons);
   if(!r||!r.ok||r.verified!==true){note.textContent="कृपया सही पूर्ण संख्याएँ भरें";return}
   state.answer=state.mode==="ratio"?r.ratio:r.answer;state.steps=r.steps;
   label.textContent=state.mode==="ratio"?"सरलतम अनुपात =":"x का मान =";
