@@ -327,7 +327,7 @@ function gcdBigInt(a,b){
 function solveLcmHcf(first,second,reasons){
   try{
     if(!reasons||typeof reasons!=='object')throw Error('REASONS');
-    const valid=v=>typeof v==='string'&&/^-?\\d+$/.test(v)&&v.length<=MAX_INPUT_LENGTH;
+    const valid=v=>typeof v==='string'&&/^-?\d+$/.test(v)&&v.length<=MAX_INPUT_LENGTH;
     if(!valid(first)||!valid(second))throw Error('INTEGER_ONLY');
     const a=BigInt(first),b=BigInt(second);
     const hcf=gcdBigInt(a,b);
