@@ -38,7 +38,17 @@
   function resetAnswer() {
     currentResult = null;
     answerPreview.textContent = "—";
+    answerPreview.classList.remove("is-message");
+    answerPreview.closest(".answer-result")?.classList.remove("has-message");
     message.textContent = "";
+  }
+
+  function showUnavailable() {
+    currentResult = null;
+    answerPreview.textContent = "हल उपलब्ध नहीं";
+    answerPreview.classList.add("is-message");
+    answerPreview.closest(".answer-result")?.classList.add("has-message");
+    message.textContent = "हल उपलब्ध नहीं";
   }
 
   function insert(value) {
@@ -72,16 +82,12 @@
   async function calculate() {
     await reasonsReady;
     if (!math || typeof math.solve !== "function" || !reasons) {
-      currentResult = null;
-      answerPreview.textContent = math?.UNSUPPORTED_MESSAGE || "यह सवाल अभी हल नहीं कर सकता";
-      message.textContent = answerPreview.textContent;
+      showUnavailable();
       return null;
     }
     const result = math.solve(currentExpression, reasons);
     if (!result.ok || result.verified !== true) {
-      currentResult = null;
-      answerPreview.textContent = result.message || math.UNSUPPORTED_MESSAGE;
-      message.textContent = answerPreview.textContent;
+      showUnavailable();
       return null;
     }
     currentResult = result;
@@ -120,7 +126,9 @@
   async function showSolution() {
     const result = currentResult || await calculate();
     $("#solution-question").textContent = currentExpression || "—";
-    $("#solution-answer").textContent = result ? result.answer : (math?.UNSUPPORTED_MESSAGE || "यह सवाल अभी हल नहीं कर सकता");
+    const solutionAnswer = $("#solution-answer");
+    solutionAnswer.textContent = result ? result.answer : "हल उपलब्ध नहीं";
+    solutionAnswer.classList.toggle("is-message", !result);
     renderSteps(result ? result.steps : []);
     homeScreen.classList.add("hidden");
     solutionScreen.classList.remove("hidden");
