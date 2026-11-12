@@ -72,3 +72,10 @@ Run locally with `npm test` (Node.js 20+; no external packages).
 - [ ] Euclidean algorithm for HCF and exact product/HCF identity for LCM.
 - [ ] Zero handling and malformed/decimal input rejection.
 - [ ] Independent divisibility verification and fixed Hindi reasons.
+
+## Phase 3.3 Ratio and Proportion engine
+- [ ] 40 hand-verified ratio simplification cases, including zero first term, equal terms, and large integers.
+- [ ] 40 hand-verified missing-term proportion cases, including exact fractions.
+- [ ] Exact BigInt arithmetic and cross-multiplication verification.
+- [ ] Malformed, zero-denominator and invalid integer inputs rejected.
+- [ ] Fixed Hindi reasons for every solution step.
