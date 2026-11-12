@@ -47,3 +47,50 @@ body.native-keyboard .expression-card{min-height:150px}
 .workspace-head{font-size:12px}
 #cannot-solve{justify-content:flex-start;padding-left:14px}
 #cannot-solve strong{font-weight:650}
+
+/* v1.3.5: compact, polished header and tool buttons */
+.topbar{
+  display:flex!important;align-items:center;justify-content:center!important;
+  width:100%;height:58px;min-height:58px;padding:0 4px;
+  border-bottom:1px solid #e6e6ef;
+}
+.brand{
+  display:inline-flex!important;align-items:center;justify-content:center;
+  width:max-content;max-width:100%;white-space:nowrap;overflow:visible;
+  line-height:1;text-align:center;flex:0 0 auto;
+}
+.brand strong{
+  display:inline-flex;align-items:baseline;gap:5px;
+  white-space:nowrap;font-size:25px;line-height:1.05;
+  letter-spacing:-1.1px;
+}
+.brand b{display:inline;color:var(--purple);white-space:nowrap}
+.subject-tools{
+  display:flex;align-items:center;justify-content:flex-start;
+  flex-wrap:wrap;gap:8px;margin:10px 1px 5px;min-height:40px;
+}
+.tool-toggle{
+  appearance:none;-webkit-appearance:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  min-width:88px;height:38px;padding:0 13px;
+  border:1px solid #ded9f3;border-radius:12px;
+  background:linear-gradient(145deg,#fff,#f5f2ff);
+  box-shadow:0 2px 0 #e5e1f2;
+  color:#5134b0;font-size:13px;font-weight:800;line-height:1;
+  white-space:nowrap;
+}
+.tool-toggle svg{display:block;width:16px;height:16px;flex:0 0 16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tool-toggle:active{transform:translateY(1px);box-shadow:0 1px 0 #e5e1f2;background:#eee9ff}
+.tool-toggle[hidden]{display:none!important}
+.work-card{margin-bottom:0}
+.keypad-section{margin-top:8px;padding-top:4px}
+.keypad-bottom{min-height:34px}
+.keypad-bottom .utility-button{height:36px;min-height:36px;border-radius:11px}
+.app-footer{margin-top:12px}
+@media(max-width:380px){
+ .topbar{height:54px;min-height:54px}
+ .brand strong{font-size:23px}
+ .subject-tools{gap:6px;margin-top:8px}
+ .tool-toggle{height:36px;min-width:82px;padding:0 10px;font-size:12px}
+ .tool-toggle svg{width:15px;height:15px;flex-basis:15px}
+}
