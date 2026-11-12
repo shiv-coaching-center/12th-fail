@@ -49,3 +49,12 @@
 - Added a working, clearly labelled placeholder solution-preview route with no fabricated result.
 - Added bottom-sheet backdrop dismissal and Escape-key dismissal.
 - Updated responsive interaction and preview styles; no solving engine added.
+
+
+## 2026-11-12 — Minimal UI pass (v1.3.0)
+
+- Removed always-visible symbol strip, redundant menu/history icons, decorative labels, and duplicate formula/element controls.
+- Added compact subject-specific tool toggles: Math (symbols/templates), Physics (symbols/formulas), Chemistry (symbols/formulas/elements).
+- Kept reference tools inside the existing on-demand bottom sheet; no symbols, formulas, or element grids are shown until requested.
+- Simplified status copy and calculator footer controls across all three subjects.
+- No solver or backend logic added.
