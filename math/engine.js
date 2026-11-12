@@ -349,5 +349,40 @@ function solveLcmHcf(first,second,reasons){
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
 
-if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,solveLcmHcf,UNSUPPORTED_MESSAGE};
-if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,solveLcmHcf,UNSUPPORTED_MESSAGE};
+
+function parsePositiveInteger(value,allowZero=false){
+  if(typeof value!=='string'||value.length===0||value.length>100||!/^\\d+$/.test(value))throw Error('BAD_INTEGER');
+  const n=BigInt(value);
+  if(allowZero?n<0n:n<=0n)throw Error('NON_POSITIVE');
+  return n;
+}
+function solveRatio(first,second,reasons){
+  try{
+    if(!reasons||typeof reasons!=='object')throw Error('REASONS');
+    const a=parsePositiveInteger(first,true),b=parsePositiveInteger(second);
+    const g=gcd(a,b),left=a/g,right=b/g;
+    if(gcd(left,right)!==1n||left* b!==right*a)throw Error('VERIFY');
+    const reason=reasons.ratio_reduce;
+    if(typeof reason!=='string'||!reason.trim())throw Error('REASON');
+    return {ok:true,ratio:left.toString()+':'+right.toString(),first:left.toString(),second:right.toString(),verified:true,steps:[{expression:first+':'+second,result:left.toString()+':'+right.toString(),display:first+':'+second+'  →  '+left+':'+right,rule:'ratio_reduce',reason}]};
+  }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
+}
+function solveProportion(first,second,third,reasons){
+  try{
+    if(!reasons||typeof reasons!=='object')throw Error('REASONS');
+    const a=parsePositiveInteger(first),b=parsePositiveInteger(second),c=parsePositiveInteger(third);
+    const x=rat(b*c,a),answer=format(x);
+    if(!sameRat(mul(rat(a),x),rat(b*c)))throw Error('VERIFY');
+    const rules=['proportion_cross_multiply','proportion_divide'];
+    const steps=rules.map((rule,i)=>{
+      const reason=reasons[rule];if(typeof reason!=='string'||!reason.trim())throw Error('REASON');
+      const expression=i===0?first+':'+second+' = '+third+':x':(first+' × x = '+second+' × '+third);
+      const result=i===0?first+' × x = '+second+' × '+third:'x = ('+second+' × '+third+') ÷ '+first+' = '+answer;
+      return {expression,result,display:expression+'  →  '+result,rule,reason};
+    });
+    return {ok:true,answer,exact:{numerator:x.n.toString(),denominator:x.d.toString()},verified:true,steps};
+  }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
+}
+
+if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,solveLcmHcf,solveRatio,solveProportion,UNSUPPORTED_MESSAGE};
+if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,solveLcmHcf,solveRatio,solveProportion,UNSUPPORTED_MESSAGE};
