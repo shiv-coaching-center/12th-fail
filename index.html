@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F7F5F0">
+  <meta name="description" content="12th Fail — offline Mathematics learning app for classes 1 to 12.">
+  <title>12th Fail</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="12th Fail">
+        <span class="brand-mark" aria-hidden="true">ƒ</span>
+        <div><h1>12th Fail</h1><p>सीखो समझकर · Learn by understanding</p></div>
+      </div>
+      <span class="status-pill" id="connection-status" role="status">जाँच हो रही है…</span>
+    </header>
+    <section class="welcome-card" aria-labelledby="welcome-title">
+      <p class="eyebrow">गणित · MATHEMATICS</p>
+      <h2 id="welcome-title">हर सवाल, कदम-दर-कदम।</h2>
+      <p class="welcome-copy">हर उत्तर के पीछे का तरीका समझो। अभी हम ऐप की ऑफलाइन नींव तैयार कर रहे हैं।</p>
+      <p class="welcome-copy english-copy">Understand every answer, one step at a time. The offline foundation is being prepared.</p>
+      <div class="phase-label"><span class="phase-dot"></span> Phase 0 · App foundation</div>
+    </section>
+    <section class="info-card" aria-labelledby="status-title">
+      <div class="section-heading"><h2 id="status-title">तैयारी की स्थिति · Setup status</h2><span class="lock-mark" aria-hidden="true">✓</span></div>
+      <ul class="status-list">
+        <li><span>बिना AI के · No AI</span><strong>हाँ · Yes</strong></li>
+        <li><span>ऑफलाइन सपोर्ट · Offline support</span><strong id="offline-state">तैयार हो रहा है</strong></li>
+        <li><span>विषय · Subject</span><strong>गणित · Maths</strong></li>
+      </ul>
+    </section>
+    <footer class="footer">
+      <p>सरल, सुरक्षित और समझने में आसान।</p><p>Simple, private, and student-friendly.</p>
+      <small>12th Fail · Version 0.1.0</small>
+    </footer>
+  </main>
+  <script src="./app.js" defer></script>
+</body>
+</html>
