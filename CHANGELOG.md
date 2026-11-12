@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1] - 2026-11-12
+
+### Changed
+- Simplified the calculator home screen: icon-only header, no connection badge, repeated headings, helper copy, or footer.
+- Reduced the solution screen to essential content and shorter Hindi labels.
+- Kept keypad actions and screen navigation unchanged.
+
 ## [0.2.0] - 2026-11-12
 
 ### Added
