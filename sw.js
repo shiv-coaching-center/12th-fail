@@ -1,11 +1,11 @@
 /* 12th Fail service worker — verified BODMAS engine v6. */
 "use strict";
-const CACHE_NAME = "12th-fail-shell-v12";
+const CACHE_NAME = "12th-fail-shell-v13";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./style.css?v=0.4.1",
-  "./app.js?v=0.4.1",
+  "./app.js?v=0.4.2",
   "./math/engine.js?v=0.3.0",
   "./reasons_hi.json?v=0.3.0",
   "./manifest.json",
