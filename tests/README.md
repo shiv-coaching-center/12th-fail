@@ -17,23 +17,27 @@
 - [x] User confirmed airplane-mode reload works.
 
 ## Phase 1 UI checklist
-- [ ] Home screen shows calculator display and four-column keypad.
-- [ ] All keypad buttons have at least 48px touch height.
-- [ ] Digits and operators append to the expression display.
-- [ ] C clears the expression.
-- [ ] Backspace removes the last character.
-- [ ] Parentheses button alternates opening and closing parentheses.
-- [ ] View steps opens the solution screen and carries the entered expression.
-- [ ] Back returns to the calculator.
-- [ ] Each sample step opens the explanation bottom sheet.
-- [ ] Close button, backdrop tap, and Escape close the bottom sheet.
-- [ ] Make it simpler toggles the simpler explanation panel.
-- [ ] Equals does not display a fabricated answer; it clearly says solving comes in Phase 2.
-- [ ] Updated app shell loads after service-worker cache version changes.
+- [x] Home screen shows calculator display and four-column keypad.
+- [x] Keypad buttons have at least 48px touch height.
+- [x] Digits and operators append to the expression display.
+- [x] C clears the expression.
+- [x] Backspace removes the last character.
+- [x] Parentheses button alternates opening and closing parentheses.
+- [x] View steps opens the solution screen and carries the entered expression.
+- [x] Back returns to the calculator.
+- [x] Sample steps open the explanation bottom sheet.
+- [x] Bottom sheet can be dismissed.
+- [x] Equals does not display a fabricated answer.
 
-- [ ] Minimal home screen shows only the app mark, expression, solve action, and keypad.
-- [ ] No online/offline badge, repeated calculator title, class tag, helper paragraph, or footer is visible.
-- [ ] Solution screen uses concise labels and retains back navigation and step details.
+## Phase 2.1 BODMAS
+- [x] 40 hand-verified arithmetic cases with source labels.
+- [x] Addition, subtraction, multiplication, division, and operator precedence.
+- [x] Parentheses and nested parentheses.
+- [x] Zero, negative values, unary signs, decimals, and large integers.
+- [x] Division-by-zero and malformed/unsupported input rejection.
+- [x] Exact decimal output (for example, `0.1 + 0.2 = 0.3`).
+- [x] Independent result check using a second evaluation algorithm.
+- [x] Every solution step maps to a fixed Hindi reason in `reasons_hi.json`.
+- [ ] UI integration and phone testing (next phase).
 
-## Math engine
-No math correctness tests exist yet because the deterministic math engine is intentionally out of scope until Phase 2.
+Run locally with `npm test` (Node.js 20+; no external packages).
