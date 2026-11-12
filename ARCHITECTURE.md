@@ -72,3 +72,11 @@ Phase 0 और Phase 1 में कोई solving engine नहीं होग
 - Uses a polynomial parser with degree capped at two; no eval() or external dependencies.
 - Returns linear roots, quadratic roots via the quadratic formula, discriminant classification, and readable Hindi solution steps.
 - Explicitly rejects higher-degree, mixed-variable, and unsupported equation forms.
+
+
+## Phase 2.3 — LCM and HCF
+
+- Supports LCM(...) and HCF(...) for 2–20 non-negative integer inputs up to 1,000,000,000.
+- Uses BigInt for exact integer results, prime factorisation for LCM, and Euclidean algorithm for HCF.
+- Displays readable Hindi working steps; rejects decimals, malformed inputs, oversized values and undefined HCF(0, 0).
+- No eval(), network calls, or external dependencies.
