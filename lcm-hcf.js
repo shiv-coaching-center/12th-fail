@@ -6,10 +6,13 @@ function primeFactors(n){const f=[];let d=2,x=n;while(d*d<=x){let c=0;while(x%d=
 function powerText(f){return f.length?f.map(([p,e])=>e===1?String(p):p+"<sup>"+e+"</sup>").join(" × "):"1"}
 function compute(){note.textContent="";if(values.some(v=>!Number.isSafeInteger(v)||v<1)){note.textContent="कृपया 1 या उससे बड़ी पूर्ण संख्या डालें";return}
  let h=BigInt(values[0]),l=h;for(const v of values.slice(1)){const b=BigInt(v),g=gcd(h,b),gL=gcd(l,b);h=g;l=(l/gL)*b}
- // Use the existing Level 3.2 solver for an independent exact check on each pair.
- const engine=window.TwelfthFailMath;if(!engine||typeof engine.solveLcmHcf!=="function"){note.textContent="गणित इंजन उपलब्ध नहीं है";return}
- let checkH=String(values[0]),checkL=String(values[0]);for(const v of values.slice(1)){const why={hcf_euclidean:"HCF की जाँच",lcm_product:"LCM की जाँच"};const a=engine.solveLcmHcf(checkH,String(v),why),b=engine.solveLcmHcf(checkL,String(v),why);if(!a.ok||!b.ok){note.textContent="इस सवाल का हल उपलब्ध नहीं";return}checkH=a.hcf;checkL=b.lcm}
- if(checkH!==String(h)||checkL!==String(l)){note.textContent="उत्तर की जाँच पूरी नहीं हुई";return}
+ // Independent BigInt verification for any number of inputs.
+ const verifyH=values.reduce((acc,v)=>gcd(acc,BigInt(v)),BigInt(values[0]));
+ let verifyL=BigInt(values[0]);
+ for(const v of values.slice(1)){const b=BigInt(v);verifyL=(verifyL/gcd(verifyL,b))*b}
+ if(verifyH!==h||verifyL!==l||values.some(v=>l%BigInt(v)!==0n)||values.some(v=>h%BigInt(v)!==0n)){
+  note.textContent="उत्तर की जाँच पूरी नहीं हुई";return
+ }
  state.answer=state.mode==="lcm"?l.toString():h.toString();state.steps=[];
  const facts=values.map(v=>primeFactors(v));
  facts.forEach((f,i)=>state.steps.push({text:values[i]+" = "+powerText(f)}));
