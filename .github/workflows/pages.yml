@@ -29,6 +29,12 @@ jobs:
         with:
           enablement: true
 
+      - name: Validate JavaScript, manifest and icon
+        run: |
+          node --check app.js
+          python -m json.tool manifest.json > /dev/null
+          python -c "import xml.etree.ElementTree as ET; ET.parse('icons/brand-icon.svg')"
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
