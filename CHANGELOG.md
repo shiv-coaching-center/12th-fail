@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.6.0] - 2026-11-12
+
+### Added
+- Exact integer exponents, including zero and negative powers, using bounded BigInt rational arithmetic.
+- Exact square roots for perfect rational squares, including fractions and finite decimals.
+- Independent AST and postfix verification plus 40 hand-verified tests.
+- Fixed Hindi reasons for powers and square roots.
+- Calculator keypad controls for x² and square root while retaining the equation separator.
+
+### Safety
+- Irrational roots, negative square roots, non-integer or oversized exponents, and zero to a negative power are rejected.
+- No floating-point math, external dependency, or network API was added.
+
 ## [0.5.1] - 2026-11-12
 
 ### Fixed
