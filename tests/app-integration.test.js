@@ -38,10 +38,15 @@ test('equation steps display transformation arrows and fixed Hindi reasons',()=>
 test('step explanations load from the versioned local reasons file',()=>{
  assert.match(app,/fetch\("\.\/reasons_hi\.json\?v=0\.3\.0"/);
 });
+test('HTML navigation is network-first with an offline cache fallback',()=>{
+ assert.match(sw,/request\.mode === "navigate"/);
+ assert.match(sw,/fetch\(request\)\.then\(\(response\)/);
+ assert.match(sw,/caches\.match\("\.\/index\.html"\)/);
+});
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.3\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.3\.0/);
- assert.match(sw,/12th-fail-shell-v15/);
+ assert.match(sw,/12th-fail-shell-v16/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
@@ -53,7 +58,7 @@ test('unsupported input keeps the compact unavailable state',()=>{
 test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.3/);
- assert.match(app,/sw\.js\?v=12/);
- assert.match(sw,/12th-fail-shell-v15/);
+ assert.match(app,/sw\.js\?v=13/);
+ assert.match(sw,/12th-fail-shell-v16/);
  assert.match(sw,/app\.js\?v=0\.4\.3/);
 });
