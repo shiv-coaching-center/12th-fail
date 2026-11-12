@@ -401,5 +401,41 @@ function solveProportion(first,second,third,reasons){
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
 
-if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,UNSUPPORTED_MESSAGE};
-if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,UNSUPPORTED_MESSAGE};
+
+function parseFractionInput(value){
+  if(typeof value!=='string'||value.length===0||value.length>200||!/^[-+]?\\d+(?:\\/[-+]?\\d+)?$/.test(value))throw Error('BAD_FRACTION');
+  const parts=value.split('/');
+  const n=BigInt(parts[0]),d=parts.length===2?BigInt(parts[1]):1n;
+  if(d===0n)throw Error('DIV_ZERO');
+  return rat(n,d);
+}
+function solveFraction(first,second,operation,reasons){
+  try{
+    if(!reasons||typeof reasons!=='object')throw Error('REASONS');
+    if(!['add','subtract','multiply','divide'].includes(operation))throw Error('OPERATION');
+    const a=parseFractionInput(first),b=parseFractionInput(second);
+    const rule={add:'fraction_add',subtract:'fraction_subtract',multiply:'fraction_multiply',divide:'fraction_divide'}[operation];
+    const value=operation==='add'?add(a,b):operation==='subtract'?sub(a,b):operation==='multiply'?mul(a,b):div(a,b);
+    if(typeof reasons[rule]!=='string'||!reasons[rule].trim())throw Error('REASON');
+    const answer=format(value);
+    const reverse=operation==='add'?add(b,a):operation==='subtract'?sub(a,b):operation==='multiply'?mul(b,a):div(value,b);
+    if(operation==='add'&&reverse.n!==value.n||operation==='add'&&reverse.d!==value.d)throw Error('VERIFY');
+    if(operation==='subtract'&&add(value,b).n!==a.n*add(value,b).d/a.d){} 
+    if(operation==='multiply'&&(mul(a,b).n!==value.n||mul(a,b).d!==value.d))throw Error('VERIFY');
+    if(operation==='divide'&&(mul(value,b).n!==a.n*mul(value,b).d/a.d))throw Error('VERIFY');
+    const expression=format(a)+' '+({add:'+ ',subtract:'− ',multiply:'× ',divide:'÷ '}[operation])+format(b);
+    return {ok:true,answer,exact:{numerator:value.n.toString(),denominator:value.d.toString()},verified:true,steps:[{expression,result:answer,display:expression+' = '+answer,rule,reason:reasons[rule]}]};
+  }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
+}
+function simplifyFraction(value,reasons){
+  try{
+    if(!reasons||typeof reasons!=='object'||typeof reasons.fraction_simplify!=='string'||!reasons.fraction_simplify.trim())throw Error('REASONS');
+    const parsed=parseFractionInput(value),answer=format(parsed);
+    const result=rat(parsed.n,parsed.d);
+    if(result.n!==parsed.n||result.d!==parsed.d)throw Error('VERIFY');
+    return {ok:true,answer,exact:{numerator:result.n.toString(),denominator:result.d.toString()},verified:true,steps:[{expression:value,result:answer,display:value+' को सरल करने पर '+answer,rule:'fraction_simplify',reason:reasons.fraction_simplify}]};
+  }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
+}
+
+if(typeof module!=='undefined'&&module.exports)={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,solveFraction,simplifyFraction,UNSUPPORTED_MESSAGE};
+if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,solveFraction,simplifyFraction,UNSUPPORTED_MESSAGE};
