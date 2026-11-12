@@ -103,3 +103,8 @@ body.native-keyboard .expression-card{min-height:150px}
 .cannot-solve.is-error{background:#fff3df;border:1px solid #f1dfbf}
 .cannot-solve.is-error #result-message{color:#75531c}
 @media(max-width:360px){.cannot-solve{padding:11px 12px;gap:8px}.cannot-solve output{font-size:21px}}
+
+/* Phase 2.2: algebra solution steps */
+.solution-steps{grid-column:1/-1;width:100%;margin-top:8px;padding-top:8px;border-top:1px solid #ded9f3}
+.solution-steps p{margin:7px 0;color:var(--ink);font-size:12px;line-height:1.55;overflow-wrap:anywhere}
+.solution-steps[hidden]{display:none!important}
