@@ -1,6 +1,6 @@
-/* 12th Fail service worker — app-shell cache only. */
+/* 12th Fail service worker — versioned app-shell cache. */
 "use strict";
-const CACHE_NAME = "12th-fail-shell-v1";
+const CACHE_NAME = "12th-fail-shell-v2";
 const APP_SHELL = ["./","./index.html","./style.css","./app.js","./manifest.json","./icons/icon.svg"];
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
