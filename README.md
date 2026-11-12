@@ -61,3 +61,5 @@ Phase 0 और Phase 1 में कोई गणितीय, भौतिक �
 The current UI is a bilingual, offline-first study workspace for Maths, Physics, and Chemistry. It includes subject switching, expression input, a thumb-friendly keypad, subject symbol strips, symbol/formula/element sheets, ready-made templates, and a local-only history capped at 20 items. Keyboard mode hides the app keypad and focuses the native device keyboard. A hidden `#preview-solution` route demonstrates the solution layout without claiming to calculate answers.
 
 **Important:** Phase 1 is UI-only. No calculation engine, AI, network API, or remote dependency is included.
+
+The original supplied 12th Fail artwork is embedded as the PWA icon and shown in the workspace header.
