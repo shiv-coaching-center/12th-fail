@@ -90,9 +90,9 @@ test('standalone LCM/HCF page is linked without replacing the original calculato
 test('LCM/HCF keypad uses a compact key height while preserving its button style',()=>{
  const css=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.css'),'utf8');
  const page=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.html'),'utf8');
- assert.match(css,/\.lcm-key\{[^}]*min-height:50px/);
- assert.match(css,/\.lcm-key\.equals\{[^}]*min-height:54px/);
- assert.match(page,/lcm-hcf\.css\?v=1\.0\.1/);
+ assert.match(css,/\.lcm-key\{[^}]*min-height:42px/);
+ assert.match(css,/\.lcm-key\.equals\{[^}]*min-height:46px/);
+ assert.match(page,/lcm-hcf\.css\?v=1\.0\.2/);
 });
 
 
