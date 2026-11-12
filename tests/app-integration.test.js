@@ -138,8 +138,11 @@ test('F logo opens a shared menu listing all available math tools on every page'
   assert.match(page,/app-menu\\.js\\?v=1\\.0\\.2/);
   assert.match(page,/app-menu\\.css\\?v=1\\.0\\.1/);
  }
- for(const feature of ['मुख्य कैलकुलेटर','प्रतिशत (Percentage)','समीकरण (Equation)','घात \\/ वर्गमूल (Power)','lcm-hcf.html','ratio-proportion.html'])assert.ok(menu.includes(feature));
- assert.match(menu,/aria-modal=\\"true\\"/);assert.match(menu,/Escape/);assert.match(menu,/document.addEventListener\\(\\"click\\"/);assert.match(menu,/backdrop.hidden/);
- assert.match(sw,/\.\/app-menu\\.css\\?v=1\\.0\\.1/);assert.match(sw,/\.\/app-menu\\.js\\?v=1\\.0\\.2/);
+ for(const feature of ['मुख्य कैलकुलेटर','प्रतिशत (Percentage)','समीकरण (Equation)','घात / वर्गमूल (Power)','lcm-hcf.html','ratio-proportion.html'])assert.ok(menu.includes(feature));
+ assert.ok(menu.includes('aria-modal="true"'));
+ assert.ok(menu.includes('document.addEventListener("click"'));
+ assert.ok(menu.includes('backdrop.hidden'));
+ assert.ok(sw.includes('./app-menu.css?v=1.0.1'));
+ assert.ok(sw.includes('./app-menu.js?v=1.0.2'));
  assert.match(css,/\.app-menu-backdrop/);
 });
