@@ -146,3 +146,18 @@ test('F logo opens a shared menu listing all available math tools on every page'
  assert.ok(sw.includes('./app-menu.js?v=1.0.2'));
  assert.match(css,/\.app-menu-backdrop/);
 });
+
+test('Fractions page is linked from home and feature menu and cached offline',()=>{
+ const page=fs.readFileSync(path.join(__dirname,'..','fractions.html'),'utf8');
+ const js=fs.readFileSync(path.join(__dirname,'..','fractions.js'),'utf8');
+ const menu=fs.readFileSync(path.join(__dirname,'..','app-menu.js'),'utf8');
+ assert.match(html,/math\/engine\.js\?v=0\.4\.1/);
+ assert.match(html,/href="\.\/fractions\.html"/);
+ assert.match(page,/data-mode="simplify"/);
+ assert.match(page,/id="fr-keypad"/);
+ assert.match(js,/solveFraction/);assert.match(js,/simplifyFraction/);
+ assert.match(menu,/href="\.\/fractions\.html"/);
+ assert.match(sw,/12th-fail-shell-v31/);
+ assert.match(sw,/\.\/fractions\.html/);
+ assert.match(sw,/\.\/fractions\.js\?v=1\.0\.0/);
+});
