@@ -1,0 +1,182 @@
+[
+  {
+    "id": "P01",
+    "input": "25%",
+    "expected": "0.25",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P02",
+    "input": "50%",
+    "expected": "0.5",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P03",
+    "input": "100%",
+    "expected": "1",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P04",
+    "input": "0%",
+    "expected": "0",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P05",
+    "input": "12.5%",
+    "expected": "0.125",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P06",
+    "input": "1%",
+    "expected": "0.01",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P07",
+    "input": "250%",
+    "expected": "2.5",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P08",
+    "input": "-25%",
+    "expected": "-0.25",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P09",
+    "input": "25%+25%",
+    "expected": "0.5",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P10",
+    "input": "50%-25%",
+    "expected": "0.25",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P11",
+    "input": "20%*50%",
+    "expected": "0.1",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P12",
+    "input": "200*10%",
+    "expected": "20",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P13",
+    "input": "80/20%",
+    "expected": "400",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P14",
+    "input": "(50+50)%",
+    "expected": "1",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P15",
+    "input": "(200-50)%",
+    "expected": "1.5",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P16",
+    "input": "1.5%",
+    "expected": "0.015",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P17",
+    "input": "0.1%",
+    "expected": "0.001",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P18",
+    "input": "1000*2.5%",
+    "expected": "25",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P19",
+    "input": "25%/50%",
+    "expected": "0.5",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P20",
+    "input": "2+50%",
+    "expected": "2.5",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P21",
+    "input": "10-25%",
+    "expected": "9.75",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P22",
+    "input": "2*(25%)",
+    "expected": "0.5",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P23",
+    "input": "(1/4)%",
+    "expected": "0.0025",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P24",
+    "input": "100000000000000000000%",
+    "expected": "1000000000000000000",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P25",
+    "input": "999999999999999999%",
+    "expected": "9999999999999999.99",
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P26",
+    "input": "1/0% ",
+    "expectedError": true,
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P27",
+    "input": "%25",
+    "expectedError": true,
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P28",
+    "input": "25%+",
+    "expectedError": true,
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P29",
+    "input": "25. %",
+    "expectedError": true,
+    "source": "Hand-verified"
+  },
+  {
+    "id": "P30",
+    "input": "25%2",
+    "expectedError": true,
+    "source": "Hand-verified"
+  }
+]
