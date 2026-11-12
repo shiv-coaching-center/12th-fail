@@ -18,6 +18,11 @@ test('solution screen has dynamic answer and step containers',()=>{
  assert.match(html,/id="steps-heading"/);
  assert.match(app,/stepList\.replaceChildren\(\)/);
 });
+test('calculator has a dedicated equation separator key distinct from variable x and multiplication',()=>{
+ assert.match(html,/<button class="key extra" data-key="x"[^>]*>x<\/button>/);
+ assert.match(html,/<button class="key extra" data-key="="[^>]*>x =<\/button>/);
+ assert.match(html,/<button class="key operator" data-key="×"[^>]*>×<\/button>/);
+});
 test('calculator routes equations to the verified equation solver',()=>{
  assert.ok(app.includes('const isEquation = currentExpression.includes("=");'));
  assert.ok(app.includes('const solver = isEquation ? math?.solveEquation : math?.solve;'));
@@ -36,7 +41,7 @@ test('step explanations load from the versioned local reasons file',()=>{
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.3\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.3\.0/);
- assert.match(sw,/12th-fail-shell-v14/);
+ assert.match(sw,/12th-fail-shell-v15/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
@@ -48,7 +53,7 @@ test('unsupported input keeps the compact unavailable state',()=>{
 test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.3/);
- assert.match(app,/sw\.js\?v=11/);
- assert.match(sw,/12th-fail-shell-v14/);
+ assert.match(app,/sw\.js\?v=12/);
+ assert.match(sw,/12th-fail-shell-v15/);
  assert.match(sw,/app\.js\?v=0\.4\.3/);
 });
