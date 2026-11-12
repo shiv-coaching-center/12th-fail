@@ -57,3 +57,5 @@ The first successful online visit installs the service worker and caches the app
 - Independent hand-verified cases are maintained in `tests/ratio-proportion-cases.json`.
 
 - `ratio-proportion.html`, `ratio-proportion.css`, and `ratio-proportion.js` provide the standalone mobile-first Ratio/Proportion page. Ratio accepts 2–6 terms through `solveRatioMany`; Proportion solves `a:b = c:x` with exact rational arithmetic. The page is linked from the main calculator and LCM/HCF page and is pre-cached for offline use.
+
+- A shared F-logo feature menu (`app-menu.js` / `app-menu.css`) is available on the main calculator, LCM/HCF page, and Ratio/Proportion page. It lists all built-in calculator functions and links to standalone number-theory tools; menu assets are pre-cached for offline access.
