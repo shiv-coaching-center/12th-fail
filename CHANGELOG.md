@@ -58,3 +58,11 @@
 - Kept reference tools inside the existing on-demand bottom sheet; no symbols, formulas, or element grids are shown until requested.
 - Simplified status copy and calculator footer controls across all three subjects.
 - No solver or backend logic added.
+
+
+## 2026-11-12 — Header and tool button polish (v1.3.5)
+
+- Kept the 12th Fail brand on one line on narrow mobile screens.
+- Replaced plain default-looking tool buttons with compact, consistent icon-and-label controls.
+- Tuned spacing around the tool row, calculator and footer for small screens.
+- Preserved on-demand visibility and existing subject-specific tool behavior.
