@@ -2,6 +2,9 @@
 
 ## [0.5.0] - 2026-11-12
 
+### Input
+- First equals-key press inserts the equation separator after a variable expression; the next press solves it.
+
 ### Added
 - Exact one-variable linear equation solving, including variables on both sides.
 - Parentheses, decimals, fractions, negative coefficients, and implicit multiplication such as `2x`.
