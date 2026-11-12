@@ -41,3 +41,11 @@ test('unsupported input uses a compact message and compact visual state',()=>{
  assert.match(css,/\.answer-preview\.is-message\s*\{[^}]*font-size:\s*clamp\(18px, 5vw, 23px\)/s);
  assert.match(css,/\.answer-result\.has-message/);
 });
+
+test('updated page and service worker force-refresh the compact message assets',()=>{
+ assert.match(html,/style\.css\?v=0\.4\.1/);
+ assert.match(html,/app\.js\?v=0\.3\.1/);
+ assert.match(app,/sw\.js\?v=7/);
+ assert.match(sw,/12th-fail-shell-v8/);
+ assert.match(sw,/app\.js\?v=0\.3\.1/);
+});
