@@ -33,3 +33,6 @@
 - Embedded the original supplied app artwork as the PWA/browser icon and workspace brand mark.
 - Restored Service Worker registration and the user-approved update banner in the new UI shell.
 - Added pre-deploy checks for JavaScript syntax, manifest JSON, and SVG icon XML.
+
+- Added a one-release compatibility bridge so the previous cached PWA shell can approve the first UI update safely.
+- Updated app-shell cache version to v1.0.4.
