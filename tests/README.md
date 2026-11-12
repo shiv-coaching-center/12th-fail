@@ -44,3 +44,12 @@ The service worker may delete only caches whose names start with `twelfth-fail-`
 - [ ] Confirm the app remains usable offline after a successful online load.
 
 - [ ] Confirm the app prompts before activating a waiting Service Worker update.
+
+
+## Minimal UI checks (v1.3.0)
+- [ ] On first load, no symbol chips, formula library, or element grid is visible.
+- [ ] Maths shows only Symbols and Templates actions.
+- [ ] Physics shows Symbols and Formulas actions; formula list opens only on demand and selecting a formula updates the fields.
+- [ ] Chemistry shows Symbols, Formulas and Elements actions; each opens only on demand and selected items insert into the reaction input.
+- [ ] Switching subjects updates the visible actions without leaving stale controls from the previous subject.
+- [ ] Keypad, History, clear and keyboard controls remain usable.
