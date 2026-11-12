@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0] - 2026-11-12
+
+### Added
+- Exact postfix percentage calculations using BigInt rational arithmetic.
+- Independent AST and shunting-yard verification for percentage operations.
+- Fixed Hindi percentage explanation and 30 hand-verified percentage cases.
+- Percentage support for standalone values, grouped expressions, decimals, negatives, and mixed arithmetic.
+
+### Safety
+- Unsupported percentage syntax and division by zero return the standard unsupported message.
+- No floating-point arithmetic, network API, or new dependency was introduced.
+
 ## [0.3.0] - 2026-11-12
 
 ### Added
