@@ -4,7 +4,7 @@
 <meta name="theme-color" content="#f4f4fb"><meta name="description" content="12th Fail offline study calculator">
 <meta name="application-name" content="12th Fail"><meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/brand-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./icons/brand-icon.svg">
-<link rel="stylesheet" href="./style.css?v=1.3.4"><title>12th Fail · Learn & Practice</title></head>
+<link rel="stylesheet" href="./style.css?v=1.3.5"><title>12th Fail · Learn & Practice</title></head>
 <body><div class="app-frame">
 <header class="topbar"><a class="brand" href="./"><strong>12th <b>Fail</b></strong></a></header>
 <section class="update-banner" id="update-banner" hidden><span>नया अपडेट उपलब्ध है।</span><button id="apply-update">अपडेट करें</button></section>
@@ -27,7 +27,12 @@
 <div class="cannot-solve" id="cannot-solve"><strong>हल करने की सुविधा जल्द उपलब्ध होगी</strong></div>
 <div class="work-footer"><button class="keyboard-toggle" id="keyboard-toggle">कीबोर्ड</button><span></span><button class="clear-button" id="clear-input">साफ़ करें</button></div>
 </section>
-<section class="subject-tools" id="subject-tools"><button class="tool-toggle" id="symbols-open">चिह्न</button><button class="tool-toggle" id="formulas-open" hidden>सूत्र</button><button class="tool-toggle" id="elements-open" hidden>तत्व</button><button class="tool-toggle" id="templates-open" hidden>साँचे</button></section>
+<section class="subject-tools" id="subject-tools" aria-label="सहायक टूल">
+<button class="tool-toggle" id="symbols-open"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 4v16M14 4l-4 16M18 4l-4 16"/></svg><span>चिह्न</span></button>
+<button class="tool-toggle" id="formulas-open" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10M7 20h10M15 4 9 20M5 12h14"/></svg><span>सूत्र</span></button>
+<button class="tool-toggle" id="elements-open" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M8 15h8"/></svg><span>तत्व</span></button>
+<button class="tool-toggle" id="templates-open" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7"/></svg><span>साँचे</span></button>
+</section>
 <section class="keypad-section" id="keypad-section"><div class="keypad" id="keypad">
 <button class="key key-clear" data-action="clear">C</button><button class="key" data-key="("> ( </button><button class="key" data-key=")"> ) </button><button class="key key-operator" data-key="%">%</button>
 <button class="key key-operator" data-key="÷">÷</button><button class="key" data-key="7">7</button><button class="key" data-key="8">8</button><button class="key" data-key="9">9</button>
@@ -41,4 +46,4 @@
 <main id="solution-screen" hidden class="solution-preview"><button class="back-button" id="solution-back">← वापस</button><header><p class="preview-kicker">12th FAIL · UI PREVIEW</p><h1>हल का पूर्वावलोकन</h1><p>यह केवल डिज़ाइन डेमो है। नीचे कोई वास्तविक गणना या सत्यापित उत्तर नहीं दिया गया है।</p></header><section class="preview-question"><span>आपका सवाल</span><strong id="preview-question-text">आपका सवाल यहाँ दिखाई देगा</strong></section><div class="cannot-solve"><span class="info-icon">i</span><strong>Solver अभी उपलब्ध नहीं है</strong></div><section class="preview-steps"><h2>हल के चरण</h2><article><b>चरण 1</b><p>Solver जुड़ने के बाद सवाल को समझने का चरण यहाँ दिखेगा।</p></article><article><b>चरण 2</b><p>सही नियम और सूत्र चुनने का चरण यहाँ दिखेगा।</p></article><article><b>चरण 3</b><p>गणना और स्वतंत्र जाँच के बाद ही उत्तर दिखाया जाएगा।</p></article></section></main>
 </div>
 <div class="sheet-backdrop" id="sheet-backdrop" hidden><section class="bottom-sheet" role="dialog" aria-modal="true"><div class="sheet-handle"></div><header class="sheet-header"><h2 id="sheet-title">चिह्न और प्रतीक</h2><button id="sheet-close" class="icon-button" aria-label="बंद करें">×</button></header><input id="sheet-search" class="sheet-search" type="search" placeholder="खोजें..."><div class="sheet-tabs" id="sheet-tabs"></div><div class="sheet-content" id="sheet-content"></div></section></div>
-<div class="toast" id="toast" role="status"></div><script src="./app.js?v=1.3.4" defer></script></body></html>
+<div class="toast" id="toast" role="status"></div><script src="./app.js?v=1.3.5" defer></script></body></html>
