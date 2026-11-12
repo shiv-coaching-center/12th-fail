@@ -4,31 +4,30 @@
 <meta name="theme-color" content="#f4f4fb"><meta name="description" content="12th Fail offline study calculator">
 <meta name="application-name" content="12th Fail"><meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icons/brand-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./icons/brand-icon.svg">
-<link rel="stylesheet" href="./style.css?v=1.3.1"><title>12th Fail · Learn & Practice</title></head>
+<link rel="stylesheet" href="./style.css?v=1.3.2"><title>12th Fail · Learn & Practice</title></head>
 <body><div class="app-frame">
-<header class="topbar"><button class="icon-button" id="more-open" aria-label="Menu">☰</button><a class="brand" href="./"><strong>12th <b>Fail</b></strong></a><div class="top-actions"><button class="icon-button" id="history-open" aria-label="History"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8.3M3 4v4.3h4.3M12 7v5l3.5 2"/></svg></button></div></header>
+<header class="topbar"><a class="brand" href="./"><strong>12th <b>Fail</b></strong></a></header>
 <section class="update-banner" id="update-banner" hidden><span>नया अपडेट उपलब्ध है।</span><button id="apply-update">अपडेट करें</button></section>
 <main id="main-screen">
 <nav class="subject-switch" role="tablist" aria-label="विषय"><button class="subject-tab active" data-subject="math" role="tab" aria-selected="true">गणित</button><button class="subject-tab" data-subject="physics" role="tab" aria-selected="false">भौतिक</button><button class="subject-tab" data-subject="chemistry" role="tab" aria-selected="false">रसायन</button></nav>
 <section class="work-card">
-<div class="workspace-head"><span id="workspace-label">गणित · सवाल हल करें</span><span class="local-label">● डिवाइस पर सुरक्षित</span></div>
+<div class="workspace-head"><span id="workspace-label">गणित</span></div>
 <div class="expression-card"><div class="example-line" id="example-line">x² + 5x + 6 = 0</div><textarea id="expression-input" rows="2" placeholder="अपना सवाल यहाँ लिखें" aria-label="अपना सवाल यहाँ लिखें" spellcheck="false"></textarea></div>
 <div class="physics-work" id="physics-work" hidden>
 <div class="formula-heading"><b>सूत्र</b></div>
-<div class="formula-chips" id="physics-formula-chips"><button class="formula-chip active" data-formula="motion">v = u + at</button><button class="formula-chip" data-formula="force">F = ma</button><button class="formula-chip" data-formula="ohm">V = IR</button><button class="formula-chip" data-formula="work">W = Fs</button></div>
+<div class="formula-current" id="formula-current">v = u + at</div>
 <div class="value-fields" id="value-fields"></div><div class="physics-output"><span id="physics-output-label">अंतिम वेग (v)</span><strong id="physics-output-value">—</strong></div>
 </div>
 <div class="chemistry-work" id="chemistry-work" hidden>
-<div class="formula-heading"><b>रासायनिक समीकरण</b><button class="small-link" id="elements-open">तत्व (Elements)</button></div>
+<div class="formula-heading"><b>रासायनिक समीकरण</b></div>
 <div class="reaction-input"><textarea id="reaction-input" rows="2" placeholder="उदा. H₂ + O₂ → H₂O" aria-label="रासायनिक समीकरण"></textarea></div>
-<div class="reaction-tools"><button class="reaction-chip" data-reaction="→">→ अभिक्रिया</button><button class="reaction-chip" data-reaction="⇌">⇌ साम्य</button><button class="reaction-chip" data-reaction="Δ">Δ ऊष्मा</button><button class="reaction-chip" data-reaction="↑">↑ गैस</button><button class="reaction-chip" data-reaction="↓">↓ अवक्षेप</button></div>
-<div class="element-preview" id="element-preview"><span>तत्व चुनें:</span><button data-element="H">H</button><button data-element="O">O</button><button data-element="Na">Na</button><button data-element="Cl">Cl</button><button data-element="C">C</button><button data-element="Fe">Fe</button></div>
-<p class="chemistry-note">तत्व या प्रतीक चुनने पर वे समीकरण में जुड़ेंगे।</p>
+
+
 </div>
-<div class="cannot-solve" id="cannot-solve"><span class="info-icon">i</span><strong>यह सवाल अभी हल नहीं कर सकता</strong></div>
-<div class="work-footer"><span id="saved-hint">आपका सवाल इस डिवाइस पर सुरक्षित है</span><button class="keyboard-toggle" id="keyboard-toggle" aria-label="फोन कीबोर्ड">⌨</button><button class="clear-button" id="clear-input">साफ़ करें</button></div>
+<div class="cannot-solve" id="cannot-solve"><strong>हल करने की सुविधा जल्द उपलब्ध होगी</strong></div>
+<div class="work-footer"><button class="keyboard-toggle" id="keyboard-toggle">कीबोर्ड</button><span></span><button class="clear-button" id="clear-input">साफ़ करें</button></div>
 </section>
-<section class="quick-tools"><div class="section-heading"><div><h2 id="quick-title">गणित के चिह्न</h2><p id="quick-subtitle">उपयोगी Symbols</p></div><button class="round-more" id="symbols-open" aria-label="अधिक चिह्न">•••</button></div><div class="quick-strip" id="quick-strip"></div></section>
+<section class="subject-tools" id="subject-tools"><button class="tool-toggle" id="symbols-open">चिह्न</button><button class="tool-toggle" id="formulas-open" hidden>सूत्र</button><button class="tool-toggle" id="elements-open" hidden>तत्व</button><button class="tool-toggle" id="templates-open" hidden>साँचे</button></section>
 <section class="keypad-section" id="keypad-section"><div class="keypad" id="keypad">
 <button class="key key-clear" data-action="clear">C</button><button class="key" data-key="("> ( </button><button class="key" data-key=")"> ) </button><button class="key key-operator" data-key="%">%</button>
 <button class="key key-operator" data-key="÷">÷</button><button class="key" data-key="7">7</button><button class="key" data-key="8">8</button><button class="key" data-key="9">9</button>
@@ -36,10 +35,10 @@
 <button class="key key-operator" data-key="−">−</button><button class="key" data-key="1">1</button><button class="key" data-key="2">2</button><button class="key" data-key="3">3</button>
 <button class="key key-operator" data-key="+">+</button><button class="key" data-key="0">0</button><button class="key" data-key=".">.</button><button class="key key-function" data-action="backspace">⌫</button>
 <button class="key key-equals" data-action="submit">=</button>
-</div><div class="keypad-bottom"><button class="utility-button" id="templates-open">▤ <span>साँचे (Templates)</span></button><button class="utility-button" id="more-tools-open">＋ <span>और Symbols</span></button><button class="utility-button" id="history-open-bottom">◷ <span>History</span></button></div></section>
+</div><div class="keypad-bottom"><button class="utility-button" id="history-open-bottom">History</button></div></section>
 <footer class="app-footer"><b>12th FAIL</b><span>100% Offline · आपका डेटा आपके डिवाइस पर</span></footer>
 </main>
 <main id="solution-screen" hidden class="solution-preview"><button class="back-button" id="solution-back">← वापस</button><header><p class="preview-kicker">12th FAIL · UI PREVIEW</p><h1>हल का पूर्वावलोकन</h1><p>यह केवल डिज़ाइन डेमो है। नीचे कोई वास्तविक गणना या सत्यापित उत्तर नहीं दिया गया है।</p></header><section class="preview-question"><span>आपका सवाल</span><strong id="preview-question-text">आपका सवाल यहाँ दिखाई देगा</strong></section><div class="cannot-solve"><span class="info-icon">i</span><strong>Solver अभी उपलब्ध नहीं है</strong></div><section class="preview-steps"><h2>हल के चरण</h2><article><b>चरण 1</b><p>Solver जुड़ने के बाद सवाल को समझने का चरण यहाँ दिखेगा।</p></article><article><b>चरण 2</b><p>सही नियम और सूत्र चुनने का चरण यहाँ दिखेगा।</p></article><article><b>चरण 3</b><p>गणना और स्वतंत्र जाँच के बाद ही उत्तर दिखाया जाएगा।</p></article></section></main>
 </div>
 <div class="sheet-backdrop" id="sheet-backdrop" hidden><section class="bottom-sheet" role="dialog" aria-modal="true"><div class="sheet-handle"></div><header class="sheet-header"><h2 id="sheet-title">चिह्न और प्रतीक</h2><button id="sheet-close" class="icon-button" aria-label="बंद करें">×</button></header><input id="sheet-search" class="sheet-search" type="search" placeholder="खोजें..."><div class="sheet-tabs" id="sheet-tabs"></div><div class="sheet-content" id="sheet-content"></div></section></div>
-<div class="toast" id="toast" role="status"></div><script src="./app.js?v=1.3.1" defer></script></body></html>
+<div class="toast" id="toast" role="status"></div><script src="./app.js?v=1.3.2" defer></script></body></html>
