@@ -8,7 +8,7 @@ const app=fs.readFileSync(path.join(__dirname,'..','app.js'),'utf8');
 const sw=fs.readFileSync(path.join(__dirname,'..','sw.js'),'utf8');
 
 test('browser loads local equation-enabled math engine before app controller',()=>{
- const engineAt=html.indexOf('./math/engine.js?v=0.4.0');
+ const engineAt=html.indexOf('./math/engine.js?v=0.4.1');
  const appAt=html.indexOf('./app.js?v=0.4.4');
  assert.ok(engineAt>=0 && appAt>engineAt);
 });
@@ -51,7 +51,7 @@ test('HTML navigation is network-first with an offline cache fallback',()=>{
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.4\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.4\.0/);
- assert.match(sw,/12th-fail-shell-v30/);
+ assert.match(sw,/12th-fail-shell-v31/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
@@ -64,7 +64,7 @@ test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.4/);
  assert.match(app,/sw\.js\?v=14/);
- assert.match(sw,/12th-fail-shell-v30/);
+ assert.match(sw,/12th-fail-shell-v31/);
  assert.match(sw,/app\.js\?v=0\.4\.4/);
 });
 
@@ -122,7 +122,7 @@ test('Ratio Proportion page is linked from calculator and LCM/HCF page',()=>{
  assert.match(css,/--dark:#075B35/);
 });
 test('Ratio Proportion page assets are included in offline shell cache',()=>{
- assert.match(sw,/12th-fail-shell-v30/);
+ assert.match(sw,/12th-fail-shell-v31/);
  assert.match(sw,/\.\/ratio-proportion\.html/);
  assert.match(sw,/\.\/ratio-proportion\.css\?v=1\.0\.0/);
  assert.match(sw,/\.\/ratio-proportion\.js\?v=1\.0\.3/);
