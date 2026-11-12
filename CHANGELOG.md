@@ -66,3 +66,12 @@
 - Replaced plain default-looking tool buttons with compact, consistent icon-and-label controls.
 - Tuned spacing around the tool row, calculator and footer for small screens.
 - Preserved on-demand visibility and existing subject-specific tool behavior.
+
+
+## 2026-11-12 — Phase 2.1: Maths numeric arithmetic
+
+- Added a strict standalone parser with no eval() or external dependencies.
+- Added arithmetic, parentheses, powers, percentages, constants and common math functions.
+- Added visible answer and validation states to the Maths workspace.
+- Explicitly rejects algebraic equations and unsupported variables instead of guessing.
+- Added automated parser tests to pre-deploy checks and cached the engine for offline use.
