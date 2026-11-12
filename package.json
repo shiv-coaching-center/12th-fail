@@ -1,0 +1,8 @@
+{
+  "name": "12th-fail",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Offline-first deterministic mathematics learning PWA",
+  "scripts": { "test": "node --test tests/math-engine.test.js" },
+  "engines": { "node": ">=20" }
+}
