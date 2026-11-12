@@ -75,3 +75,11 @@
 - Added visible answer and validation states to the Maths workspace.
 - Explicitly rejects algebraic equations and unsupported variables instead of guessing.
 - Added automated parser tests to pre-deploy checks and cached the engine for offline use.
+
+
+## 2026-11-12 — Phase 2.2: Linear and Quadratic Algebra
+
+- Added a safe polynomial parser for one-variable linear and quadratic equations.
+- Added quadratic formula, discriminant classification, real/complex roots, and integer factorisation hints.
+- Added readable Hindi solution steps in the result panel.
+- Added automated algebra tests and pre-deploy validation.
