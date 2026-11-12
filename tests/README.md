@@ -63,3 +63,15 @@ The service worker may delete only caches whose names start with `twelfth-fail-`
 - [ ] Division by zero, invalid syntax, too-long input and unsupported variables show clear messages.
 - [ ] x² + 5x + 6 = 0 is explicitly reported as algebra not yet supported.
 - [ ] Works offline after math-engine.js is cached.
+
+
+## Phase 2.2 Algebra checks
+
+- [ ] 2x + 5 = 15 gives x = 5.
+- [ ] x² + 5x + 6 = 0 gives roots -3 and -2 with factorisation steps.
+- [ ] x² - 4 = 0 gives -2 and 2.
+- [ ] x² + 2x + 1 = 0 gives the repeated root -1.
+- [ ] 3(x - 2) = 9 gives x = 5.
+- [ ] x² + 1 = 0 is classified as complex roots.
+- [ ] 0 = 0 and 2 = 3 are handled correctly.
+- [ ] Cubic and mixed x/y equations are rejected clearly.
