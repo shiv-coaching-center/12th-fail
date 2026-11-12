@@ -44,7 +44,8 @@
 
 - Fixed native-keyboard mode so it hides the app keypad and quick-symbol strip, focuses the active subject input, and can be toggled back.
 - Standardized local history retention to the latest 20 entries.
-- Corrected Physics formula-sheet selection for supported interactive formulas.
+- Corrected Physics formula-sheet selection and added interactive displacement, velocity, and power formula previews.
+- Guarded invalid Physics calculations so the UI never displays `NaN` as a result.
 - Added a working, clearly labelled placeholder solution-preview route with no fabricated result.
 - Added bottom-sheet backdrop dismissal and Escape-key dismissal.
 - Updated responsive interaction and preview styles; no solving engine added.
