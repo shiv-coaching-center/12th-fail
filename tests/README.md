@@ -26,3 +26,18 @@
 ## Cache isolation
 
 The service worker may delete only caches whose names start with `twelfth-fail-`. It must never clear unrelated origin caches or unregister itself.
+
+
+## Phase 1 UI checks
+
+- [ ] Load the workspace at 320px, 360px, 390px, and 430px viewport widths.
+- [ ] Switch between Maths, Physics, and Chemistry; verify each subject strip changes.
+- [ ] Insert keypad and quick-strip symbols at the cursor position.
+- [ ] Switch to native keyboard mode; confirm the app keypad is hidden and the textarea receives focus.
+- [ ] Open More, Symbols, Formula sheet, Chemistry Elements, and Templates sheets; insert an item.
+- [ ] Submit an expression; verify the UI shows the explicit "solver not included" state and never fabricates a numeric answer.
+- [ ] Save more than 20 expressions; verify only the latest 20 remain in local history.
+- [ ] Reload and confirm history persists on the same device; no account or network sync is used.
+- [ ] Open `#preview-solution`; verify the placeholder disclaimer, numbered step cards, step detail sheet, and local-voice-only TTS behavior.
+- [ ] Confirm the supplied original app icon appears in the header and is referenced by the PWA manifest.
+- [ ] Confirm the app remains usable offline after a successful online load.
