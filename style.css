@@ -72,7 +72,8 @@ button:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
   padding: 8px 8px 15px;
   color: var(--ink);
   font-size: clamp(30px, 8vw, 39px);
-  font-weight: 450;
+  font-weight: 600;
+  letter-spacing: .01em;
   text-align: right;
 }
 .answer-row {
@@ -115,7 +116,8 @@ button:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
   background: linear-gradient(145deg, #FBE5A6, #D8AC51);
   box-shadow: 0 5px 12px rgb(125 93 34 / 17%), inset 0 1px 0 rgb(255 255 255 / 85%);
   font-size: 16px;
-  font-weight: 750;
+  font-weight: 800;
+  box-shadow: 0 5px 0 #C49A45, 0 8px 13px rgb(125 93 34 / 18%), inset 0 1px 0 rgb(255 255 255 / 85%);
 }
 .keypad {
   display: grid;
@@ -132,10 +134,12 @@ button:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
   background: linear-gradient(145deg, #FFFDF8, #F2EBDD);
   box-shadow: 0 5px 9px rgb(87 71 46 / 9%), inset 0 1px 0 rgb(255 255 255 / 95%);
   font-size: 25px;
-  font-weight: 500;
+  font-weight: 650;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 75%);
+  box-shadow: 0 6px 0 #E7DECF, 0 8px 14px rgb(87 71 46 / 12%), inset 0 1px 0 #FFFFFF, inset 0 -2px 3px rgb(130 112 82 / 7%);
   transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
 }
-.key:active { transform: translateY(1px); background: #EFE7D9; }
+.key:active { transform: translateY(3px); background: #EFE7D9; box-shadow: 0 2px 0 #E0D5C4, 0 3px 7px rgb(87 71 46 / 10%), inset 0 2px 4px rgb(130 112 82 / 8%); }
 .key.extra { color: #171A18; background: linear-gradient(145deg, #FFFDF8, #F2EBDD); }
 .key.operator { color: var(--green-dark); }
 .key.clear { color: #171A18; }
@@ -143,7 +147,7 @@ button:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
   border-color: #08713F;
   color: #FFFFFF;
   background: linear-gradient(145deg, #159653, #086B3B);
-  box-shadow: 0 5px 12px rgb(10 102 57 / 20%), inset 0 1px 0 rgb(255 255 255 / 22%);
+  box-shadow: 0 6px 0 #075A35, 0 9px 15px rgb(10 102 57 / 23%), inset 0 1px 0 rgb(255 255 255 / 28%);
   font-size: 29px;
   font-weight: 750;
 }
@@ -197,7 +201,8 @@ button:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
   overflow-wrap: anywhere;
   color: var(--ink);
   font-size: clamp(25px, 7vw, 34px);
-  font-weight: 450;
+  font-weight: 600;
+  letter-spacing: .01em;
   text-align: center;
 }
 .answer-value {
@@ -265,7 +270,7 @@ button:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
   background: linear-gradient(145deg, #21A45D, #08713F);
 }
 .step-copy { display: flex; min-width: 0; flex: 1; align-items: center; }
-.step-copy strong { color: var(--ink); font-size: 19px; font-weight: 450; }
+.step-copy strong { color: var(--ink); font-size: 19px; font-weight: 600; }
 .step-arrow { color: var(--green-dark); font-size: 25px; }
 
 .sheet-backdrop {
