@@ -30,7 +30,7 @@ test('step explanations come from the fixed reasons file',()=>{
 test('offline shell pre-caches engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.1\.0/);
  assert.match(sw,/\.\/reasons_hi\.json/);
- assert.match(sw,/12th-fail-shell-v6/);
+ assert.match(sw,/12th-fail-shell-v7/);
 });
 
 test('unsupported input uses a compact message and compact visual state',()=>{
