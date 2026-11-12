@@ -1,0 +1,12 @@
+'use strict';
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');
+const {solveFraction,simplifyFraction,UNSUPPORTED_MESSAGE}=require('../math/engine.js');const reasons=JSON.parse(fs.readFileSync(path.join(__dirname,'..','reasons_hi.json'),'utf8'));
+const cases=[
+['1/2','1/3','add','5/6'],['1/2','1/2','add','1'],['1/4','1/4','add','1/2'],['2/3','1/6','add','5/6'],['3/5','1/5','add','4/5'],['-1/2','1/3','add','-1/6'],['2/7','3/7','add','5/7'],['5/8','1/4','add','7/8'],['7/10','2/5','add','11/10'],['1/9','2/3','add','7/9'],
+['1/2','1/3','subtract','1/6'],['3/4','1/4','subtract','1/2'],['1/3','1/2','subtract','-1/6'],['5/6','1/3','subtract','1/2'],['7/8','1/8','subtract','3/4'],['2/5','1/5','subtract','1/5'],['9/10','3/10','subtract','3/5'],['4/7','2/7','subtract','2/7'],['1','1/4','subtract','3/4'],['-1/2','1/2','subtract','-1'],
+['1/2','1/3','multiply','1/6'],['2/3','3/4','multiply','1/2'],['3/5','5/9','multiply','1/3'],['7/8','4/7','multiply','1/2'],['-1/2','2/3','multiply','-1/3'],['5/6','6/5','multiply','1'],['3/10','5/9','multiply','1/6'],['4','3/8','multiply','3/2'],['0/7','3/5','multiply','0'],['9/4','2/3','multiply','3/2'],
+['1/2','1/3','divide','3/2'],['2/3','4/5','divide','5/6'],['3/4','1/2','divide','3/2'],['5/6','5/3','divide','1/2'],['-1/2','1/4','divide','-2'],['3','3/4','divide','4'],['7/8','7/4','divide','1/2'],['1/5','2/5','divide','1/2'],['9/10','3/5','divide','3/2'],['4/7','2/3','divide','6/7']];
+test('Fraction arithmetic: 40 hand-checked cases',()=>{for(const [a,b,op,expected] of cases){const r=solveFraction(a,b,op,reasons);assert.equal(r.ok,true,a+' '+op+' '+b);assert.equal(r.answer,expected);assert.equal(r.verified,true)}});
+test('Fraction simplification returns reduced exact values',()=>{for(const [v,e] of [['2/4','1/2'],['10/5','2'],['-6/9','-2/3'],['0/7','0'],['15/25','3/5'],['100/125','4/5']]){const r=simplifyFraction(v,reasons);assert.equal(r.ok,true);assert.equal(r.answer,e);assert.equal(r.verified,true)}});
+test('Fractions reject malformed inputs and division by zero',()=>{for(const [a,b,op] of [['1/0','2/3','add'],['1/2','0','divide'],['1.5','2','add'],['x','2','multiply'],['1/2/3','2','add'],['1'.repeat(201),'2','add']]){const r=solveFraction(a,b,op,reasons);assert.equal(r.ok,false);assert.equal(r.message,UNSUPPORTED_MESSAGE)}});
+test('Fraction simplifier rejects zero denominators and malformed values',()=>{for(const v of ['1/0','abc','2/3/4','1.2'])assert.equal(simplifyFraction(v,reasons).ok,false)});
