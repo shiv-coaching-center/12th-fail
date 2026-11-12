@@ -1,6 +1,6 @@
 /* 12th Fail service worker — verified BODMAS engine v6. */
 "use strict";
-const CACHE_NAME = "12th-fail-shell-v29";
+const CACHE_NAME = "12th-fail-shell-v30";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -10,8 +10,8 @@ const APP_SHELL = [
   "./reasons_hi.json?v=0.4.0",
   "./manifest.json",
   "./icons/icon.svg",
-  "./app-menu.css?v=1.0.0",
-  "./app-menu.js?v=1.0.1",
+  "./app-menu.css?v=1.0.1",
+  "./app-menu.js?v=1.0.2",
   "./lcm-hcf.html",
   "./lcm-hcf.css?v=1.0.3",
   "./lcm-hcf.js?v=1.0.3",
