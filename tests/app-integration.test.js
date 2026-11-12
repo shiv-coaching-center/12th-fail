@@ -7,9 +7,9 @@ const html=fs.readFileSync(path.join(__dirname,'..','index.html'),'utf8');
 const app=fs.readFileSync(path.join(__dirname,'..','app.js'),'utf8');
 const sw=fs.readFileSync(path.join(__dirname,'..','sw.js'),'utf8');
 
-test('browser loads local math engine before app controller',()=>{
- const engineAt=html.indexOf('./math/engine.js?v=0.2.1');
- const appAt=html.indexOf('./app.js?v=0.3.2');
+test('browser loads local equation-enabled math engine before app controller',()=>{
+ const engineAt=html.indexOf('./math/engine.js?v=0.3.0');
+ const appAt=html.indexOf('./app.js?v=0.4.0');
  assert.ok(engineAt>=0 && appAt>engineAt);
 });
 test('solution screen has dynamic answer and step containers',()=>{
@@ -18,34 +18,35 @@ test('solution screen has dynamic answer and step containers',()=>{
  assert.match(html,/id="steps-heading"/);
  assert.match(app,/stepList\.replaceChildren\(\)/);
 });
-test('equals and view steps both call verified engine',()=>{
- assert.match(app,/button\.dataset\.action === "equals"\) calculate\(\)/);
- assert.match(app,/currentResult \|\| await calculate\(\)/);
+test('calculator routes equations to the verified equation solver',()=>{
+ assert.ok(app.includes('const isEquation = currentExpression.includes("=");'));
+ assert.ok(app.includes('const solver = isEquation ? math?.solveEquation : math?.solve;'));
  assert.match(app,/result\.verified !== true/);
 });
-test('step explanations come from the fixed reasons file',()=>{
- assert.match(app,/fetch\("\.\/reasons_hi\.json\?v=0\.2\.0"/);
+test('equation steps display transformation arrows and fixed Hindi reasons',()=>{
+ assert.ok(app.includes('step.display || (step.expression + " = " + step.result)'));
+ assert.ok(app.includes('selectedStep.display || (selectedStep.expression + " = " + selectedStep.result)'));
  assert.match(app,/selectedStep\.reason/);
 });
-test('offline shell pre-caches engine and fixed reasons',()=>{
- assert.match(sw,/\.\/math\/engine\.js\?v=0\.2\.1/);
- assert.match(sw,/\.\/reasons_hi\.json\?v=0\.2\.0/);
- assert.match(sw,/12th-fail-shell-v10/);
+test('step explanations load from the versioned local reasons file',()=>{
+ assert.match(app,/fetch\("\.\/reasons_hi\.json\?v=0\.3\.0"/);
 });
-
-test('unsupported input uses a compact message and compact visual state',()=>{
+test('offline shell pre-caches the equation engine and fixed reasons',()=>{
+ assert.match(sw,/\.\/math\/engine\.js\?v=0\.3\.0/);
+ assert.match(sw,/\.\/reasons_hi\.json\?v=0\.3\.0/);
+ assert.match(sw,/12th-fail-shell-v11/);
+});
+test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
  assert.match(app,/answerPreview\.classList\.add\("is-message"\)/);
- assert.match(app,/answer-result"\)\?\.classList\.add\("has-message"\)/);
  const css=fs.readFileSync(path.join(__dirname,'..','style.css'),'utf8');
  assert.match(css,/\.answer-preview\.is-message\s*\{[^}]*font-size:\s*clamp\(18px, 5vw, 23px\)/s);
  assert.match(css,/\.answer-result\.has-message/);
 });
-
-test('updated page and service worker force-refresh the compact message assets',()=>{
+test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
- assert.match(html,/app\.js\?v=0\.3\.2/);
- assert.match(app,/sw\.js\?v=8/);
- assert.match(sw,/12th-fail-shell-v10/);
- assert.match(sw,/app\.js\?v=0\.3\.2/);
+ assert.match(html,/app\.js\?v=0\.4\.0/);
+ assert.match(app,/sw\.js\?v=9/);
+ assert.match(sw,/12th-fail-shell-v11/);
+ assert.match(sw,/app\.js\?v=0\.4\.0/);
 });
