@@ -9,7 +9,7 @@ const sw=fs.readFileSync(path.join(__dirname,'..','sw.js'),'utf8');
 
 test('browser loads local equation-enabled math engine before app controller',()=>{
  const engineAt=html.indexOf('./math/engine.js?v=0.3.0');
- const appAt=html.indexOf('./app.js?v=0.4.0');
+ const appAt=html.indexOf('./app.js?v=0.4.1');
  assert.ok(engineAt>=0 && appAt>engineAt);
 });
 test('solution screen has dynamic answer and step containers',()=>{
@@ -20,7 +20,7 @@ test('solution screen has dynamic answer and step containers',()=>{
 });
 test('calculator routes equations to the verified equation solver',()=>{
  assert.ok(app.includes('const isEquation = currentExpression.includes("=");'));
- assert.ok(app.includes('const solver = isEquation ? math?.solveEquation : math?.solve;'));
+ assert.ok(app.includes('const solver = isEquation ? math?.solveEquation : math?.solve;'));\n assert.ok(app.includes('if (/[xX]/.test(currentExpression) && !currentExpression.includes("=")) insert("=");'));
  assert.match(app,/result\.verified !== true/);
 });
 test('equation steps display transformation arrows and fixed Hindi reasons',()=>{
@@ -34,7 +34,7 @@ test('step explanations load from the versioned local reasons file',()=>{
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.3\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.3\.0/);
- assert.match(sw,/12th-fail-shell-v11/);
+ assert.match(sw,/12th-fail-shell-v12/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
@@ -47,6 +47,6 @@ test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.0/);
  assert.match(app,/sw\.js\?v=9/);
- assert.match(sw,/12th-fail-shell-v11/);
+ assert.match(sw,/12th-fail-shell-v12/);
  assert.match(sw,/app\.js\?v=0\.4\.0/);
 });
