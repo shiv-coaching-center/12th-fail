@@ -114,3 +114,10 @@
 - Proportion input layout for `a:b = c:x` with exact answer calculation.
 - Main calculator and LCM/HCF navigation links; offline app-shell caching.
 - Automated integration tests for the new page and multi-term ratios.
+
+## [0.8.2] - 2026-11-12
+
+### Added
+- Clickable F app logo on every calculator page, opening a shared feature drawer.
+- Central list of the main calculator, percentage, equations, powers/roots, LCM/HCF, and Ratio/Proportion tools.
+- Shared accessible menu with close button, backdrop dismissal, Escape-key support, and offline asset caching.
