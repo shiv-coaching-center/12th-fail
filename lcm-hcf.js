@@ -10,7 +10,7 @@ function compute(){note.textContent="";if(values.some(v=>!Number.isSafeInteger(v
  const verifyH=values.reduce((acc,v)=>gcd(acc,BigInt(v)),BigInt(values[0]));
  let verifyL=BigInt(values[0]);
  for(const v of values.slice(1)){const b=BigInt(v);verifyL=(verifyL/gcd(verifyL,b))*b}
- if(verifyH!==h||verifyL!==l||values.some(v=>l%BigInt(v)!==0n)||values.some(v=>h%BigInt(v)!==0n)){
+ if(verifyH!==h||verifyL!==l||values.some(v=>l%BigInt(v)!==0n)||values.some(v=>BigInt(v)%h!==0n)){
   note.textContent="उत्तर की जाँच पूरी नहीं हुई";return
  }
  state.answer=state.mode==="lcm"?l.toString():h.toString();state.steps=[];
