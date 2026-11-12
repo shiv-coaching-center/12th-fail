@@ -78,5 +78,21 @@ if("serviceWorker"in navigator)navigator.serviceWorker.addEventListener("control
 renderConnection();
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!sheet.hidden)closeSheet();if(e.key==="Enter"&&e.ctrlKey){e.preventDefault();submitExpression()}});
 loadHistory();renderLanguage();renderStrip();showSolutionRoute();
-if("serviceWorker"in navigator){let refreshing=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(refreshing)return;refreshing=true;location.reload()})}
+if("serviceWorker"in navigator){
+ let refreshing=false,serviceRegistration=null;
+ const updateBanner=$("#update-banner"),applyUpdate=$("#apply-update");
+ function offerUpdate(worker){if(!worker)return;updateBanner.hidden=false;applyUpdate.onclick=()=>{applyUpdate.disabled=true;applyUpdate.textContent=language==="hi"?"अपडेट हो रहा है…":"Updating…";worker.postMessage({type:"SKIP_WAITING"})}}
+ navigator.serviceWorker.addEventListener("controllerchange",()=>{if(refreshing)return;refreshing=true;location.reload()});
+ navigator.serviceWorker.register("./sw.js").then(reg=>{
+   serviceRegistration=reg;
+   if(reg.waiting&&navigator.serviceWorker.controller)offerUpdate(reg.waiting);
+   reg.addEventListener("updatefound",()=>{
+     const installing=reg.installing;if(!installing)return;
+     installing.addEventListener("statechange",()=>{
+       if(installing.state==="installed"&&navigator.serviceWorker.controller)offerUpdate(reg.waiting||installing);
+     });
+   });
+   window.addEventListener("load",()=>{if(serviceRegistration)serviceRegistration.update().catch(()=>{})});
+ }).catch(()=>showToast(language==="hi"?"ऑफलाइन सेटअप पूरा नहीं हुआ":"Offline setup failed"));
+}
 })();
