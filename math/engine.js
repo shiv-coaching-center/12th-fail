@@ -381,7 +381,7 @@ function solveProportion(first,second,third,reasons){
       return {expression,result,display:expression+'  →  '+result,rule,reason};
     });
     return {ok:true,answer,exact:{numerator:x.n.toString(),denominator:x.d.toString()},verified:true,steps};
-  }catch(e){return {ok:false,message:String(e&&e.message||e),verified:false,steps:[]};}
+  }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
 
 if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,solveLcmHcf,solveRatio,solveProportion,UNSUPPORTED_MESSAGE};
