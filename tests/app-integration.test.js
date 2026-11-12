@@ -8,7 +8,7 @@ const app=fs.readFileSync(path.join(__dirname,'..','app.js'),'utf8');
 const sw=fs.readFileSync(path.join(__dirname,'..','sw.js'),'utf8');
 
 test('browser loads local math engine before app controller',()=>{
- const engineAt=html.indexOf('./math/engine.js?v=0.1.0');
+ const engineAt=html.indexOf('./math/engine.js?v=0.2.0');
  const appAt=html.indexOf('./app.js?v=0.3.1');
  assert.ok(engineAt>=0 && appAt>engineAt);
 });
@@ -30,7 +30,7 @@ test('step explanations come from the fixed reasons file',()=>{
 test('offline shell pre-caches engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.1\.0/);
  assert.match(sw,/\.\/reasons_hi\.json/);
- assert.match(sw,/12th-fail-shell-v8/);
+ assert.match(sw,/12th-fail-shell-v9/);
 });
 
 test('unsupported input uses a compact message and compact visual state',()=>{
@@ -46,6 +46,6 @@ test('updated page and service worker force-refresh the compact message assets',
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.3\.1/);
  assert.match(app,/sw\.js\?v=7/);
- assert.match(sw,/12th-fail-shell-v8/);
+ assert.match(sw,/12th-fail-shell-v9/);
  assert.match(sw,/app\.js\?v=0\.3\.1/);
 });
