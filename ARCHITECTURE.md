@@ -55,3 +55,5 @@ The first successful online visit installs the service worker and caches the app
 - `solveProportion(first, second, third, reasons)` solves `first:second = third:x` exactly as a rational value and verifies by cross multiplication.
 - Both APIs reject malformed, decimal, negative, zero-denominator, and oversized inputs; all displayed explanations use fixed entries in `reasons_hi.json`.
 - Independent hand-verified cases are maintained in `tests/ratio-proportion-cases.json`.
+
+- `ratio-proportion.html`, `ratio-proportion.css`, and `ratio-proportion.js` provide the standalone mobile-first Ratio/Proportion page. Ratio accepts 2–6 terms through `solveRatioMany`; Proportion solves `a:b = c:x` with exact rational arithmetic. The page is linked from the main calculator and LCM/HCF page and is pre-cached for offline use.
