@@ -51,7 +51,7 @@ test('HTML navigation is network-first with an offline cache fallback',()=>{
 test('offline shell pre-caches the equation engine and fixed reasons',()=>{
  assert.match(sw,/\.\/math\/engine\.js\?v=0\.4\.0/);
  assert.match(sw,/\.\/reasons_hi\.json\?v=0\.4\.0/);
- assert.match(sw,/12th-fail-shell-v23/);
+ assert.match(sw,/12th-fail-shell-v24/);
 });
 test('unsupported input keeps the compact unavailable state',()=>{
  assert.match(app,/answerPreview\.textContent = "हल उपलब्ध नहीं"/);
@@ -90,8 +90,8 @@ test('standalone LCM/HCF page is linked without replacing the original calculato
 test('LCM/HCF keypad uses a compact key height while preserving its button style',()=>{
  const css=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.css'),'utf8');
  const page=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.html'),'utf8');
- assert.match(css,/\.lcm-key\{[^}]*min-height:42px/);
- assert.match(css,/\.lcm-key\.equals\{[^}]*min-height:46px/);
+ assert.match(css,/\.lcm-key\{[^}]*min-height:48px/);
+ assert.match(css,/\.lcm-key\.equals\{[^}]*min-height:52px/);
  assert.match(page,/lcm-hcf\.css\?v=1\.0\.2/);
 });
 
