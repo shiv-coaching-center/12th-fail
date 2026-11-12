@@ -1,13 +1,14 @@
 "use strict";
 
 const CACHE_PREFIX = "twelfth-fail-";
-const CACHE_VERSION = "v1.3.6";
+const CACHE_VERSION = "v2.0.0";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 const APP_SHELL = [
   "./",
   "./index.html",
   "./style.css",
   "./app.js",
+  "./math-engine.js",
   "./manifest.json",
   "./icons/icon.svg",
   "./icons/brand-icon.svg"
