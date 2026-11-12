@@ -318,5 +318,36 @@ function solveEquation(input,reasons){
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
 
-if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,UNSUPPORTED_MESSAGE};
-if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,UNSUPPORTED_MESSAGE};
+
+function gcdBigInt(a,b){
+  a=a<0n?-a:a;b=b<0n?-b:b;
+  while(b!==0n){const r=a%b;a=b;b=r;}
+  return a;
+}
+function solveLcmHcf(first,second,reasons){
+  try{
+    if(!reasons||typeof reasons!=='object')throw Error('REASONS');
+    const valid=v=>typeof v==='string'&&/^-?\\d+$/.test(v)&&v.length<=MAX_INPUT_LENGTH;
+    if(!valid(first)||!valid(second))throw Error('INTEGER_ONLY');
+    const a=BigInt(first),b=BigInt(second);
+    const hcf=gcdBigInt(a,b);
+    const lcm=(a===0n||b===0n)?0n:((a<0n?-a:a)/hcf)*(b<0n?-b:b);
+    const steps=[
+      {expression:'HCF('+first+', '+second+')',result:hcf.toString(),rule:'hcf_euclidean'},
+      {expression:'LCM('+first+', '+second+')',result:lcm.toString(),rule:'lcm_product'}
+    ].map(s=>{
+      if(typeof reasons[s.rule]!=='string'||!reasons[s.rule].trim())throw Error('REASON');
+      return {...s,display:s.expression+'  →  '+s.result,reason:reasons[s.rule]};
+    });
+    // Independent verification: HCF divides both; LCM is divisible by both
+    // and equals the product/HCF identity for non-zero inputs.
+    if((a!==0n&&a%hcf!==0n)||(b!==0n&&b%hcf!==0n))throw Error('VERIFY');
+    if(a!==0n&&b!==0n){
+      if(lcm%a!==0n||lcm%b!==0n||lcm*hcf!==(a<0n?-a:a)*(b<0n?-b:b))throw Error('VERIFY');
+    }else if(lcm!==0n)throw Error('VERIFY');
+    return {ok:true,hcf:hcf.toString(),lcm:lcm.toString(),verified:true,steps};
+  }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
+}
+
+if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,solveLcmHcf,UNSUPPORTED_MESSAGE};
+if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,solveLcmHcf,UNSUPPORTED_MESSAGE};
