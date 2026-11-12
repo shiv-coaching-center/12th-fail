@@ -66,3 +66,9 @@ Run locally with `npm test` (Node.js 20+; no external packages).
 - [x] Exact substitution and reduced-equation verification.
 - [x] Fixed Hindi reason for every displayed equation step.
 - [ ] Phone testing of linear equations.
+
+## Phase 3.2 LCM and HCF
+- [ ] 40 hand-verified integer pairs, including zero, negatives, equal values, coprimes and large integers.
+- [ ] Euclidean algorithm for HCF and exact product/HCF identity for LCM.
+- [ ] Zero handling and malformed/decimal input rejection.
+- [ ] Independent divisibility verification and fixed Hindi reasons.
