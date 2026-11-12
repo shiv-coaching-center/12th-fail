@@ -35,6 +35,7 @@ jobs:
           node --check app.js
           node tests/math-engine.test.js
           node tests/algebra.test.js
+          node tests/lcm-hcf.test.js
           python -m json.tool manifest.json > /dev/null
           python -c "import xml.etree.ElementTree as ET; ET.parse('icons/brand-icon.svg')"
 
