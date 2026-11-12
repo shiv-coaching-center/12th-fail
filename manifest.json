@@ -1,0 +1,15 @@
+{
+  "id": "./",
+  "name": "12th Fail - Mathematics Learning",
+  "short_name": "12th Fail",
+  "description": "Offline Mathematics learning app for students in classes 1 to 12.",
+  "lang": "hi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F5F0",
+  "theme_color": "#F7F5F0",
+  "orientation": "portrait",
+  "categories": ["education", "utilities"],
+  "icons": [{"src":"./icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
+}
