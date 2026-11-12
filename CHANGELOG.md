@@ -20,3 +20,12 @@
 ### Scope
 - No solving engine, external API, AI/LLM, analytics, ads, CDN or external fonts.
 - UI remains a foundation placeholder until Phase 1.
+
+
+## 2026-11-12 — Phase 1 UI
+
+- Replaced the PWA placeholder with a bilingual Maths / Physics / Chemistry workspace.
+- Added expression entry, keypad, subject symbol strips, sheets, templates, and device-local 20-item history.
+- Added hidden solution-preview route with explicit placeholder messaging; no solver or fabricated answers.
+- Added responsive mobile styling, accessibility labels, and a thumb-reach sticky keypad.
+- Bumped the app-shell cache version to v1.0.0.
