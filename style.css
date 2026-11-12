@@ -94,3 +94,12 @@ body.native-keyboard .expression-card{min-height:150px}
  .tool-toggle{height:36px;min-width:82px;padding:0 10px;font-size:12px}
  .tool-toggle svg{width:15px;height:15px;flex-basis:15px}
 }
+
+/* Phase 2.1: numeric Maths answer and validation */
+.cannot-solve{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:58px;padding:13px 16px}
+.cannot-solve #result-message{font-size:13px;line-height:1.45;font-weight:700}
+.cannot-solve output{display:block;color:var(--purple);font-size:24px;font-weight:900;line-height:1.15;overflow-wrap:anywhere;text-align:right}
+.cannot-solve.is-result{background:#eeeaff;border:1px solid #d8ceff}
+.cannot-solve.is-error{background:#fff3df;border:1px solid #f1dfbf}
+.cannot-solve.is-error #result-message{color:#75531c}
+@media(max-width:360px){.cannot-solve{padding:11px 12px;gap:8px}.cannot-solve output{font-size:21px}}
