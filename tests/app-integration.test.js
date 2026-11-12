@@ -64,7 +64,7 @@ test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
  assert.match(html,/app\.js\?v=0\.4\.4/);
  assert.match(app,/sw\.js\?v=14/);
- assert.match(sw,/12th-fail-shell-v23/);
+ assert.match(sw,/12th-fail-shell-v24/);
  assert.match(sw,/app\.js\?v=0\.4\.4/);
 });
 
@@ -92,7 +92,7 @@ test('LCM/HCF keypad uses a compact key height while preserving its button style
  const page=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.html'),'utf8');
  assert.match(css,/\.lcm-key\{[^}]*min-height:48px/);
  assert.match(css,/\.lcm-key\.equals\{[^}]*min-height:52px/);
- assert.match(page,/lcm-hcf\.css\?v=1\.0\.2/);
+ assert.match(page,/lcm-hcf\.css\?v=1\.0\.3/);
 });
 
 
