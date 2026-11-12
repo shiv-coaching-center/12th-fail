@@ -437,5 +437,5 @@ function simplifyFraction(value,reasons){
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
 
-if(typeof module!=='undefined'&&module.exports)={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,solveFraction,simplifyFraction,UNSUPPORTED_MESSAGE};
+if(typeof module!=='undefined'&&module.exports)module.exports={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,solveFraction,simplifyFraction,UNSUPPORTED_MESSAGE};
 if(typeof window!=='undefined')window.TwelfthFailMath={solve,solveEquation,solveLcmHcf,solveRatio,solveRatioMany,solveProportion,solveFraction,simplifyFraction,UNSUPPORTED_MESSAGE};
