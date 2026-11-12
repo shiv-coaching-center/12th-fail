@@ -1,7 +1,7 @@
 "use strict";
 
 const CACHE_PREFIX = "twelfth-fail-";
-const CACHE_VERSION = "v1.0.0";
+const CACHE_VERSION = "v1.0.1";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 const APP_SHELL = [
   "./",
@@ -9,7 +9,8 @@ const APP_SHELL = [
   "./style.css",
   "./app.js",
   "./manifest.json",
-  "./icons/icon.svg"
+  "./icons/icon.svg",
+  "./icons/brand-icon.svg"
 ];
 
 self.addEventListener("install", (event) => {
