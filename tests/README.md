@@ -33,12 +33,13 @@ The service worker may delete only caches whose names start with `twelfth-fail-`
 - [ ] Load the workspace at 320px, 360px, 390px, and 430px viewport widths.
 - [ ] Switch between Maths, Physics, and Chemistry; verify each subject strip changes.
 - [ ] Insert keypad and quick-strip symbols at the cursor position.
-- [ ] Switch to native keyboard mode; confirm the app keypad is hidden and the textarea receives focus.
+- [ ] Switch to native keyboard mode; confirm the app keypad and quick-symbol strip are hidden and the correct subject input receives focus.
+- [ ] Tap the keyboard toggle again; confirm the app keypad returns.
 - [ ] Open More, Symbols, Formula sheet, Chemistry Elements, and Templates sheets; insert an item.
 - [ ] Submit an expression; verify the UI shows the explicit "solver not included" state and never fabricates a numeric answer.
 - [ ] Save more than 20 expressions; verify only the latest 20 remain in local history.
 - [ ] Reload and confirm history persists on the same device; no account or network sync is used.
-- [ ] Open `#preview-solution`; verify the placeholder disclaimer, numbered step cards, step detail sheet, and local-voice-only TTS behavior.
+- [ ] Open `#preview-solution`; verify the placeholder disclaimer and numbered placeholder step cards; confirm no answer is presented as calculated.
 - [ ] Confirm the supplied original app icon appears in the header and is referenced by the PWA manifest.
 - [ ] Confirm the app remains usable offline after a successful online load.
 
