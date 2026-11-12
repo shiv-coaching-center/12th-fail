@@ -71,8 +71,11 @@ $("#solution-preview-link").addEventListener("click",()=>{location.hash="preview
 $("#speak-solution").addEventListener("click",speakSolution);
 $("#simple-solution").addEventListener("click",()=>$("#solution-screen").classList.toggle("simple-reading"));
 window.addEventListener("hashchange",showSolutionRoute);
-window.addEventListener("online",()=>{$("#connection-status span").textContent=language==="hi"?"ऑनलाइन":"Online"});
-window.addEventListener("offline",()=>{$("#connection-status span").textContent=language==="hi"?"ऑफलाइन":"Offline"});
+function renderConnection(){const online=navigator.onLine;const controlled=Boolean(navigator.serviceWorker&&navigator.serviceWorker.controller);const label=online?(controlled?(language==="hi"?"ऑनलाइन · ऑफलाइन तैयार":"Online · offline ready"):(language==="hi"?"ऑनलाइन · सेटअप हो रहा है":"Online · setting up")):(controlled?(language==="hi"?"ऑफलाइन · ऐप उपलब्ध है":"Offline · app available"):(language==="hi"?"ऑफलाइन · पहली बार ऑनलाइन खोलें":"Offline · open online once"));$("#connection-status span").textContent=label}
+window.addEventListener("online",renderConnection);
+window.addEventListener("offline",renderConnection);
+if("serviceWorker"in navigator)navigator.serviceWorker.addEventListener("controllerchange",renderConnection);
+renderConnection();
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!sheet.hidden)closeSheet();if(e.key==="Enter"&&e.ctrlKey){e.preventDefault();submitExpression()}});
 loadHistory();renderLanguage();renderStrip();showSolutionRoute();
 if("serviceWorker"in navigator){let refreshing=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(refreshing)return;refreshing=true;location.reload()})}
