@@ -36,5 +36,5 @@ $("#rp-keypad").addEventListener("click",e=>{const b=e.target.closest("button[da
 $("#rp-equals").addEventListener("click",compute);
 $("#rp-show").addEventListener("click",()=>{if(state.answer===null)compute();if(state.answer!==null)solution.classList.toggle("rp-hidden")});
 render();
-if("serviceWorker"in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js?v=16",{scope:"./"}).catch(()=>{});
+if("serviceWorker"in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js?v=17",{scope:"./"}).catch(()=>{});
 })();
