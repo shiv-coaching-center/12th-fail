@@ -16,7 +16,7 @@
   let selectedStep = null;
 
   const math = window.TwelfthFailMath;
-  const reasonsReady = fetch("./reasons_hi.json?v=0.2.0", { cache: "no-store" })
+  const reasonsReady = fetch("./reasons_hi.json?v=0.3.0", { cache: "no-store" })
     .then((response) => {
       if (!response.ok) throw new Error("REASONS_UNAVAILABLE");
       return response.json();
@@ -81,11 +81,11 @@
 
   async function calculate() {
     await reasonsReady;
-    if (!math || typeof math.solve !== "function" || !reasons) {
+    const isEquation = currentExpression.includes("=");\n    const solver = isEquation ? math?.solveEquation : math?.solve;\n    if (!math || typeof solver !== "function" || !reasons) {
       showUnavailable();
       return null;
     }
-    const result = math.solve(currentExpression, reasons);
+    const result = solver(currentExpression, reasons);
     if (!result.ok || result.verified !== true) {
       showUnavailable();
       return null;
@@ -112,7 +112,7 @@
       const copy = document.createElement("span");
       copy.className = "step-copy";
       const strong = document.createElement("strong");
-      strong.textContent = step.expression + " = " + step.result;
+      strong.textContent = step.display || (step.expression + " = " + step.result);
       copy.append(strong);
 
       const arrow = document.createElement("span");
@@ -145,7 +145,7 @@
   function openStep(index) {
     if (!currentResult || !currentResult.steps[index]) return;
     selectedStep = currentResult.steps[index];
-    $("#sheet-title").textContent = selectedStep.expression + " = " + selectedStep.result;
+    $("#sheet-title").textContent = selectedStep.display || (selectedStep.expression + " = " + selectedStep.result);
     $("#sheet-reason").textContent = selectedStep.reason;
     $("#sheet-easier").classList.add("hidden");
     sheet.classList.remove("hidden");
@@ -177,7 +177,7 @@
   });
 
   if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-    navigator.serviceWorker.register("./sw.js?v=8", { scope: "./" }).catch(() => {
+    navigator.serviceWorker.register("./sw.js?v=9", { scope: "./" }).catch(() => {
       message.textContent = "ऑफलाइन अपडेट के लिए पेज दोबारा खोलें";
     });
   }
