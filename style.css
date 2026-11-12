@@ -108,3 +108,6 @@ body.native-keyboard .expression-card{min-height:150px}
 .solution-steps{grid-column:1/-1;width:100%;margin-top:8px;padding-top:8px;border-top:1px solid #ded9f3}
 .solution-steps p{margin:7px 0;color:var(--ink);font-size:12px;line-height:1.55;overflow-wrap:anywhere}
 .solution-steps[hidden]{display:none!important}
+
+/* Phase A: input strip, expression preview, and accessible touch targets */
+.quick-tools{margin:7px 1px 4px}.quick-strip{gap:7px;padding:5px 1px}.symbol-chip{min-width:48px;height:48px;font-size:16px}.math-display{min-height:24px;margin:5px 2px 0;padding:5px 8px;border-top:1px solid var(--line);color:var(--purple);font-size:17px;font-weight:750;overflow-wrap:anywhere}.math-display[hidden]{display:none!important}.key{min-height:48px}.subject-tab{min-height:48px;height:auto}.tool-toggle{min-height:48px;height:auto}.keyboard-toggle,.clear-button{min-height:48px;height:auto}.utility-button{min-height:48px;height:auto}.icon-button{width:48px;height:48px}.sheet-search{min-height:48px;height:auto}.sheet-tab{min-height:44px}
