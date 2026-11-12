@@ -46,8 +46,8 @@ test('unsupported input keeps the compact unavailable state',()=>{
 });
 test('page and service worker force-refresh the equation app assets',()=>{
  assert.match(html,/style\.css\?v=0\.4\.1/);
- assert.match(html,/app\.js\?v=0\.4\.0/);
- assert.match(app,/sw\.js\?v=9/);
+ assert.match(html,/app\.js\?v=0\.4\.1/);
+ assert.match(app,/sw\.js\?v=10/);
  assert.match(sw,/12th-fail-shell-v12/);
- assert.match(sw,/app\.js\?v=0\.4\.0/);
+ assert.match(sw,/app\.js\?v=0\.4\.1/);
 });
