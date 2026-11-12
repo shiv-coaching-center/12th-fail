@@ -71,17 +71,11 @@
 
       <section class="question-card" aria-label="सवाल">
         <p id="solution-question" class="question-value">—</p>
-        <p class="answer-value">—</p>
+        <p id="solution-answer" class="answer-value">—</p>
       </section>
 
-      <div class="steps-heading"><h3>हल के चरण</h3></div>
-      <div class="step-list">
-        <button class="step-button" type="button" data-step="1"><span class="step-number">1</span><span class="step-copy"><strong>—</strong></span><span class="step-arrow">›</span></button>
-        <button class="step-button" type="button" data-step="2"><span class="step-number">2</span><span class="step-copy"><strong>—</strong></span><span class="step-arrow">›</span></button>
-        <button class="step-button" type="button" data-step="3"><span class="step-number">3</span><span class="step-copy"><strong>—</strong></span><span class="step-arrow">›</span></button>
-        <button class="step-button" type="button" data-step="4"><span class="step-number">4</span><span class="step-copy"><strong>—</strong></span><span class="step-arrow">›</span></button>
-        <button class="step-button" type="button" data-step="5"><span class="step-number">5</span><span class="step-copy"><strong>—</strong></span><span class="step-arrow">›</span></button>
-      </div>
+      <div class="steps-heading hidden" id="steps-heading"><h3>हल के चरण</h3></div>
+      <div class="step-list" id="step-list" aria-label="हल के चरण"></div>
     </section>
   </main>
 
@@ -99,6 +93,7 @@
     </section>
   </div>
 
-  <script src="./app.js?v=0.2.3" defer></script>
+  <script src="./math/engine.js?v=0.1.0" defer></script>
+  <script src="./app.js?v=0.3.0" defer></script>
 </body>
 </html>
