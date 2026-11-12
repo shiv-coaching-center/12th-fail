@@ -12,7 +12,7 @@ function div(a,b){if(b.n===0n)throw Error('DIV_ZERO');return rat(a.n*b.d,a.d*b.n
 const neg=a=>rat(-a.n,a.d);
 
 function decimal(s){
-  if(s.length>MAX_DIGITS||!/^\\d+(?:\\.\\d+)?$/.test(s))throw Error('BAD_NUMBER');
+  if(s.length>MAX_DIGITS||!/^[0-9]+(?:[.][0-9]+)?$/.test(s))throw Error('BAD_NUMBER');
   const p=s.split('.');
   if(p.length===1)return rat(BigInt(p[0]));
   const scale=10n**BigInt(p[1].length);
@@ -35,7 +35,7 @@ function tokenize(input){
   const s=input.replace(/[×✕]/g,'*').replace(/÷/g,'/').replace(/[−–]/g,'-'),out=[];
   let i=0;
   while(i<s.length){
-    const c=s[i];if(/\\s/.test(c)){i++;continue;}
+    const c=s[i];if(/[ \t\r\n]/.test(c)){i++;continue;}
     if(/[0-9]/.test(c)){
       const start=i;while(/[0-9]/.test(s[i]||''))i++;
       if(s[i]==='.'){i++;const ds=i;while(/[0-9]/.test(s[i]||''))i++;if(i===ds)throw Error('BAD_NUMBER');}
