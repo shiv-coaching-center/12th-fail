@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FBF8F2"><meta name="description" content="12th Fail Ratio and Proportion calculator">
+<title>Ratio / Proportion - 12th Fail</title>
+<link rel="stylesheet" href="./ratio-proportion.css?v=1.0.0">
+</head>
+<body>
+<main class="rp-shell">
+<header class="rp-head"><span class="rp-mark">ƒ</span><h1>Ratio / Proportion</h1><span></span></header>
+<nav class="rp-tabs" aria-label="गणना चुनें">
+<button class="rp-tab active" data-mode="ratio" aria-pressed="true">अनुपात (Ratio)</button>
+<button class="rp-tab" data-mode="proportion" aria-pressed="false">समानुपात (Proportion)</button>
+</nav>
+<section class="rp-card">
+<div id="rp-values" class="rp-values" aria-label="संख्याएँ"></div>
+<button id="rp-add" class="rp-add" type="button">＋ संख्या जोड़ें</button>
+<div id="rp-result" class="rp-result rp-hidden">
+<span id="rp-result-label" class="rp-result-label">सरलतम अनुपात =</span>
+<strong id="rp-result-number" class="rp-result-value">—</strong>
+</div>
+</section>
+<section id="rp-solution" class="rp-solution rp-hidden"><h2>हल :</h2><div id="rp-steps" class="rp-steps"></div></section>
+<button id="rp-show" class="rp-show" type="button">हल देखें</button>
+<div id="rp-keypad" class="rp-keypad" aria-label="नंबर कीपैड">
+<button class="rp-key" data-key="7" type="button">7</button><button class="rp-key" data-key="8" type="button">8</button><button class="rp-key" data-key="9" type="button">9</button><button class="rp-key green" data-key="clear" type="button">C</button>
+<button class="rp-key" data-key="4" type="button">4</button><button class="rp-key" data-key="5" type="button">5</button><button class="rp-key" data-key="6" type="button">6</button><button class="rp-key green" data-key="back" type="button" aria-label="मिटाएँ">⌫</button>
+<button class="rp-key" data-key="1" type="button">1</button><button class="rp-key" data-key="2" type="button">2</button><button class="rp-key" data-key="3" type="button">3</button><button class="rp-key green" data-key="dot" type="button">,</button>
+<button class="rp-key zero" data-key="0" type="button">0</button><button id="rp-equals" class="rp-key equals" type="button">=</button>
+</div>
+<p id="rp-note" class="rp-note" role="status" aria-live="polite"></p>
+<a class="rp-back" href="./index.html">← मुख्य Calculator पर वापस जाएँ</a>
+</main>
+<script src="./math/engine.js?v=0.4.0" defer></script><script src="./ratio-proportion.js?v=1.0.0" defer></script>
+</body></html>
