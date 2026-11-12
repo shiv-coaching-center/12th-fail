@@ -1,6 +1,6 @@
 /* 12th Fail service worker — verified BODMAS engine v6. */
 "use strict";
-const CACHE_NAME = "12th-fail-shell-v15";
+const CACHE_NAME = "12th-fail-shell-v16";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -33,6 +33,25 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (request.method !== "GET" || url.origin !== self.location.origin) return;
 
+  // HTML navigation must be network-first so a published update is not hidden
+  // behind an old app shell. If offline, fall back to the last cached page.
+  if (request.mode === "navigate" || request.headers.get("accept")?.includes("text/html")) {
+    event.respondWith(
+      fetch(request).then((response) => {
+        if (response && response.ok) {
+          const copy = response.clone();
+          event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)));
+        }
+        return response;
+      }).catch(async () => {
+        return (await caches.match(request)) || (await caches.match("./index.html")) ||
+          new Response("ऑफलाइन पेज उपलब्ध नहीं", { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } });
+      })
+    );
+    return;
+  }
+
+  // Versioned CSS/JS and other app assets remain cache-first for full offline use.
   event.respondWith(
     caches.match(request).then((cached) => {
       if (cached) return cached;
