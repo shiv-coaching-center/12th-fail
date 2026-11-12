@@ -107,3 +107,23 @@ test('LCM/HCF verifies that every input is divisible by the calculated HCF',()=>
  assert.match(js,/BigInt\(v\)%h!==0n/);
  assert.match(js,/l%BigInt\(v\)!==0n/);
 });
+
+
+test('Ratio Proportion page is linked from calculator and LCM/HCF page',()=>{
+ const page=fs.readFileSync(path.join(__dirname,'..','ratio-proportion.html'),'utf8');
+ const css=fs.readFileSync(path.join(__dirname,'..','ratio-proportion.css'),'utf8');
+ const js=fs.readFileSync(path.join(__dirname,'..','ratio-proportion.js'),'utf8');
+ const lcm=fs.readFileSync(path.join(__dirname,'..','lcm-hcf.html'),'utf8');
+ assert.match(html,/href="\.\/ratio-proportion\.html"/);
+ assert.match(lcm,/href="\.\/ratio-proportion\.html"/);
+ assert.match(page,/अनुपात \(Ratio\)/);assert.match(page,/समानुपात \(Proportion\)/);
+ assert.match(page,/id="rp-keypad"/);assert.match(js,/solveRatioMany/);assert.match(js,/solveProportion/);
+ assert.match(js,/i===1\?" = ":" : "/);
+ assert.match(css,/--dark:#075B35/);
+});
+test('Ratio Proportion page assets are included in offline shell cache',()=>{
+ assert.match(sw,/12th-fail-shell-v25/);
+ assert.match(sw,/\.\/ratio-proportion\.html/);
+ assert.match(sw,/\.\/ratio-proportion\.css\?v=1\.0\.0/);
+ assert.match(sw,/\.\/ratio-proportion\.js\?v=1\.0\.1/);
+});
