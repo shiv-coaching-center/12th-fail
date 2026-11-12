@@ -1,0 +1,14 @@
+"use strict";
+const assert=require("node:assert/strict");const {solveEquation}=require("../math-engine.js");
+let r=solveEquation("2x + 5 = 15");assert.equal(r.kind,"linear");assert.ok(Math.abs(r.roots[0]-5)<1e-10);
+r=solveEquation("x² + 5x + 6 = 0");assert.equal(r.kind,"quadratic");assert.deepEqual(r.roots,[-3,-2]);assert.ok(r.steps.some(s=>s.includes("Factorisation")));
+r=solveEquation("x^2 - 4 = 0");assert.deepEqual(r.roots,[-2,2]);
+r=solveEquation("x^2 + 2x + 1 = 0");assert.deepEqual(r.roots,[-1]);
+r=solveEquation("3(x - 2) = 9");assert.equal(r.kind,"linear");assert.equal(r.roots[0],5);
+r=solveEquation("x^2 + 1 = 0");assert.equal(r.kind,"complex");
+r=solveEquation("0 = 0");assert.equal(r.kind,"identity");
+r=solveEquation("2 = 3");assert.equal(r.kind,"none");
+assert.throws(()=>solveEquation("x^3 + 1 = 0"),/केवल Linear और Quadratic/);
+assert.throws(()=>solveEquation("x + y = 3"),/एक समीकरण में अभी x और y/);
+assert.throws(()=>solveEquation("x = 2x + 1"),/एक ही बराबर/);
+console.log("Algebra solver tests passed.");
