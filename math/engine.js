@@ -61,7 +61,9 @@ function tokenize(input){
       const start=i;while(/[0-9]/.test(s[i]||''))i++;
       if(s[i]==='.'){i++;const ds=i;while(/[0-9]/.test(s[i]||''))i++;if(i===ds)throw Error('BAD_NUMBER');}
       const raw=s.slice(start,i);out.push({type:'num',value:decimal(raw)});
-    }else if(c==='√'){out.push({type:'sqrt'});i++;\n    }else if(c==='%'){
+    }else if(c==='√'){
+      out.push({type:'sqrt'});i++;
+    }else if(c==='%'){
       out.push({type:'percent',value:'%'});i++;
     }else if('+-*/^()'.includes(c)){
       out.push({type:c==='('? 'open':c===')'?'close':'op',value:c});i++;
