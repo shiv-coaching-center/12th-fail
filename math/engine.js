@@ -351,7 +351,7 @@ function solveLcmHcf(first,second,reasons){
 
 
 function parsePositiveInteger(value,allowZero=false){
-  if(typeof value!=='string'||value.length===0||value.length>100||!/^\\d+$/.test(value))throw Error('BAD_INTEGER');
+  if(typeof value!=='string'||value.length===0||value.length>100||!/^\d+$/.test(value))throw Error('BAD_INTEGER');
   const n=BigInt(value);
   if(allowZero?n<0n:n<=0n)throw Error('NON_POSITIVE');
   return n;
