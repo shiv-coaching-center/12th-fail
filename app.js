@@ -159,10 +159,7 @@
     if (button.dataset.action === "clear") clearExpression();
     else if (button.dataset.action === "backspace") backspace();
     else if (button.dataset.action === "parentheses") insertParentheses();
-    else if (button.dataset.action === "equals") {
-      if (/[xX]/.test(currentExpression) && !currentExpression.includes("=")) insert("=");
-      else calculate();
-    }
+    else if (button.dataset.action === "equals") calculate();
     else if (button.dataset.key) insert(button.dataset.key);
   });
 
@@ -182,7 +179,7 @@
   });
 
   if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-    navigator.serviceWorker.register("./sw.js?v=10", { scope: "./" }).catch(() => {
+    navigator.serviceWorker.register("./sw.js?v=11", { scope: "./" }).catch(() => {
       message.textContent = "ऑफलाइन अपडेट के लिए पेज दोबारा खोलें";
     });
   }
