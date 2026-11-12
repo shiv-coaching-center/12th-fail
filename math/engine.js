@@ -11,6 +11,27 @@ const mul=(a,b)=>rat(a.n*b.n,a.d*b.d);
 function div(a,b){if(b.n===0n)throw Error('DIV_ZERO');return rat(a.n*b.d,a.d*b.n);}
 const neg=a=>rat(-a.n,a.d);
 
+function powRat(value, exponent){
+  if(exponent.d!==1n||exponent.n>1000n||exponent.n< -1000n)throw Error('BAD_EXPONENT');
+  if(value.n===0n&&exponent.n<0n)throw Error('DIV_ZERO');
+  let power=exponent.n<0n?-exponent.n:exponent.n;
+  let base=value,result=rat(1n);
+  while(power>0n){if(power%2n===1n)result=mul(result,base);power/=2n;if(power>0n)base=mul(base,base);}
+  return exponent.n<0n?div(rat(1n),result):result;
+}
+function integerSqrt(n){
+  if(n<0n)throw Error('NEGATIVE_ROOT');
+  if(n<2n)return n;
+  let x=n,y=(x+1n)/2n;
+  while(y<x){x=y;y=(x+n/x)/2n;}
+  return x;
+}
+function sqrtRat(value){
+  if(value.n<0n)throw Error('NEGATIVE_ROOT');
+  const n=integerSqrt(value.n),d=integerSqrt(value.d);
+  if(n*n!==value.n||d*d!==value.d)throw Error('IRRATIONAL_ROOT');
+  return rat(n,d);
+}
 function decimal(s){
   if(s.length>MAX_DIGITS||!/^[0-9]+(?:[.][0-9]+)?$/.test(s))throw Error('BAD_NUMBER');
   const p=s.split('.');
@@ -40,9 +61,9 @@ function tokenize(input){
       const start=i;while(/[0-9]/.test(s[i]||''))i++;
       if(s[i]==='.'){i++;const ds=i;while(/[0-9]/.test(s[i]||''))i++;if(i===ds)throw Error('BAD_NUMBER');}
       const raw=s.slice(start,i);out.push({type:'num',value:decimal(raw)});
-    }else if(c==='%'){
+    }else if(c==='√'){out.push({type:'sqrt'});i++;\n    }else if(c==='%'){
       out.push({type:'percent',value:'%'});i++;
-    }else if('+-*/()'.includes(c)){
+    }else if('+-*/^()'.includes(c)){
       out.push({type:c==='('? 'open':c===')'?'close':'op',value:c});i++;
     }else throw Error('UNSUPPORTED');
     if(out.length>MAX_TOKENS)throw Error('TOO_MANY');
@@ -55,16 +76,30 @@ function parse(tokens){
   function primary(){
     const x=tokens[i++];if(!x)throw Error('END');
     if(x.type==='num')return {type:'num',v:x.value};
+    if(x.type==='sqrt')return {type:'sqrt',child:primary()};
     if(x.type==='open'){const child=expr(0);if(!tokens[i]||tokens[i].type!=='close')throw Error('PAREN');i++;return {type:'group',child};}
-    if(x.type==='op'&&(x.value==='+'||x.value==='-'))return {type:'unary',op:x.value,child:primary()};
     throw Error('VALUE');
   }
+  function power(){
+    const left=primary();
+    if(tokens[i]&&tokens[i].type==='op'&&tokens[i].value==='^'){
+      i++;return {type:'pow',left,right:unary()};
+    }
+    return left;
+  }
+  function unary(){
+    if(tokens[i]&&tokens[i].type==='op'&&(tokens[i].value==='+'||tokens[i].value==='-')){
+      const op=tokens[i++].value;return {type:'unary',op,child:unary()};
+    }
+    return power();
+  }
   function expr(min){
-    let left=primary();
+    let left=unary();
     while(tokens[i]&&(tokens[i].type==='op'||tokens[i].type==='percent')){
       if(tokens[i].type==='percent'){i++;left={type:'percent',child:left};continue;}
-      const op=tokens[i].value,prec=(op==='+'||op==='-')?1:2;
-      if(prec<min)break;i++;left={type:'bin',op,left,right:expr(prec+1)};
+      const op=tokens[i].value,prec=(op==='+'||op==='-')?1:(op==='*'||op==='/')?2:0;
+      if(prec<min)break;
+      i++;left={type:'bin',op,left,right:expr(prec+1)};
     }
     return left;
   }
@@ -74,6 +109,8 @@ function evalTree(node,steps){
   if(node.type==='num')return node.v;
   if(node.type==='group'){const v=evalTree(node.child,steps);steps.push({expression:'('+format(v)+')',result:format(v),rule:'brackets'});return v;}
   if(node.type==='unary'){const a=evalTree(node.child,steps),v=node.op==='-'?neg(a):a;steps.push({expression:node.op+'('+format(a)+')',result:format(v),rule:'unary'});return v;}
+  if(node.type==='sqrt'){const a=evalTree(node.child,steps),v=sqrtRat(a);steps.push({expression:'√('+format(a)+')',result:format(v),rule:'square_root'});return v;}
+  if(node.type==='pow'){const a=evalTree(node.left,steps),b=evalTree(node.right,steps),v=powRat(a,b);steps.push({expression:format(a)+'^'+format(b),result:format(v),rule:'power'});return v;}
   if(node.type==='percent'){const a=evalTree(node.child,steps),v=div(a,rat(100n));steps.push({expression:format(a)+'%',result:format(v),rule:'percentage'});return v;}
   const a=evalTree(node.left,steps),b=evalTree(node.right,steps);
   const rule={'+':'addition','-':'subtraction','*':'multiplication','/':'division'}[node.op];
@@ -84,18 +121,27 @@ function evalTree(node,steps){
 
 // Separate shunting-yard and postfix evaluator used only for verification.
 function postfix(tokens){
-  const out=[],ops=[],prec={'u+':3,'u-':3,'*':2,'/':2,'+':1,'-':1};let need=true;
+  const out=[],ops=[],prec={'u+':3,'u-':3,'*':2,'/':2,'+':1,'-':1,'^':4};let need=true;
   for(const x of tokens){
     if(x.type==='num'){if(!need)throw Error('OP');out.push(x);need=false;}
+    else if(x.type==='sqrt'){if(!need)throw Error('OP');ops.push('sqrt');need=true;}
     else if(x.type==='percent'){if(need)throw Error('PERCENT');out.push({type:'op',value:'%'});}
     else if(x.type==='open'){if(!need)throw Error('OP');ops.push('(');need=true;}
     else if(x.type==='close'){
       if(need)throw Error('CLOSE');while(ops.length&&ops[ops.length-1]!=='(')out.push({type:'op',value:ops.pop()});
-      if(!ops.length)throw Error('PAREN');ops.pop();need=false;
+      if(!ops.length)throw Error('PAREN');ops.pop();
+      if(ops[ops.length-1]==='sqrt')out.push({type:'op',value:ops.pop()});
+      need=false;
     }else{
       let op=x.value;
       if(need){if(op!=='+'&&op!=='-')throw Error('VALUE');ops.push(op==='+'?'u+':'u-');}
-      else{while(ops.length&&ops[ops.length-1]!=='('&&prec[ops[ops.length-1]]>=prec[op])out.push({type:'op',value:ops.pop()});ops.push(op);need=true;}
+      else{
+        while(ops.length&&ops[ops.length-1]!=='('){
+          const top=ops[ops.length-1],topPrec=top==='sqrt'?5:prec[top],currentPrec=prec[op];
+          if(topPrec>currentPrec||(topPrec===currentPrec&&op!=='^'))out.push({type:'op',value:ops.pop()});else break;
+        }
+        ops.push(op);need=true;
+      }
     }
   }
   if(need)throw Error('INCOMPLETE');
@@ -107,7 +153,9 @@ function evalPostfix(list){
   for(const x of list){
     if(x.type==='num')st.push(x.value);
     else if(x.value==='u+'||x.value==='u-'){if(!st.length)throw Error('STACK');const a=st.pop();st.push(x.value==='u-'?neg(a):a);}
+    else if(x.value==='sqrt'){if(!st.length)throw Error('STACK');st.push(sqrtRat(st.pop()));}
     else if(x.value==='%'){if(!st.length)throw Error('STACK');st.push(div(st.pop(),rat(100n)));}
+    else if(x.value==='^'){if(st.length<2)throw Error('STACK');const b=st.pop(),a=st.pop();st.push(powRat(a,b));}
     else{if(st.length<2)throw Error('STACK');const b=st.pop(),a=st.pop();st.push(x.value==='+'?add(a,b):x.value==='-'?sub(a,b):x.value==='*'?mul(a,b):div(a,b));}
   }
   if(st.length!==1)throw Error('STACK');return st[0];
