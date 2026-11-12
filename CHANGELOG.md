@@ -105,3 +105,12 @@
 - Service worker with versioned app-shell cache.
 - Online/offline status indicator.
 - Initial architecture and test documentation.
+
+## [0.8.1] - 2026-11-12
+
+### Added
+- Standalone Ratio / Proportion page matching the cream and green 3D calculator design.
+- Multi-term ratio simplification for 2–6 values with Hindi step-by-step solution.
+- Proportion input layout for `a:b = c:x` with exact answer calculation.
+- Main calculator and LCM/HCF navigation links; offline app-shell caching.
+- Automated integration tests for the new page and multi-term ratios.
