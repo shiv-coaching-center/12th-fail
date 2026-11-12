@@ -409,6 +409,7 @@ function parseFractionInput(value){
   if(d===0n)throw Error('DIV_ZERO');
   return rat(n,d);
 }
+function formatFraction(value){return value.d===1n?value.n.toString():value.n.toString()+'/'+value.d.toString();}
 function solveFraction(first,second,operation,reasons){
   try{
     if(!reasons||typeof reasons!=='object')throw Error('REASONS');
@@ -417,20 +418,20 @@ function solveFraction(first,second,operation,reasons){
     const rule={add:'fraction_add',subtract:'fraction_subtract',multiply:'fraction_multiply',divide:'fraction_divide'}[operation];
     const value=operation==='add'?add(a,b):operation==='subtract'?sub(a,b):operation==='multiply'?mul(a,b):div(a,b);
     if(typeof reasons[rule]!=='string'||!reasons[rule].trim())throw Error('REASON');
-    const answer=format(value);
+    const answer=formatFraction(value);
     const reverse=operation==='add'?add(b,a):operation==='subtract'?sub(a,b):operation==='multiply'?mul(b,a):div(value,b);
     if(operation==='add'&&reverse.n!==value.n||operation==='add'&&reverse.d!==value.d)throw Error('VERIFY');
     if(operation==='subtract'&&!sameRat(add(value,b),a))throw Error('VERIFY');
     if(operation==='multiply'&&!sameRat(mul(a,b),value))throw Error('VERIFY');
     if(operation==='divide'&&!sameRat(mul(value,b),a))throw Error('VERIFY');
-    const expression=format(a)+' '+({add:'+ ',subtract:'− ',multiply:'× ',divide:'÷ '}[operation])+format(b);
+    const expression=formatFraction(a)+' '+({add:'+ ',subtract:'− ',multiply:'× ',divide:'÷ '}[operation])+formatFraction(b);
     return {ok:true,answer,exact:{numerator:value.n.toString(),denominator:value.d.toString()},verified:true,steps:[{expression,result:answer,display:expression+' = '+answer,rule,reason:reasons[rule]}]};
   }catch(_){return {ok:false,message:UNSUPPORTED_MESSAGE,verified:false,steps:[]};}
 }
 function simplifyFraction(value,reasons){
   try{
     if(!reasons||typeof reasons!=='object'||typeof reasons.fraction_simplify!=='string'||!reasons.fraction_simplify.trim())throw Error('REASONS');
-    const parsed=parseFractionInput(value),answer=format(parsed);
+    const parsed=parseFractionInput(value),answer=formatFraction(parsed);
     const result=rat(parsed.n,parsed.d);
     if(result.n!==parsed.n||result.d!==parsed.d)throw Error('VERIFY');
     return {ok:true,answer,exact:{numerator:result.n.toString(),denominator:result.d.toString()},verified:true,steps:[{expression:value,result:answer,display:value+' को सरल करने पर '+answer,rule:'fraction_simplify',reason:reasons.fraction_simplify}]};
