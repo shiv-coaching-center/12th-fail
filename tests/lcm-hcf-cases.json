@@ -220,7 +220,7 @@
     "a": "123456",
     "b": "7890",
     "expectedHcf": "6",
-    "expectedLcm": "162344160",
+    "expectedLcm": "162344640",
     "source": "Hand-verified"
   },
   {
