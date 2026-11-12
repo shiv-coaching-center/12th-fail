@@ -81,7 +81,9 @@
 
   async function calculate() {
     await reasonsReady;
-    const isEquation = currentExpression.includes("=");\n    const solver = isEquation ? math?.solveEquation : math?.solve;\n    if (!math || typeof solver !== "function" || !reasons) {
+    const isEquation = currentExpression.includes("=");
+    const solver = isEquation ? math?.solveEquation : math?.solve;
+    if (!math || typeof solver !== "function" || !reasons) {
       showUnavailable();
       return null;
     }
