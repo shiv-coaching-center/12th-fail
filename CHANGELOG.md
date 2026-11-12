@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.0] - 2026-11-12
+
+### Added
+- Standalone exact-arithmetic BODMAS engine using BigInt rational values.
+- Independent verification using a second shunting-yard/postfix evaluation path.
+- Fixed Hindi explanation rules in `reasons_hi.json`.
+- 40 hand-verified BODMAS test cases and automated tests using Node's built-in test runner.
+- Safe unsupported response for invalid syntax, unsupported operators, division by zero, missing explanations, or verification mismatch.
+
+### Scope
+- Supports addition, subtraction, multiplication, division, parentheses, unary signs, and finite decimal inputs.
+- Does not yet support percentages, powers, roots, variables, or natural-language questions.
+- Engine remains separate from the UI until the integration phase.
+
 ## [0.2.1] - 2026-11-12
 
 ### Changed
