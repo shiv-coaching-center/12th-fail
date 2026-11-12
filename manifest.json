@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "12th Fail",
+  "short_name": "12th Fail",
+  "description": "Offline-first learning app",
+  "lang": "hi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8f7f3",
+  "theme_color": "#f8f7f3",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
